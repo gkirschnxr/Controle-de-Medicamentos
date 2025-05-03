@@ -1,6 +1,4 @@
-﻿
-using ClubeDaLeitura2.ConsoleApp.Util;
-using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 {

@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
 namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
@@ -11,11 +12,13 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
         private string arquivoArmazenamento = "dados-controle-medicamentos.json";
 
         public List<Fornecedor> Fornecedores { get; set; }
+        public List<Funcionario> Funcionarios { get; set; }
         public List<Medicamento> Medicamentos { get; set; }
 
         public ContextoDeDados()
         {
             Fornecedores = new List<Fornecedor>();
+            Funcionarios = new List<Funcionario>();
 
             Medicamentos = new List<Medicamento>();
         }
@@ -63,6 +66,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
             if (contextoArmazenado == null) return;
 
             Fornecedores = contextoArmazenado.Fornecedores;
+            Funcionarios = contextoArmazenado.Funcionarios;
 
             Medicamentos = contextoArmazenado.Medicamentos;
 
