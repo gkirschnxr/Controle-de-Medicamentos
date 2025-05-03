@@ -2,6 +2,7 @@
 
 using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 
 namespace ClubeDaLeitura2.ConsoleApp.Util
 {
@@ -11,6 +12,7 @@ namespace ClubeDaLeitura2.ConsoleApp.Util
         
         private ContextoDeDados contexto;
         private TelaFornecedor telaFornecedor;
+        private TelaFuncionario telaFuncionario;
 
         
 
@@ -20,6 +22,9 @@ namespace ClubeDaLeitura2.ConsoleApp.Util
 
             IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedor(contexto);
             telaFornecedor = new TelaFornecedor(repositorioFornecedor);
+
+            IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario(contexto);
+            telaFuncionario = new TelaFuncionario(repositorioFuncionario);
         }
 
 
@@ -40,6 +45,7 @@ namespace ClubeDaLeitura2.ConsoleApp.Util
                 Console.ForegroundColor = ConsoleColor.Yellow;
 
                 Console.WriteLine("1 - Controle de Fornecedores");
+                Console.WriteLine("4 - Controle de Funcionarios");
                 Console.WriteLine("S - Sair");
 
 
@@ -59,6 +65,8 @@ namespace ClubeDaLeitura2.ConsoleApp.Util
         {
             if (opcaoPrincipal == '1')
                 return telaFornecedor;
+            if (opcaoPrincipal == '4')
+                return telaFuncionario;
             return null;
         }
 
