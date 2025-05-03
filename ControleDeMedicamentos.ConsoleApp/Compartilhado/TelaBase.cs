@@ -1,10 +1,12 @@
-﻿namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
+﻿using ClubeDaLeitura2.ConsoleApp.Util;
+
+namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 {
     public abstract class TelaBase<T> where T : EntidadeBase<T>
     {
 
         protected string nomeEntidade;
-        private IRepositorio<T> repositorio;
+        protected IRepositorio<T> repositorio;
 
 
         protected TelaBase(string nomeEntidade, IRepositorio<T> repositorio) 
@@ -68,7 +70,7 @@
 
             repositorio.CadastrarRegistro(novoRegistro);
 
-            //Notificador.ExibirMensagem("O registro foi concluído com sucesso!", ConsoleColor.Green);
+            Notificador.ExibirMensagem("O registro foi concluído com sucesso!", ConsoleColor.Green);
         }
 
         public virtual void EditarRegistro()
@@ -109,7 +111,7 @@
             //    return;
             //}
 
-            //Notificador.ExibirMensagem("O registro foi editado com sucesso!", ConsoleColor.Green);
+            Notificador.ExibirMensagem("O registro foi editado com sucesso!", ConsoleColor.Green);
         }
 
         public virtual void ExcluirRegistro()
@@ -140,9 +142,33 @@
             //Notificador.ExibirMensagem("O registro foi excluído com sucesso!", ConsoleColor.Green);
         }
 
-        public abstract void VisualizarRegistros(bool exibirTitulo);
+        public void VisualizarRegistros(bool exibirTitulo) 
+        {
+            if (exibirTitulo)
+                ExibirCabecalho();
+
+            Console.WriteLine($"Visualizando {nomeEntidade}s...");
+            Console.WriteLine("----------------------------------------");
+
+            Console.WriteLine();
+
+            ExibirCabecalhoTabela();
+
+            List<T> registros = repositorio.SelecionarRegistros();
+
+            foreach (T registro in registros)
+                ExibirLinhaTabela(registro);
+
+            Console.WriteLine();
+
+            Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
+        }
 
         public abstract T ObterDados();
+
+        public abstract void ExibirCabecalhoTabela(); 
+        public abstract void ExibirLinhaTabela(T registro); 
+        
     
 
 }
