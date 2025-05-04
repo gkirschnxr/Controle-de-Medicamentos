@@ -49,8 +49,8 @@ namespace ClubeDaLeitura2.ConsoleApp.Util
                 Console.ForegroundColor = ConsoleColor.Yellow;
 
                 Console.WriteLine("1 - Controle de Fornecedores");
-                Console.WriteLine("4 - Controle de Funcionarios");
                 Console.WriteLine("3 - Controle de Medicamentos");
+                Console.WriteLine("4 - Controle de Funcionarios");
                 Console.WriteLine("S - Sair");
 
 
@@ -70,14 +70,13 @@ namespace ClubeDaLeitura2.ConsoleApp.Util
         {
             if (opcaoPrincipal == '1')
                 return telaFornecedor;
-            if (opcaoPrincipal == '4')
-                return telaFuncionario;
-            return null;
-
             if (opcaoPrincipal == '3')
                 return telaMedicamento;
-
-                return null;
+            if (opcaoPrincipal == '4')
+                return telaFuncionario;
+            
+            return null;
+            ;
         }
     }
 }
