@@ -5,6 +5,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
     public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
     {
         private IRepositorioFornecedor repositorioFornecedor;
+        public string telefone;
 
         public TelaFornecedor(IRepositorioFornecedor repositorio) : base("Fornecedor", repositorio)
         {
@@ -18,7 +19,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
             string nome = Console.ReadLine()!;
             
             Console.WriteLine("Digite o Telefone do fornecedor");
-            string telefone = Console.ReadLine()!;
+            telefone = Console.ReadLine()!;
 
             Console.WriteLine("Digite o CNPJ do fornecedor");
             string cnpj = Console.ReadLine()!;
@@ -37,7 +38,10 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
         public override void ExibirLinhaTabela(Fornecedor fornecedor)
         {
             Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}", 
-                fornecedor.Id, fornecedor.Nome, fornecedor.Telefone, fornecedor.CNJP);
+                fornecedor.Id, fornecedor.Nome, fornecedor.FormatarTelefone(telefone), fornecedor.ObterCnpjFormatado());
         }
+
+        
+
     }
 }

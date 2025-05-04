@@ -5,8 +5,11 @@
 
         public int Id { get; set; }
 
+
         public abstract void AtualizarRegistro(T registroEditado);
 
         public abstract string Validar();
+
+        
     }
 }

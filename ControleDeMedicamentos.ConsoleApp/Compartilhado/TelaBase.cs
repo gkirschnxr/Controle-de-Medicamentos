@@ -160,6 +160,8 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
             Notificador.ExibirMensagem("\nPressione ENTER para continuar...", ConsoleColor.Yellow);
         }
 
+
+
         public abstract T ObterDados();
 
         public abstract void ExibirCabecalhoTabela();
