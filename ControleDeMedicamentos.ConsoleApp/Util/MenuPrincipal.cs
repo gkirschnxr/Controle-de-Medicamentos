@@ -1,14 +1,9 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
-using System;
-
-
-using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
-namespace ClubeDaLeitura2.ConsoleApp.Util
 namespace ControleDeMedicamentos.ConsoleApp.Util
 {
     public class MenuPrincipal
@@ -20,7 +15,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
         private TelaFuncionario telaFuncionario;
         private TelaMedicamento telaMedicamento;
 
-        private ContextoDeDados contexto;
+        
         private TelaPaciente telaPaciente;        
 
         
@@ -78,6 +73,8 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
         {
             if (opcaoPrincipal == '1')
                 return telaFornecedor;
+            if (opcaoPrincipal == '2')
+                return telaPaciente;
             if (opcaoPrincipal == '3')
                 return telaMedicamento;
             if (opcaoPrincipal == '4')

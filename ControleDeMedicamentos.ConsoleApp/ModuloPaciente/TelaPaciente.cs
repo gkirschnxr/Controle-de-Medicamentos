@@ -1,5 +1,5 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using System;
+
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 
@@ -25,7 +25,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
         return paciente;
     }
 
-    protected override void ExibirCabecalhoTabela()
+    public override void ExibirCabecalhoTabela()
     {
         Console.WriteLine(
             "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
@@ -33,7 +33,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
         );
     }
 
-    protected override void ExibirLinhaTabela(Paciente registro)
+    public override void ExibirLinhaTabela(Paciente registro)
     {
         Console.WriteLine(
             "{0, -6} | {1, -25} | {2, -20} | {3, -20}",

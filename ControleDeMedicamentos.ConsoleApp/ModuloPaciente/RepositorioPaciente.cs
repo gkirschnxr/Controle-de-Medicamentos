@@ -1,5 +1,5 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using System.Collections.Generic;
+
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 

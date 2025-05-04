@@ -28,8 +28,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
                 return fornecedor;
         }
 
-        
-
         public override void ExibirCabecalhoTabela()
         {
             Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -30}", 

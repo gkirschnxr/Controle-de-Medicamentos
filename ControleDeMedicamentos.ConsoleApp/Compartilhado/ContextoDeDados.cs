@@ -4,8 +4,7 @@ using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
-using System.Collections.Generic;
-using System.IO;
+
 
 
 namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
@@ -18,6 +17,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
         public List<Fornecedor> Fornecedores { get; set; }
         public List<Funcionario> Funcionarios { get; set; }
         public List<Medicamento> Medicamentos { get; set; }
+        public List<Paciente> Pacientes { get; set; }
 
         public ContextoDeDados()
         {
@@ -72,10 +72,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 
             Fornecedores = contextoArmazenado.Fornecedores;
             Funcionarios = contextoArmazenado.Funcionarios;
-
             Medicamentos = contextoArmazenado.Medicamentos;
-
-        }
             Pacientes = contextoArmazenado.Pacientes;
         }
 

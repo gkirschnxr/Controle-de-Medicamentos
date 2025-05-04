@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace ControleDeMedicamentos.ConsoleApp.Util
 {
     public static class Notificador
