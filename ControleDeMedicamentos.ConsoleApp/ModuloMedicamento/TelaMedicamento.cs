@@ -17,7 +17,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
             string descricao = Console.ReadLine()!;
 
             Console.WriteLine("Digite a quantidade do medicamento: ");
-            string quantidade = Console.ReadLine()!;
+            int quantidade = Convert.ToInt32(Console.ReadLine());
 
             Medicamento medicamento = new Medicamento(nomeMedicamento, descricao, quantidade);
 

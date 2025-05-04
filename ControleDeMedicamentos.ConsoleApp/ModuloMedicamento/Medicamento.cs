@@ -41,6 +41,9 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
             if (Quantidade <= 0)
                 erros += "O campo 'Quantidade' deve ser maior que Zero.\n";
 
+            if(Quantidade <= 20)
+                Console.WriteLine("Medicamento em falta");
+
             return erros;
         }
     }
