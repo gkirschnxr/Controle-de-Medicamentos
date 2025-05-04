@@ -14,11 +14,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
         private TelaFornecedor telaFornecedor;
         private TelaFuncionario telaFuncionario;
         private TelaMedicamento telaMedicamento;
-
-        
-        private TelaPaciente telaPaciente;        
-
-        
+        private TelaPaciente telaPaciente;               
 
         public MenuPrincipal()
         {
@@ -52,6 +48,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
                 Console.ForegroundColor = ConsoleColor.Yellow;
 
                 Console.WriteLine("1 - Controle de Fornecedores");
+                Console.WriteLine("2 - Controle de Pacientes");
                 Console.WriteLine("3 - Controle de Medicamentos");
                 Console.WriteLine("4 - Controle de Funcionarios");
                 Console.WriteLine("S - Sair");
@@ -61,11 +58,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
 
                 Console.Write("Escolha uma das opções: ");
                 Console.ResetColor();
-                opcaoPrincipal = Console.ReadLine()![0];
-
-
-            
-            
+                opcaoPrincipal = Console.ReadLine()![0];                     
 
        }
 
@@ -80,7 +73,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
             if (opcaoPrincipal == '4')
                 return telaFuncionario;
             
-            return null;
+            return null!;
             ;
         }
     }
