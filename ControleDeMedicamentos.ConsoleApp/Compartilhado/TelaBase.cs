@@ -1,14 +1,12 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Util;
-using System;
-using System.Collections.Generic;
+﻿using ClubeDaLeitura2.ConsoleApp.Util;
 
-namespace ControleDeMedicamentos.ConsoleApp.Compartilhado;
-
-public abstract class TelaBase<T> where T : EntidadeBase<T>
+namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 {
+    public abstract class TelaBase<T> where T : EntidadeBase<T>
+    {
 
-    protected string nomeEntidade;
-    private IRepositorio<T> repositorio;
+        protected string nomeEntidade;
+        protected IRepositorio<T> repositorio;
 
 
     protected TelaBase(string nomeEntidade, IRepositorio<T> repositorio) 

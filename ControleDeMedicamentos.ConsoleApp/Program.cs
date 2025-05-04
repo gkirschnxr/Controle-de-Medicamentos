@@ -7,24 +7,41 @@ class Program
 {
     static void Main(string[] args)
     {
-        MenuPrincipal menuPrincipal = new MenuPrincipal();
-
-        while (true)
+        static void Main(string[] args)
         {
-            menuPrincipal.ApresentarMenu();
+            MenuPrincipal telaPrincipal = new MenuPrincipal();
 
-            ITelaCrud telaSelecionada = menuPrincipal.ObterTela();
-
-            char opcaoEscolhida = telaSelecionada.ApresentarMenu();
-
-            switch (opcaoEscolhida)
+            while (true)
             {
-                case '1': telaSelecionada.CadastrarRegistro(); break;
-                case '2': telaSelecionada.EditarRegistro(); break;
-                case '3': telaSelecionada.ExcluirRegistro(); break;
-                case '4': telaSelecionada.VisualizarRegistros(true); break;
+                Console.Clear();
 
-                default: break;
+                telaPrincipal.ApresentarMenu();
+                ITelaCrud telaSelecionada = telaPrincipal.ObterTela(); 
+
+                char opcaoEscolhida = telaSelecionada.ApresentarMenu();
+
+                //if (telaSelecionada is TelaEmprestimo)
+                //{
+                //    TelaEmprestimo telaEmprestimo = (TelaEmprestimo)telaSelecionada;
+
+                //    if (opcaoEscolhida == 5)
+                //        telaEmprestimo.RegistrarDevolucao();
+                //}
+
+                switch (opcaoEscolhida)
+                {
+                    case '1': telaSelecionada.CadastrarRegistro(); break;
+
+                    case '2': telaSelecionada.EditarRegistro(); break;
+
+                    case '3': telaSelecionada.ExcluirRegistro(); break;
+
+                    case '4': telaSelecionada.VisualizarRegistros(true); break;
+
+
+                }
+
+
             }
         }
 

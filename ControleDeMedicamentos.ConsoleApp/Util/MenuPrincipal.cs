@@ -2,63 +2,89 @@
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using System;
 
+
+using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+
+namespace ClubeDaLeitura2.ConsoleApp.Util
 namespace ControleDeMedicamentos.ConsoleApp.Util
 {
     public class MenuPrincipal
     {
         private char opcaoPrincipal;
+        
+        private ContextoDeDados contexto;
+        private TelaFornecedor telaFornecedor;
+        private TelaFuncionario telaFuncionario;
+        private TelaMedicamento telaMedicamento;
 
         private ContextoDeDados contexto;
         private TelaPaciente telaPaciente;        
+
+        
 
         public MenuPrincipal()
         {
             contexto = new ContextoDeDados(true);
 
+            IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedor(contexto);
+            IRepositorioMedicamento repositorioMedicamento = new RepositorioMedicamento(contexto);
+            telaFornecedor = new TelaFornecedor(repositorioFornecedor);
+
+            IRepositorioFuncionario repositorioFuncionario = new RepositorioFuncionario(contexto);
+            telaFuncionario = new TelaFuncionario(repositorioFuncionario);
+            telaMedicamento = new TelaMedicamento(repositorioMedicamento);
             IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contexto);
             telaPaciente = new TelaPaciente(repositorioPaciente);
         }
 
         public void ApresentarMenu()
         {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-            Console.WriteLine("-----------------------------------");
-            Console.WriteLine("|                                 |");
-            Console.WriteLine("|        Farmacinha do Biel       |");
-            Console.WriteLine("|                                 |");
-            Console.WriteLine("-----------------------------------");
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-            Console.ResetColor();
-            Console.WriteLine();
+                Console.WriteLine("-------------------------------------------");
+                Console.WriteLine("|                                         |");
+                Console.WriteLine("|        Controle de Medicamentos         |");
+                Console.WriteLine("|                                         |");
+                Console.WriteLine("-------------------------------------------");
 
-            Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.ResetColor();
+                Console.WriteLine();
 
-            Console.WriteLine("1 - Gerenciar Pacientes");
-            Console.WriteLine("2 - Gerenciar Caixas");
-            Console.WriteLine("3 - Gerenciar Revistas");
-            Console.WriteLine("4 - Gerenciar Emprestimos");
-            Console.WriteLine("S - Sair");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+
+                Console.WriteLine("1 - Controle de Fornecedores");
+                Console.WriteLine("3 - Controle de Medicamentos");
+                Console.WriteLine("4 - Controle de Funcionarios");
+                Console.WriteLine("S - Sair");
 
 
-            Console.WriteLine();
+                Console.WriteLine();
 
-            Console.Write("Escolha uma das opções: ");
-            Console.ResetColor();
-            opcaoPrincipal = Console.ReadLine()[0];
+                Console.Write("Escolha uma das opções: ");
+                Console.ResetColor();
+                opcaoPrincipal = Console.ReadLine()![0];
+
 
             
+            
 
-        }
+       }
 
         public ITelaCrud ObterTela()
         {
             if (opcaoPrincipal == '1')
-                return telaPaciente;
-                
-
+                return telaFornecedor;
+            if (opcaoPrincipal == '3')
+                return telaMedicamento;
+            if (opcaoPrincipal == '4')
+                return telaFuncionario;
+            
             return null;
+            ;
         }
-
     }
 }
