@@ -1,14 +1,9 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
-using System;
-
-
-using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
-namespace ClubeDaLeitura2.ConsoleApp.Util
 namespace ControleDeMedicamentos.ConsoleApp.Util
 {
     public class MenuPrincipal
@@ -19,11 +14,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
         private TelaFornecedor telaFornecedor;
         private TelaFuncionario telaFuncionario;
         private TelaMedicamento telaMedicamento;
-
-        private ContextoDeDados contexto;
-        private TelaPaciente telaPaciente;        
-
-        
+        private TelaPaciente telaPaciente;               
 
         public MenuPrincipal()
         {
@@ -57,6 +48,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
                 Console.ForegroundColor = ConsoleColor.Yellow;
 
                 Console.WriteLine("1 - Controle de Fornecedores");
+                Console.WriteLine("2 - Controle de Pacientes");
                 Console.WriteLine("3 - Controle de Medicamentos");
                 Console.WriteLine("4 - Controle de Funcionarios");
                 Console.WriteLine("S - Sair");
@@ -66,11 +58,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
 
                 Console.Write("Escolha uma das opções: ");
                 Console.ResetColor();
-                opcaoPrincipal = Console.ReadLine()![0];
-
-
-            
-            
+                opcaoPrincipal = Console.ReadLine()![0];                     
 
        }
 
@@ -78,12 +66,14 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
         {
             if (opcaoPrincipal == '1')
                 return telaFornecedor;
+            if (opcaoPrincipal == '2')
+                return telaPaciente;
             if (opcaoPrincipal == '3')
                 return telaMedicamento;
             if (opcaoPrincipal == '4')
                 return telaFuncionario;
             
-            return null;
+            return null!;
             ;
         }
     }
