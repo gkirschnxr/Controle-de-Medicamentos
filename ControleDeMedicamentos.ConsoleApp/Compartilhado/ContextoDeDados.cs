@@ -1,19 +1,22 @@
 ﻿using System.Text.Json.Serialization;
 using System.Text.Json;
+using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using System.Collections.Generic;
+using System.IO;
+
 
 namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 {
     public class ContextoDeDados
-    {
-
-      
-
+    {   
         private string pastaArmazenamento = "C:\\temp";
         private string arquivoArmazenamento = "dados.json";
 
+        public List<Paciente> Pacientes { get; set; }
+
         public ContextoDeDados()
         {
-           
+            Pacientes = new List<Paciente>();
         }
 
         public ContextoDeDados(bool carregarDados) : this()
@@ -36,8 +39,8 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
                 Directory.CreateDirectory(pastaArmazenamento);
 
             File.WriteAllText(caminhoCompleto, json);
-
         }
+
         public void Carregar()
         {
             string caminhoCompleto = Path.Combine(pastaArmazenamento, arquivoArmazenamento);
@@ -57,8 +60,8 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 
             if (contextoArmazenado == null) return;
 
-          
-
+            Pacientes = contextoArmazenado.Pacientes;
         }
+
     }
 }

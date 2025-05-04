@@ -1,4 +1,6 @@
-﻿namespace ClubeDaLeitura2.ConsoleApp.Util
+﻿using System;
+
+namespace ControleDeMedicamentos.ConsoleApp.Util
 {
     public static class Notificador
     {

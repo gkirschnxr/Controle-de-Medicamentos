@@ -1,19 +1,23 @@
-﻿
+﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using System;
 
-namespace ClubeDaLeitura2.ConsoleApp.Util
+namespace ControleDeMedicamentos.ConsoleApp.Util
 {
     public class MenuPrincipal
     {
         private char opcaoPrincipal;
-        
+
+        private ContextoDeDados contexto;
+        private TelaPaciente telaPaciente;        
 
         public MenuPrincipal()
         {
+            contexto = new ContextoDeDados(true);
 
-            
-            
+            IRepositorioPaciente repositorioPaciente = new RepositorioPaciente(contexto);
+            telaPaciente = new TelaPaciente(repositorioPaciente);
         }
-
 
         public void ApresentarMenu()
         {
@@ -21,7 +25,7 @@ namespace ClubeDaLeitura2.ConsoleApp.Util
 
             Console.WriteLine("-----------------------------------");
             Console.WriteLine("|                                 |");
-            Console.WriteLine("|        Clube da Leitura         |");
+            Console.WriteLine("|        Farmacinha do Biel       |");
             Console.WriteLine("|                                 |");
             Console.WriteLine("-----------------------------------");
 
@@ -30,7 +34,7 @@ namespace ClubeDaLeitura2.ConsoleApp.Util
 
             Console.ForegroundColor = ConsoleColor.Yellow;
 
-            Console.WriteLine("1 - Gerenciar Amigos");
+            Console.WriteLine("1 - Gerenciar Pacientes");
             Console.WriteLine("2 - Gerenciar Caixas");
             Console.WriteLine("3 - Gerenciar Revistas");
             Console.WriteLine("4 - Gerenciar Emprestimos");
@@ -50,6 +54,7 @@ namespace ClubeDaLeitura2.ConsoleApp.Util
         public ITelaCrud ObterTela()
         {
             if (opcaoPrincipal == '1')
+                return telaPaciente;
                 
 
             return null;

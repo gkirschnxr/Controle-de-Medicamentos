@@ -1,4 +1,6 @@
-﻿namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
+﻿using System.Collections.Generic;
+
+namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 {
     public interface IRepositorio<T> where T : EntidadeBase<T>
     {
