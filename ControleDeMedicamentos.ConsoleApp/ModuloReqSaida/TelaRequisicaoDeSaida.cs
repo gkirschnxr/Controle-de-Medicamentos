@@ -6,13 +6,13 @@ using Microsoft.Win32;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
 
-public class TelaRequisicoesDeSaida : TelaBase<RequisicoesDeSaida>, ITelaCrud
+public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
 {
-    public TelaRequisicoesDeSaida (IRepositorioRequisicaoDeSaida repositorio) : base("Requisição de Saída", repositorio)
+    public TelaRequisicaoDeSaida (IRepositorioRequisicaoDeSaida repositorio) : base("Requisição de Saída", repositorio)
     {
     }
 
-    public override RequisicoesDeSaida ObterDados()
+    public override RequisicaoDeSaida ObterDados()
     {
         Console.WriteLine($"Data da requisição de saída: {DateTime.Now}");
 
@@ -79,7 +79,7 @@ public class TelaRequisicoesDeSaida : TelaBase<RequisicoesDeSaida>, ITelaCrud
             return null!;
         }
 
-        RequisicoesDeSaida novaRequisicao = new RequisicoesDeSaida(DateTime.Now, pacienteSelecionado, prescricaoSelecionada, medicamentoSelecionado);
+        RequisicaoDeSaida novaRequisicao = new RequisicaoDeSaida(DateTime.Now, pacienteSelecionado, prescricaoSelecionada, medicamentoSelecionado);
 
         return novaRequisicao;
     }
@@ -105,7 +105,7 @@ public class TelaRequisicoesDeSaida : TelaBase<RequisicoesDeSaida>, ITelaCrud
              "ID", "Paciente", "Prescricao", "Medicamentos"
         );
     }
-    public override void ExibirLinhaTabela(RequisicoesDeSaida registro)
+    public override void ExibirLinhaTabela(RequisicaoDeSaida registro)
     {
         Console.WriteLine(
             "{0, -6} | {1, -25} | {2, -20} | {3, -20}",

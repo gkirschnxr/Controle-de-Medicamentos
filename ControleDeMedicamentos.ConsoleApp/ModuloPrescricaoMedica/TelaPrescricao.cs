@@ -5,6 +5,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
 
 partial class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
 {
+    IRepositorioMedicamento repositorioMedicamento;
     public TelaPrescricao (IRepositorioPrescricao repositorio) : base("Prescricao", repositorio)
     {
     }
@@ -12,7 +13,7 @@ partial class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
     public override Prescricao ObterDados()
     {
         Console.Write("Digite o seu CRM: ");
-        int crm = Convert.ToInt32(Console.ReadLine()!);
+        string crm = Console.ReadLine()!;
 
         Console.WriteLine();
 
@@ -22,6 +23,7 @@ partial class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
         foreach (var medicamento in medicamentos)
         {
             Console.WriteLine($"ID: {medicamento.Id}, Nome: {medicamento.NomeMedicamento}");
+            Console.ReadLine();
         }
 
         Console.WriteLine();
@@ -46,13 +48,15 @@ partial class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
 
     public override void ExibirLinhaTabela(Prescricao registro)
     {
+        List<Medicamento> medicamentoCadastrado = repositorioMedicamento.SelecionarRegistros();
+
         Console.WriteLine(
             "{0, -10} | {1, -12} | {2, -20} | {3, -20}",
-             registro.Id, registro.CRM, registro.DataPrescricao, registro.Medicamentos
+             registro.Id, registro.CRM, registro.DataPrescricao, medicamentoCadastrado
         );
     }
     private List<Medicamento> ObterMedicamentos()
     {
-        return new List<Medicamento>();
+        return null;
     }
 }

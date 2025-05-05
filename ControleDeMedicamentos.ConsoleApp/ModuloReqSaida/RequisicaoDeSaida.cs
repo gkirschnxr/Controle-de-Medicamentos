@@ -6,16 +6,16 @@ using System.Text.RegularExpressions;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
 
-public class RequisicoesDeSaida : EntidadeBase<RequisicoesDeSaida>
+public class RequisicaoDeSaida : EntidadeBase<RequisicaoDeSaida>
 {
     public DateTime DataRequisicaoSaida { get; set; }
     public Paciente Paciente { get; set; }
     public Prescricao Prescricao { get; set; }
     public Medicamento Medicamentos { get; set; }
 
-    public RequisicoesDeSaida() { }
+    public RequisicaoDeSaida() { }
 
-    public RequisicoesDeSaida (DateTime dataRequisicaoSaida, Paciente paciente, Prescricao prescricao, Medicamento medicamentos)
+    public RequisicaoDeSaida (DateTime dataRequisicaoSaida, Paciente paciente, Prescricao prescricao, Medicamento medicamentos)
     {
         DataRequisicaoSaida = dataRequisicaoSaida;
         Paciente = paciente;
@@ -23,7 +23,7 @@ public class RequisicoesDeSaida : EntidadeBase<RequisicoesDeSaida>
         Medicamentos = medicamentos;
     }
 
-    public override void AtualizarRegistro(RequisicoesDeSaida registroEditado)
+    public override void AtualizarRegistro(RequisicaoDeSaida registroEditado)
     {
         DataRequisicaoSaida = registroEditado.DataRequisicaoSaida;
     }

@@ -2,4 +2,4 @@
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
 
-public interface IRepositorioRequisicaoDeSaida : IRepositorio<RequisicoesDeSaida>;
+public interface IRepositorioRequisicaoDeSaida : IRepositorio<RequisicaoDeSaida>;
