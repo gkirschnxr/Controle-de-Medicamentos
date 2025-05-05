@@ -6,15 +6,16 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 {
     public class Fornecedor : EntidadeBase<Fornecedor>
     {
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
-        public string Telefone { get; set; }
+        public string Telefone { get; set; } = string.Empty;
 
-        public string CNPJ { get; set; }
+        public string CNPJ { get; set; } = string.Empty;
 
         public Fornecedor()
         {
         }
+
         public Fornecedor(string nome, string telefone, string cnpj)
         {
             Nome = nome;
@@ -28,12 +29,10 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
             Telefone = registroEditado.Telefone;
             CNPJ = registroEditado.CNPJ;
         }
-        
 
         public override string Validar()
         {
-        
-        string erros = "";
+            string erros = "";
 
             if (string.IsNullOrWhiteSpace(Nome))
                 erros += "O campo 'Nome' é obrigatório.\n";
@@ -52,7 +51,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
             if (cnpjNumerico.Length != 14)
                 erros += "O campo 'CNPJ' deve conter exatamente 14 dígitos numéricos.\n";
 
-
             return erros;
         }
 
@@ -70,8 +68,8 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
         {
             string numeroTelefone = new string(Telefone.Where(char.IsDigit).ToArray());
 
-            if (numeroTelefone.Length == 10)// Formato (XX) XXXX-XXXX
-            { 
+            if (numeroTelefone.Length == 10) // Formato (XX) XXXX-XXXX
+            {
                 string ddd = numeroTelefone.Substring(0, 2);
                 string parte1 = numeroTelefone.Substring(2, 4);
                 string parte2 = numeroTelefone.Substring(6, 4);

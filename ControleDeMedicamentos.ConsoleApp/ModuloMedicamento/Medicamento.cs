@@ -1,17 +1,22 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
 {
     public class Medicamento : EntidadeBase<Medicamento>
     {
         public string NomeMedicamento { get; set; }
-
         public string Descricao { get; set; }
-
         public int Quantidade { get; set; }
-    
+        public List<RequisicoesDeSaida> RequisicoesDeSaida { get; set; }
+
+        public Medicamento()
+        {
+            RequisicoesDeSaida = new List<RequisicoesDeSaida>();
+        }
+
         public Medicamento(string nomeMedicamento, string descricao, int quantidade)
-            {
+        {
             NomeMedicamento = nomeMedicamento;
             Descricao = descricao;
             Quantidade = quantidade;
@@ -26,7 +31,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
 
         public override string Validar()
         {
-
             string erros = "";
 
             if (string.IsNullOrWhiteSpace(NomeMedicamento))
@@ -42,9 +46,19 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
                 erros += "O campo 'Quantidade' deve ser maior que Zero.\n";
 
             if(Quantidade <= 20)
-                Console.WriteLine("Medicamento em falta");
+                erros += "Medicamento em falta";
 
             return erros;
+        }
+
+        public void AdicionarRequisicao(RequisicoesDeSaida requisicoesDeSaida)
+        {
+            RequisicoesDeSaida.Add(requisicoesDeSaida);
+        }
+
+        public void ExcluirRequisicao(RequisicoesDeSaida requisicoesDeSaida)
+        {
+            RequisicoesDeSaida.Remove(requisicoesDeSaida);
         }
     }
 }

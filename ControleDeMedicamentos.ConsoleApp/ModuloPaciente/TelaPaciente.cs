@@ -5,6 +5,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 
 public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
 {
+    public string telefone = "";
     public TelaPaciente(IRepositorioPaciente repositorio) : base("Paciente", repositorio)
     {
     }
@@ -37,7 +38,13 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
     {
         Console.WriteLine(
             "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
-            registro.Id, registro.Nome, registro.Telefone, registro.CartaoSus
+            registro.Id, registro.Nome, registro.FormatarTelefone(telefone), registro.CartaoSus
         );
+    }
+
+    public void ExibirPacientes(Paciente registro)
+    {
+        ExibirCabecalhoTabela();
+        ExibirLinhaTabela(registro);
     }
 }

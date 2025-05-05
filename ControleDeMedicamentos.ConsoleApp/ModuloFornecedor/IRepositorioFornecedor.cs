@@ -1,10 +1,5 @@
-﻿
+﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
-using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
-{
-    public interface IRepositorioFornecedor : IRepositorio<Fornecedor>
-    {
-    }
-}
+public interface IRepositorioFornecedor : IRepositorio<Fornecedor>;

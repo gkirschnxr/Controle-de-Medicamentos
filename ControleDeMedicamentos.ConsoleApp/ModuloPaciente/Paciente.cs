@@ -46,5 +46,29 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
 
             return erros;
         }
+
+        internal object FormatarTelefone(string telefone)
+        {
+            string numeroTelefone = new string(Telefone.Where(char.IsDigit).ToArray());
+
+            if (numeroTelefone.Length == 10)// Formato (XX) XXXX-XXXX
+            {
+                string ddd = numeroTelefone.Substring(0, 2);
+                string parte1 = numeroTelefone.Substring(2, 4);
+                string parte2 = numeroTelefone.Substring(6, 4);
+                return $"({ddd}) {parte1}-{parte2}";
+            }
+            if (numeroTelefone.Length == 11) // Formato (XX) 9XXXX-XXXX
+            {
+                string ddd = numeroTelefone.Substring(0, 2);
+                string parte1 = numeroTelefone.Substring(2, 5);
+                string parte2 = numeroTelefone.Substring(7, 4);
+                return $"({ddd}) {parte1}-{parte2}";
+            }
+
+            return Telefone;
+        }
+
+
     }
 }

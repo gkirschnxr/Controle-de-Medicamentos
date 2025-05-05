@@ -4,15 +4,12 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 {
     public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
     {
-        private IRepositorioFornecedor repositorioFornecedor;
         public string telefone;
 
         public TelaFornecedor(IRepositorioFornecedor repositorio) : base("Fornecedor", repositorio)
         {
-
         }
-
-       
+        
         public override Fornecedor ObterDados()
         {
             Console.WriteLine("Digite o Nome do fornecedor");

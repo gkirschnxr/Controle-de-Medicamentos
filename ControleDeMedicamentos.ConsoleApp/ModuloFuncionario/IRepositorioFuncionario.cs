@@ -1,9 +1,5 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
+namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
-{
-    public interface IRepositorioFuncionario : IRepositorio<Funcionario>
-    {
-    }
-}
+public interface IRepositorioFuncionario : IRepositorio<Funcionario>;
