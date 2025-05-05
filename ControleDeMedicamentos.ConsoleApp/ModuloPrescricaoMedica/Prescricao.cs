@@ -5,13 +5,13 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
 
 public class Prescricao : EntidadeBase<Prescricao>
 {
-    public int CRM { get; set; }
+    public string CRM { get; set; }
     public DateTime DataPrescricao { get; set; }
     public Medicamento Medicamentos { get; set; }
 
     public Prescricao() { }
 
-    public Prescricao(int crm, DateTime dataPrescricao, Medicamento medicamentos)
+    public Prescricao(string crm, DateTime dataPrescricao, Medicamento medicamentos)
     {
         CRM = crm;
         DataPrescricao = dataPrescricao;
@@ -27,7 +27,7 @@ public class Prescricao : EntidadeBase<Prescricao>
     {
         string erros = "";
 
-        if (CRM != 6)
+        if (CRM.Length != 6)
             erros += "O CRM deve conter exatos 6 dígitos";
 
         return erros;

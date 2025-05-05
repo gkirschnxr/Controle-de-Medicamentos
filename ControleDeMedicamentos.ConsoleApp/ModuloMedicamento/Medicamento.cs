@@ -8,11 +8,11 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
         public string NomeMedicamento { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
-        public List<RequisicoesDeSaida> RequisicoesDeSaida { get; set; }
+        public List<RequisicaoDeSaida> RequisicoesDeSaida { get; set; }
 
         public Medicamento()
         {
-            RequisicoesDeSaida = new List<RequisicoesDeSaida>();
+            RequisicoesDeSaida = new List<RequisicaoDeSaida>();
         }
 
         public Medicamento(string nomeMedicamento, string descricao, int quantidade)
@@ -51,12 +51,12 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
             return erros;
         }
 
-        public void AdicionarRequisicao(RequisicoesDeSaida requisicoesDeSaida)
+        public void AdicionarRequisicao(RequisicaoDeSaida requisicoesDeSaida)
         {
             RequisicoesDeSaida.Add(requisicoesDeSaida);
         }
 
-        public void ExcluirRequisicao(RequisicoesDeSaida requisicoesDeSaida)
+        public void ExcluirRequisicao(RequisicaoDeSaida requisicoesDeSaida)
         {
             RequisicoesDeSaida.Remove(requisicoesDeSaida);
         }
