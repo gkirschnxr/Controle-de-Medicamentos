@@ -2,7 +2,6 @@
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
-using Microsoft.Win32;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
 
