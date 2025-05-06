@@ -26,6 +26,11 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
             Telefone = registroEditado.Telefone;
             CPF = registroEditado.CPF;
         }
+        
+        public override string FormatarTelefone(string telefone)
+        {
+            return base.FormatarTelefone(Telefone);
+        }
 
         public override string Validar()
         {
@@ -40,6 +45,9 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
             if (string.IsNullOrWhiteSpace(Telefone))
                 erros += "O campo 'Telefone' é obrigatório.\n";
 
+            if (Telefone.Length < 10)
+                erros += "O campo 'Telefone' precisa conter ao menos 10 caracteres.\n";
+
             if (string.IsNullOrWhiteSpace(CPF))
                 erros += "O campo 'CPF' é obrigatório.\n";
 
@@ -48,7 +56,8 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
             if (cpfNumerico.Length != 11)
                 erros += "O campo 'CPF' deve conter exatamente 11 dígitos numéricos.\n";
 
-
+            FormatarTelefone(Telefone);
+            
             return erros;
         }
 
@@ -61,26 +70,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
 
             return Convert.ToUInt64(numeros).ToString(@"000\.000\.000\-00");
         }
-        internal object FormatarTelefone(string telefone)
-        {
-            string numeroTelefone = new string(Telefone.Where(char.IsDigit).ToArray());
-
-            if (numeroTelefone.Length == 10)// Formato (XX) XXXX-XXXX
-            {
-                string ddd = numeroTelefone.Substring(0, 2);
-                string parte1 = numeroTelefone.Substring(2, 4);
-                string parte2 = numeroTelefone.Substring(6, 4);
-                return $"({ddd}) {parte1}-{parte2}";
-            }
-            if (numeroTelefone.Length == 11) // Formato (XX) 9XXXX-XXXX
-            {
-                string ddd = numeroTelefone.Substring(0, 2);
-                string parte1 = numeroTelefone.Substring(2, 5);
-                string parte2 = numeroTelefone.Substring(7, 4);
-                return $"({ddd}) {parte1}-{parte2}";
-            }
-
-            return Telefone; // Retorna como está se inválido
-        }
+        
     }
 }

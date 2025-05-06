@@ -25,6 +25,11 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
             CartaoSus = registroEditado.CartaoSus;
         }
 
+        public override string FormatarTelefone(string telefone)
+        {
+            return base.FormatarTelefone(telefone);
+        }
+
         public override string Validar()
         {
             string erros = "";
@@ -35,8 +40,11 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
             if (Nome.Length < 3 || Nome.Length > 100)
                 erros += "O campo 'Nome' deve conter entre 3 e 100 caracteres.\n";
 
-            if (Regex.IsMatch(Telefone, @"^\(?\d{2}\)?\s?(9\d{4})-?\d{4}$"))
-                erros += "O campo 'Telefone' deve seguir o padrão (DDD) 0000-0000 ou (DDD) 00000-0000.\n";
+            if (string.IsNullOrWhiteSpace(Telefone))
+                erros += "O campo 'Telefone' é obrigatório.\n";
+
+            if (Telefone.Length < 10)
+                erros += "O campo 'Telefone' deve ter no minimo 10 caracteres.\n";
 
             if (string.IsNullOrEmpty(CartaoSus))
                 erros += "O campo Cartão SUS é obrigatório.\n";
@@ -44,7 +52,19 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
             if (!Regex.IsMatch(CartaoSus, @"^\d{15}$"))
                 erros += "O Cartão SUS deve conter 15 números.\n";
 
+            Telefone = FormatarTelefone(Telefone);
+
             return erros;
+        }
+
+        public string ObterCartaoSusFormatado()
+        {
+            string numeros = new string(CartaoSus.Where(char.IsDigit).ToArray());
+
+            if (numeros.Length != 15)
+                return CartaoSus; // Retorna como está se inválido
+
+            return Convert.ToUInt64(numeros).ToString(@"000\ 0000\ 0000\ 0000");
         }
     }
 }

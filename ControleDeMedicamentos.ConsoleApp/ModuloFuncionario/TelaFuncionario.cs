@@ -1,4 +1,6 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
+using ControleDeMedicamentos.ConsoleApp.Util;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
 {
@@ -8,9 +10,47 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
         private IRepositorioFuncionario repositorioFuncionario;
 
         string telefone { get; set; }
-        public TelaFuncionario(IRepositorioFuncionario repositorio) : base("Funcionario", repositorio)
+        public TelaFuncionario(IRepositorioFuncionario repositorioFuncionario) : base("Funcionario", repositorioFuncionario)
         {
+            this.repositorioFuncionario = repositorioFuncionario;
+        }
+        public override void CadastrarRegistro()
+        {
+            ExibirCabecalho();
 
+            Console.WriteLine();
+
+            Console.WriteLine($"Cadastrando {nomeEntidade}...");
+            Console.WriteLine("--------------------------------------------");
+
+            Console.WriteLine();
+
+            Funcionario novoRegistro = ObterDados();
+
+            string erros = novoRegistro.Validar();
+
+            if (erros.Length > 0)
+            {
+                Notificador.ExibirMensagem(erros, ConsoleColor.Red);
+                CadastrarRegistro();
+
+                return;
+            }
+
+            bool cpfDuplicado = repositorioFuncionario.CpfEstaDuplicado(novoRegistro);
+
+            if (cpfDuplicado)
+            {
+
+                Notificador.ExibirMensagem("Este CPF já está cadastrado", ConsoleColor.Red);
+
+                CadastrarRegistro();
+                return;
+            }
+
+            repositorio.CadastrarRegistro(novoRegistro);
+
+            Notificador.ExibirMensagem("O registro foi concluído com sucesso!", ConsoleColor.Green);
         }
 
         public override Funcionario ObterDados()

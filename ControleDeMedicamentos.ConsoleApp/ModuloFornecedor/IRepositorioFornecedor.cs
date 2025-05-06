@@ -6,5 +6,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 {
     public interface IRepositorioFornecedor : IRepositorio<Fornecedor>
     {
+        bool CnpjEstaDuplicado(Fornecedor fornecedor);
     }
 }

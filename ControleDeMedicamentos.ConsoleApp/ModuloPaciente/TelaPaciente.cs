@@ -1,12 +1,54 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+using ControleDeMedicamentos.ConsoleApp.Util;
 
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 
 public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
 {
-    public TelaPaciente(IRepositorioPaciente repositorio) : base("Paciente", repositorio)
+    IRepositorioPaciente repositorioPaciente;
+    public TelaPaciente(IRepositorioPaciente repositorioPaciente) : base("Paciente", repositorioPaciente)
     {
+        this.repositorioPaciente = repositorioPaciente;
+    }
+    public override void CadastrarRegistro()
+    {
+        ExibirCabecalho();
+
+        Console.WriteLine();
+
+        Console.WriteLine($"Cadastrando {nomeEntidade}...");
+        Console.WriteLine("--------------------------------------------");
+
+        Console.WriteLine();
+
+        Paciente novoRegistro = ObterDados();
+
+        string erros = novoRegistro.Validar();
+
+        if (erros.Length > 0)
+        {
+            Notificador.ExibirMensagem(erros, ConsoleColor.Red);
+            CadastrarRegistro();
+
+            return;
+        }
+
+        bool cartaoSusDuplicado = repositorioPaciente.CartaoSusDuplicado(novoRegistro);
+
+        if (cartaoSusDuplicado)
+        {
+
+            Notificador.ExibirMensagem("Este CARTÃO SUS já está cadastrado", ConsoleColor.Red);
+
+            CadastrarRegistro();
+            return;
+        }
+
+        repositorio.CadastrarRegistro(novoRegistro);
+
+        Notificador.ExibirMensagem("O registro foi concluído com sucesso!", ConsoleColor.Green);
     }
 
     public override Paciente ObterDados()
@@ -37,7 +79,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
     {
         Console.WriteLine(
             "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
-            registro.Id, registro.Nome, registro.Telefone, registro.CartaoSus
+            registro.Id, registro.Nome, registro.Telefone, registro.ObterCartaoSusFormatado()
         );
     }
 }

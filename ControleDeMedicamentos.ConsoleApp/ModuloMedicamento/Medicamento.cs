@@ -44,6 +44,8 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
             if(Quantidade <= 20)
                 Console.WriteLine("Medicamento em falta");
 
+            
+
             return erros;
         }
     }
