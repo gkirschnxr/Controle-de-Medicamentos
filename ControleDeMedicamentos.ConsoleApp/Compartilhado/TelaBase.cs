@@ -142,7 +142,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
             Notificador.ExibirMensagem("O registro foi excluído com sucesso!", ConsoleColor.Green);
         }
 
-        public void VisualizarRegistros(bool exibirTitulo)
+        public virtual void VisualizarRegistros(bool exibirTitulo)
         {
             if (exibirTitulo)
                 ExibirCabecalho();

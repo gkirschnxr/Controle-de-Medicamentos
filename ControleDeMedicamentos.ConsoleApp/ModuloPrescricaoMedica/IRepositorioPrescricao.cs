@@ -2,4 +2,4 @@
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
 
-    public interface IRepositorioPrescricao : IRepositorio<Prescricao>;
+public interface IRepositorioPrescricao : IRepositorio<Prescricao>;
