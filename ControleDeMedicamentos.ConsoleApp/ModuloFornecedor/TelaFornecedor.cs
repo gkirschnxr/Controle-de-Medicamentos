@@ -12,13 +12,13 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
         
         public override Fornecedor ObterDados()
         {
-            Console.WriteLine("Digite o Nome do fornecedor");
+            Console.Write("Digite o Nome do fornecedor: ");
             string nome = Console.ReadLine()!;
             
-            Console.WriteLine("Digite o Telefone do fornecedor");
+            Console.Write("Digite o Telefone do fornecedor: ");
             telefone = Console.ReadLine()!;
 
-            Console.WriteLine("Digite o CNPJ do fornecedor");
+            Console.Write("Digite o CNPJ do fornecedor: ");
             string cnpj = Console.ReadLine()!;
 
             Fornecedor fornecedor = new Fornecedor(nome, telefone, cnpj);

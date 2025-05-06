@@ -15,14 +15,14 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
 
         public override Funcionario ObterDados()
         {
-            Console.WriteLine("Digite o Nome do Funcionario");
-            string nome = Console.ReadLine();
+            Console.WriteLine("Digite o Nome do Funcionario: ");
+            string nome = Console.ReadLine()!;
 
-            Console.WriteLine("Digite o Telefone do Funcionario");
-            telefone = Console.ReadLine();
+            Console.WriteLine("Digite o Telefone do Funcionario: ");
+            telefone = Console.ReadLine()!;
 
-            Console.WriteLine("Digite o CPF do Funcionario");
-            string cpf = Console.ReadLine();
+            Console.WriteLine("Digite o CPF do Funcionario: ");
+            string cpf = Console.ReadLine()!;
 
             Funcionario funcionario = new Funcionario(nome, telefone, cpf);
 

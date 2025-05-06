@@ -5,6 +5,7 @@ using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
 using ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoDeEntrada;
 
 namespace ControleDeMedicamentos.ConsoleApp.Util
 {
@@ -19,6 +20,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
         private TelaPaciente telaPaciente;               
         private TelaPrescricao telaPrescricao;      
         private TelaRequisicaoDeSaida telaRequisicaoDeSaida;
+        private TelaRequisicaoDeEntrada telaRequisicaoDeEntrada;
         
 
         public MenuPrincipal()
@@ -42,6 +44,10 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
 
             IRepositorioRequisicaoDeSaida repositorioRequisicaoDeSaida = new RepositorioRequisicaoDeSaida(contexto);
             telaRequisicaoDeSaida = new TelaRequisicaoDeSaida(repositorioRequisicaoDeSaida);
+
+            IRepositorioRequisicaoDeEntrada repositorioRequisicaoDeEntrada = new RepositorioRequisicaoDeEntrada(contexto);
+            telaRequisicaoDeEntrada = new TelaRequisicaoDeEntrada(repositorioRequisicaoDeEntrada);
+
 
         }
 
@@ -67,6 +73,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
                 Console.WriteLine("4 - Controle de Funcionarios");
                 Console.WriteLine("5 - Controle de Prescrições Médicas");
                 Console.WriteLine("6 - Controle de Requisições de Saída");
+                Console.WriteLine("7 - Controle de Requisições de Entrada");
                 Console.WriteLine("S - Sair");
 
 
@@ -92,6 +99,8 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
                 return telaPrescricao;
             if (opcaoPrincipal == '6')
                 return telaRequisicaoDeSaida;
+            if (opcaoPrincipal == '7')
+                return telaRequisicaoDeEntrada;
 
             return null!;
             ;
