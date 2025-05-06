@@ -6,11 +6,11 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 {
     public class Fornecedor : EntidadeBase<Fornecedor>
     {
-        public string Nome { get; set; }
+        public string Nome { get; set; } = string.Empty;
 
-        public string Telefone { get; set; }
+        public string Telefone { get; set; } = string.Empty;
 
-        public string CNPJ { get; set; }
+        public string CNPJ { get; set; } = string.Empty;
 
 
         
@@ -18,6 +18,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
         public Fornecedor()
         {
         }
+
         public Fornecedor(string nome, string telefone, string cnpj)
         {
             Nome = nome;

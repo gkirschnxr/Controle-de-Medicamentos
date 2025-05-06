@@ -18,10 +18,10 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
         
         public override Medicamento ObterDados()
         {
-            Console.WriteLine("Digite o Nome do medicamento: ");
+            Console.Write("Digite o Nome do medicamento: ");
             string nomeMedicamento = Console.ReadLine()!;
 
-            Console.WriteLine("Digite a Descrição do medicamento: ");
+            Console.Write("Digite a Descrição do medicamento: ");
             string descricao = Console.ReadLine()!;
 
             Console.WriteLine("Digite a quantidade do medicamento: ");

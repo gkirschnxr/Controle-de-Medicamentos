@@ -1,17 +1,22 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
 {
     public class Medicamento : EntidadeBase<Medicamento>
     {
         public string NomeMedicamento { get; set; }
-
         public string Descricao { get; set; }
-
         public int Quantidade { get; set; }
-    
+        public List<RequisicaoDeSaida> RequisicoesDeSaida { get; set; }
+
+        public Medicamento()
+        {
+            RequisicoesDeSaida = new List<RequisicaoDeSaida>();
+        }
+
         public Medicamento(string nomeMedicamento, string descricao, int quantidade)
-            {
+        {
             NomeMedicamento = nomeMedicamento;
             Descricao = descricao;
             Quantidade = quantidade;
@@ -26,7 +31,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
 
         public override string Validar()
         {
-
             string erros = "";
 
             if (string.IsNullOrWhiteSpace(NomeMedicamento))
@@ -47,6 +51,16 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
             
 
             return erros;
+        }
+
+        public void AdicionarRequisicao(RequisicaoDeSaida requisicoesDeSaida)
+        {
+            RequisicoesDeSaida.Add(requisicoesDeSaida);
+        }
+
+        public void ExcluirRequisicao(RequisicaoDeSaida requisicoesDeSaida)
+        {
+            RequisicoesDeSaida.Remove(requisicoesDeSaida);
         }
     }
 }

@@ -82,4 +82,10 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
             registro.Id, registro.Nome, registro.Telefone, registro.ObterCartaoSusFormatado()
         );
     }
+
+    public void ExibirPacientes(Paciente registro)
+    {
+        ExibirCabecalhoTabela();
+        ExibirLinhaTabela(registro);
+    }
 }

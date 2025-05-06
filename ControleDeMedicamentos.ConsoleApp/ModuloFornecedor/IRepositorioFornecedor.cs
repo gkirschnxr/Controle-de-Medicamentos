@@ -1,6 +1,4 @@
-﻿
-
-using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 {

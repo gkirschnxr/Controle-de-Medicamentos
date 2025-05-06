@@ -4,8 +4,9 @@ using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
-
-
+using ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
+using ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoDeEntrada;
 
 namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 {
@@ -18,14 +19,19 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
         public List<Funcionario> Funcionarios { get; set; }
         public List<Medicamento> Medicamentos { get; set; }
         public List<Paciente> Pacientes { get; set; }
+        public List<Prescricao> Prescricao { get; set; }
+        public List<RequisicaoDeSaida> RequisicaoSaida { get; set; }
+        public List<RequisicaoDeEntrada> RequisicaoEntrada { get; set; }
 
         public ContextoDeDados()
         {
             Fornecedores = new List<Fornecedor>();
             Funcionarios = new List<Funcionario>();
-
             Medicamentos = new List<Medicamento>();
             Pacientes = new List<Paciente>();
+            Prescricao = new List<Prescricao>();
+            RequisicaoSaida = new List<RequisicaoDeSaida>();
+            RequisicaoEntrada = new List<RequisicaoDeEntrada>();
         }
 
         public ContextoDeDados(bool carregarDados) : this()
@@ -74,6 +80,9 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
             Funcionarios = contextoArmazenado.Funcionarios;
             Medicamentos = contextoArmazenado.Medicamentos;
             Pacientes = contextoArmazenado.Pacientes;
+            Prescricao = contextoArmazenado.Prescricao;
+            RequisicaoSaida = contextoArmazenado.RequisicaoSaida;
+            RequisicaoEntrada = contextoArmazenado.RequisicaoEntrada;
         }
 
     }
