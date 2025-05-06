@@ -7,15 +7,17 @@ public class Prescricao : EntidadeBase<Prescricao>
 {
     public string CRM { get; set; }
     public DateTime DataPrescricao { get; set; }
-    public Medicamento Medicamentos { get; set; }
+    public List<Medicamento> Medicamentos { get; set; }
 
-    public Prescricao() { }
+    public Prescricao()
+    {
+        Medicamentos = new List<Medicamento>();
+    }
 
-    public Prescricao(string crm, DateTime dataPrescricao, Medicamento medicamentos)
+    public Prescricao(string crm, DateTime dataPrescricao) : this()
     {
         CRM = crm;
         DataPrescricao = dataPrescricao;
-        Medicamentos = medicamentos;
     }
 
     public override void AtualizarRegistro(Prescricao registroEditado)

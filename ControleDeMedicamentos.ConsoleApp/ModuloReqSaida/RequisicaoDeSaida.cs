@@ -9,18 +9,20 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
 public class RequisicaoDeSaida : EntidadeBase<RequisicaoDeSaida>
 {
     public DateTime DataRequisicaoSaida { get; set; }
-    public Paciente Paciente { get; set; }
-    public Prescricao Prescricao { get; set; }
-    public Medicamento Medicamentos { get; set; }
+    public List<Paciente> Paciente { get; set; }
+    public List<Prescricao> Prescricao { get; set; }
+    public List<Medicamento> Medicamentos { get; set; }
 
-    public RequisicaoDeSaida() { }
+    public RequisicaoDeSaida()
+    {
+        Paciente = new List<Paciente>();
+        Prescricao = new List<Prescricao>();
+        Medicamentos = new List<Medicamento>();
+    }
 
-    public RequisicaoDeSaida (DateTime dataRequisicaoSaida, Paciente paciente, Prescricao prescricao, Medicamento medicamentos)
+    public RequisicaoDeSaida (DateTime dataRequisicaoSaida) : this()
     {
         DataRequisicaoSaida = dataRequisicaoSaida;
-        Paciente = paciente;
-        Prescricao = prescricao;
-        Medicamentos = medicamentos;
     }
 
     public override void AtualizarRegistro(RequisicaoDeSaida registroEditado)

@@ -3,11 +3,13 @@ using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
 
-partial class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
+public class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
 {
     IRepositorioMedicamento repositorioMedicamento;
-    public TelaPrescricao (IRepositorioPrescricao repositorio) : base("Prescricao", repositorio)
+    public TelaPrescricao (IRepositorioPrescricao repositorio, IRepositorioMedicamento repositorioMedicamento)
+        : base("Prescricao", repositorio)
     {
+        this.repositorioMedicamento = repositorioMedicamento;
     }
 
     public override Prescricao ObterDados()
@@ -17,13 +19,13 @@ partial class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
 
         Console.WriteLine();
 
-        List<Medicamento> medicamentos = ObterMedicamentos();
+        ExibirCabecalhoTabelaMedicamento(); 
 
-        Console.WriteLine("Medicamentos disponíveis:");
+        List<Medicamento> medicamentos = repositorioMedicamento.SelecionarRegistros();
+
         foreach (var medicamento in medicamentos)
         {
-            Console.WriteLine($"ID: {medicamento.Id}, Nome: {medicamento.NomeMedicamento}");
-            Console.ReadLine();
+            ExibirLinhaTabelaMedicamento(medicamento);
         }
 
         Console.WriteLine();
@@ -31,9 +33,7 @@ partial class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
         Console.Write("Digite o ID do medicamento: ");
         int idMedicamento = Convert.ToInt32(Console.ReadLine() ?? "0");
 
-        Medicamento medicamentoSelecionado = medicamentos.FirstOrDefault(medicamento => medicamento.Id == idMedicamento)!;
-
-        Prescricao novaPrescricao = new Prescricao(crm, DateTime.Now, medicamentoSelecionado);
+        Prescricao novaPrescricao = new Prescricao(crm, DateTime.Now);
 
         return novaPrescricao;
     }
@@ -48,15 +48,22 @@ partial class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
 
     public override void ExibirLinhaTabela(Prescricao registro)
     {
-        List<Medicamento> medicamentoCadastrado = repositorioMedicamento.SelecionarRegistros();
-
         Console.WriteLine(
             "{0, -10} | {1, -12} | {2, -20} | {3, -20}",
-             registro.Id, registro.CRM, registro.DataPrescricao, medicamentoCadastrado
+             registro.Id, registro.CRM, registro.DataPrescricao, registro.Medicamentos.Count
         );
     }
-    private List<Medicamento> ObterMedicamentos()
+
+    public void ExibirCabecalhoTabelaMedicamento()
     {
-        return null;
+        Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -30}",
+            "Id", "Medicamento", "Descricao", "Quantidade");
     }
+
+    public void ExibirLinhaTabelaMedicamento(Medicamento medicamento)
+    {
+        Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}",
+            medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade);
+    }
+
 }

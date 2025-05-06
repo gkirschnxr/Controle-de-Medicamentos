@@ -2,26 +2,41 @@
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
+using ControleDeMedicamentos.ConsoleApp.Util;
 using Microsoft.Win32;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
 
 public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
 {
-    public TelaRequisicaoDeSaida (IRepositorioRequisicaoDeSaida repositorio) : base("Requisição de Saída", repositorio)
+    IRepositorioPaciente repositorioPaciente;
+    IRepositorioPrescricao repositorioPrescricao;
+    IRepositorioMedicamento repositorioMedicamento;
+
+    private readonly string telefone;
+
+    public TelaRequisicaoDeSaida (IRepositorioRequisicaoDeSaida repositorio, IRepositorioPaciente repositorioPaciente,
+                                  IRepositorioPrescricao repositorioPrescricao, IRepositorioMedicamento repositorioMedicamento)
+                                 : base("Requisição de Saída", repositorio)
     {
+        this.repositorioPaciente = repositorioPaciente;
+        this.repositorioPrescricao = repositorioPrescricao;
+        this.repositorioMedicamento = repositorioMedicamento;
     }
 
     public override RequisicaoDeSaida ObterDados()
     {
         Console.WriteLine($"Data da requisição de saída: {DateTime.Now}");
 
-        List<Paciente> pacientes = ObterPacientes();
+        Console.WriteLine();
 
-        Console.WriteLine("Pacientes disponíveis:");
+        ExibirCabecalhoTabelaPaciente();
+
+        List<Paciente> pacientes = repositorioPaciente.SelecionarRegistros();
+
         foreach (var paciente in pacientes)
         {
-            Console.WriteLine($"ID: {paciente.Id}, Nome: {paciente.Nome}");
+            ExibirLinhaTabelaPaciente(paciente, telefone);
         }
 
         Console.WriteLine();
@@ -29,41 +44,31 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
         Console.Write("Digite o ID do paciente: ");
         int idPaciente = Convert.ToInt32(Console.ReadLine() ?? "0");
 
-        Paciente pacienteSelecionado = pacientes.FirstOrDefault(paciente => paciente.Id == idPaciente)!;
+        Console.WriteLine();
 
-        if (pacienteSelecionado == null)
+        ExibirCabecalhoTabelaPrescricao();
+
+        List<Prescricao> prescricoes = repositorioPrescricao.SelecionarRegistros();
+
+        foreach (var prescricao in prescricoes)
         {
-            Console.WriteLine("Paciente não encontrado. Operação cancelada.");
-            return null!;
-        }
-
-        List<Medicamento> medicamentos = ObterMedicamentos();
-
-        Console.WriteLine("Medicamentos disponíveis:");
-        foreach (var medicamento in medicamentos)
-        {
-            Console.WriteLine($"ID: {medicamento.Id}, Nome: {medicamento.NomeMedicamento}");
+            ExibirLinhaTabelaPrescricao(prescricao);
         }
 
         Console.WriteLine();
 
-        Console.Write("Digite o ID do medicamento: ");
-        int idMedicamento = Convert.ToInt32(Console.ReadLine() ?? "0");
+        Console.Write("Digite o ID da prescrição médica: ");
+        int idPrescricao = Convert.ToInt32(Console.ReadLine() ?? "0");
 
-        Medicamento medicamentoSelecionado = medicamentos.FirstOrDefault(medicamento => medicamento.Id == idMedicamento)!;
+        Console.WriteLine();
 
-        if (medicamentoSelecionado == null)
+        ExibirCabecalhoTabelaMedicamento();
+
+        List<Medicamento> medicamentos = repositorioMedicamento.SelecionarRegistros();
+
+        foreach (var medicamento in medicamentos)
         {
-            Console.WriteLine("Medicamento não encontrado. Operação cancelada.");
-            return null!;
-        }
-
-        List<Prescricao> prescricoes = ObterPrescricoes();
-
-        Console.WriteLine("Prescrições disponíveis:");
-        foreach (var prescricao in prescricoes)
-        {
-            Console.WriteLine($"ID: {prescricao.Id}, CRM {prescricao.CRM}, Nome: {prescricao.Medicamentos}");
+            ExibirLinhaTabelaMedicamento(medicamento);
         }
 
         Console.WriteLine();
@@ -71,31 +76,11 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
         Console.Write("Digite o ID da prescrição: ");
         int idPrescrição = Convert.ToInt32(Console.ReadLine() ?? "0");
 
-        Prescricao prescricaoSelecionada = prescricoes.FirstOrDefault(prescricoes => prescricoes.Id == idPrescrição)!;
+        Console.WriteLine();
 
-        if (prescricaoSelecionada == null)
-        {
-            Console.WriteLine("Medicamento não encontrado. Operação cancelada.");
-            return null!;
-        }
-
-        RequisicaoDeSaida novaRequisicao = new RequisicaoDeSaida(DateTime.Now, pacienteSelecionado, prescricaoSelecionada, medicamentoSelecionado);
+        RequisicaoDeSaida novaRequisicao = new RequisicaoDeSaida(DateTime.Now);
 
         return novaRequisicao;
-    }
-
-    private List<Medicamento> ObterMedicamentos()
-    {
-        return new List<Medicamento>();
-    }
-    private List<Prescricao> ObterPrescricoes()
-    {
-        return new List<Prescricao>();
-    }
-
-    private List<Paciente> ObterPacientes()
-    {
-        return new List<Paciente>();
     }
 
     public override void ExibirCabecalhoTabela()
@@ -113,5 +98,65 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
         );
     }
 
+    public void ExibirCabecalhoTabelaPaciente()
+    {
+        Console.WriteLine(
+            "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
+            "ID", "Nome", "Telefone", "Cartão do SUS"
+        );
+    }
+    public void ExibirLinhaTabelaPaciente(Paciente registro, string telefone)
+    {
+        Console.WriteLine(
+            "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
+            registro.Id, registro.Nome, registro.FormatarTelefone(telefone), registro.CartaoSus
+        );
+    }
+
+    public void ExibirCabecalhoTabelaPrescricao()
+    {
+        Console.WriteLine(
+            "{0, -10} | {1, -12} | {2, -20} | {3, -20}",
+            "ID", "CRM", "Data", "Lista de Medicamentos"
+        );
+    }
+    public void ExibirLinhaTabelaPrescricao(Prescricao registro)
+    {
+        Console.WriteLine(
+            "{0, -10} | {1, -12} | {2, -20} | {3, -20}",
+             registro.Id, registro.CRM, registro.DataPrescricao, registro.Medicamentos.Count
+        );
+    }
+
+    public void ExibirCabecalhoTabelaMedicamento()
+    {
+        Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -30}",
+            "Id", "Medicamento", "Descricao", "Quantidade");
+    }
+    public void ExibirLinhaTabelaMedicamento(Medicamento medicamento)
+    {
+        Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}",
+            medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade);
+    }
+
+    public override void VisualizarRegistros(bool exibirTitulo)
+    {
+        if (exibirTitulo)
+            ExibirCabecalho();
+
+        Console.WriteLine($"Visualizando {nomeEntidade}s...");
+        Console.WriteLine("------------------------------------\n");
+
+        ExibirCabecalhoTabela();
+
+        List<RequisicaoDeSaida> registros = repositorio.SelecionarRegistros();
+
+        foreach (RequisicaoDeSaida registro in registros)
+            ExibirLinhaTabela(registro);
+
+
+
+        Notificador.ExibirMensagem("\nPressione ENTER para continuar...", ConsoleColor.Yellow);
+    }
 
 }

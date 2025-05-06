@@ -38,10 +38,10 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
             telaMedicamento = new TelaMedicamento(repositorioMedicamento);
 
             IRepositorioPrescricao repositorioPrescricao = new RepositorioPrescricao(contexto);
-            telaPrescricao = new TelaPrescricao(repositorioPrescricao);
+            telaPrescricao = new TelaPrescricao(repositorioPrescricao, repositorioMedicamento);
 
             IRepositorioRequisicaoDeSaida repositorioRequisicaoDeSaida = new RepositorioRequisicaoDeSaida(contexto);
-            telaRequisicaoDeSaida = new TelaRequisicaoDeSaida(repositorioRequisicaoDeSaida);
+            telaRequisicaoDeSaida = new TelaRequisicaoDeSaida(repositorioRequisicaoDeSaida, repositorioPaciente, repositorioPrescricao, repositorioMedicamento);
 
         }
 
