@@ -1,9 +1,8 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
+namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
+
+public interface IRepositorioFornecedor : IRepositorio<Fornecedor>
 {
-    public interface IRepositorioFornecedor : IRepositorio<Fornecedor>
-    {
-        bool CnpjEstaDuplicado(Fornecedor fornecedor);
-    }
+    bool CnpjEstaDuplicado(Fornecedor novoRegistro);
 }
