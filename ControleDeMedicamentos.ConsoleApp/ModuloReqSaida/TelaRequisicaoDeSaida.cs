@@ -13,8 +13,6 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
     IRepositorioPrescricao repositorioPrescricao;
     IRepositorioMedicamento repositorioMedicamento;
 
-    private readonly string telefone;
-
     public TelaRequisicaoDeSaida (IRepositorioRequisicaoDeSaida repositorio, IRepositorioPaciente repositorioPaciente,
                                   IRepositorioPrescricao repositorioPrescricao, IRepositorioMedicamento repositorioMedicamento)
                                  : base("Requisição de Saída", repositorio)
@@ -27,59 +25,81 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
     public override RequisicaoDeSaida ObterDados()
     {
         Console.WriteLine($"Data da requisição de saída: {DateTime.Now}");
-
         Console.WriteLine();
 
+        // Seleção de paciente
         ExibirCabecalhoTabelaPaciente();
-
         List<Paciente> pacientes = repositorioPaciente.SelecionarRegistros();
-
         foreach (var paciente in pacientes)
+            ExibirLinhaTabelaPaciente(paciente);
+
+        Console.Write("\nDigite o ID do paciente: ");
+        int idPaciente = Convert.ToInt32(Console.ReadLine());
+
+        Paciente pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(idPaciente);
+
+        if (pacienteSelecionado == null)
         {
-            ExibirLinhaTabelaPaciente(paciente, telefone);
+            Notificador.ExibirMensagem("Paciente não encontrado!", ConsoleColor.Red);
+            return null;
         }
 
+        // Seleção de prescrição
         Console.WriteLine();
-
-        Console.Write("Digite o ID do paciente: ");
-        int idPaciente = Convert.ToInt32(Console.ReadLine() ?? "0");
-
-        Console.WriteLine();
-
         ExibirCabecalhoTabelaPrescricao();
-
         List<Prescricao> prescricoes = repositorioPrescricao.SelecionarRegistros();
-
         foreach (var prescricao in prescricoes)
-        {
             ExibirLinhaTabelaPrescricao(prescricao);
-        }
 
-        Console.WriteLine();
+        Console.Write("\nDigite o ID da prescrição médica: ");
+        int idPrescricao = Convert.ToInt32(Console.ReadLine());
 
-        Console.Write("Digite o ID da prescrição médica: ");
-        int idPrescricao = Convert.ToInt32(Console.ReadLine() ?? "0");
+        Prescricao prescricaoSelecionada = repositorioPrescricao.SelecionarRegistroPorId(idPrescricao);
 
-        Console.WriteLine();
-
-        ExibirCabecalhoTabelaMedicamento();
-
-        List<Medicamento> medicamentos = repositorioMedicamento.SelecionarRegistros();
-
-        foreach (var medicamento in medicamentos)
+        if (prescricaoSelecionada == null)
         {
-            ExibirLinhaTabelaMedicamento(medicamento);
+            Notificador.ExibirMensagem("Prescrição não encontrada!", ConsoleColor.Red);
+            return null!;
         }
 
+        // Seleção de medicamento
         Console.WriteLine();
+        ExibirCabecalhoTabelaMedicamento();
+        List<Medicamento> medicamentos = repositorioMedicamento.SelecionarRegistros();
+        foreach (var medicamento in medicamentos)
+            ExibirLinhaTabelaMedicamento(medicamento);
 
-        Console.Write("Digite o ID da prescrição: ");
-        int idPrescrição = Convert.ToInt32(Console.ReadLine() ?? "0");
+        Console.Write("\nDigite o ID do medicamento: ");
+        int idMedicamento = Convert.ToInt32(Console.ReadLine());
 
-        Console.WriteLine();
+        Medicamento medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(idMedicamento);
 
-        RequisicaoDeSaida novaRequisicao = new RequisicaoDeSaida(DateTime.Now);
+        if (medicamentoSelecionado == null)
+        {
+            Notificador.ExibirMensagem("Medicamento não encontrado!", ConsoleColor.Red);
+            return null!;
+        }
 
+        Console.Write("Digite a quantidade a requisitar: ");
+        int quantidade = Convert.ToInt32(Console.ReadLine());
+
+        if (quantidade > medicamentoSelecionado.Quantidade)
+        {
+            Notificador.ExibirMensagem("Quantidade indisponível no estoque!", ConsoleColor.Red);
+            return null!;
+        }
+
+        medicamentoSelecionado.Quantidade -= quantidade;
+
+        RequisicaoDeSaida novaRequisicao = new RequisicaoDeSaida(pacienteSelecionado, prescricaoSelecionada)
+        {
+            Prescricao = prescricaoSelecionada,
+            Paciente = pacienteSelecionado,
+            DataRequisicaoSaida = DateTime.Now,
+            Medicamentos = new List<Medicamento> { medicamentoSelecionado }
+        };
+
+        Notificador.ExibirMensagem("Requisição realizada com sucesso!", ConsoleColor.Green);
         return novaRequisicao;
     }
 
@@ -94,22 +114,25 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
     {
         Console.WriteLine(
             "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
-            registro.Id, registro.Paciente, registro.Prescricao, registro.Medicamentos
+
+            registro.Id, registro.Paciente.NomePaciente, registro.Prescricao.DataPrescricao.ToShortDateString(), registro.Prescricao.Medicamentos.Count 
+            //mostrar todos os medicamentos separados por virgula, trazer os medicamentos direto da prescricao
+
         );
     }
 
     public void ExibirCabecalhoTabelaPaciente()
     {
         Console.WriteLine(
-            "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
-            "ID", "Nome", "Telefone", "Cartão do SUS"
+            "{0, -6} | {1, -25} | {2, -20}",
+            "ID", "Nome", "Cartão do SUS"
         );
     }
-    public void ExibirLinhaTabelaPaciente(Paciente registro, string telefone)
+    public void ExibirLinhaTabelaPaciente(Paciente registro)
     {
         Console.WriteLine(
-            "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
-            registro.Id, registro.Nome, registro.FormatarTelefone(telefone), registro.CartaoSus
+            "{0, -6} | {1, -25} | {2, -20}",
+            registro.Id, registro.NomePaciente, registro.CartaoSus
         );
     }
 
@@ -137,26 +160,6 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
     {
         Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}",
             medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade);
-    }
-
-    public override void VisualizarRegistros(bool exibirTitulo)
-    {
-        if (exibirTitulo)
-            ExibirCabecalho();
-
-        Console.WriteLine($"Visualizando {nomeEntidade}s...");
-        Console.WriteLine("------------------------------------\n");
-
-        ExibirCabecalhoTabela();
-
-        List<RequisicaoDeSaida> registros = repositorio.SelecionarRegistros();
-
-        foreach (RequisicaoDeSaida registro in registros)
-            ExibirLinhaTabela(registro);
-
-
-
-        Notificador.ExibirMensagem("\nPressione ENTER para continuar...", ConsoleColor.Yellow);
     }
 
 }

@@ -6,7 +6,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 {
     public class Fornecedor : EntidadeBase<Fornecedor>
     {
-        public string Nome { get; set; } = string.Empty;
+        public string NomeFornecedor { get; set; } = string.Empty;
 
         public string Telefone { get; set; } = string.Empty;
 
@@ -21,14 +21,14 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 
         public Fornecedor(string nome, string telefone, string cnpj)
         {
-            Nome = nome;
+            NomeFornecedor = nome;
             Telefone = telefone;
             CNPJ = cnpj;
         }
 
         public override void AtualizarRegistro(Fornecedor registroEditado)
         {
-            Nome = registroEditado.Nome;
+            NomeFornecedor = registroEditado.NomeFornecedor;
             Telefone = registroEditado.Telefone;
             CNPJ = registroEditado.CNPJ;
 
@@ -44,10 +44,10 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
             
             string erros = "";
 
-            if (string.IsNullOrWhiteSpace(Nome))
+            if (string.IsNullOrWhiteSpace(NomeFornecedor))
                 erros += "O campo 'Nome' é obrigatório.\n";
 
-            if (Nome.Length < 3)
+            if (NomeFornecedor.Length < 3)
                 erros += "O campo 'Nome' precisa conter ao menos 3 caracteres.\n";
 
             if (string.IsNullOrWhiteSpace(Telefone))

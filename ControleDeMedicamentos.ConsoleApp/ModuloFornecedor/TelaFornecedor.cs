@@ -138,7 +138,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
         public override void ExibirLinhaTabela(Fornecedor fornecedor)
         {
             Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}", 
-                fornecedor.Id, fornecedor.Nome, fornecedor.FormatarTelefone(telefone), fornecedor.ObterCnpjFormatado());
+                fornecedor.Id, fornecedor.NomeFornecedor, fornecedor.FormatarTelefone(telefone), fornecedor.ObterCnpjFormatado());
         }
 
         

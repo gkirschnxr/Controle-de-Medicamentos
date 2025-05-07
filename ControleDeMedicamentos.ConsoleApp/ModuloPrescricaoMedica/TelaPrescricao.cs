@@ -1,5 +1,7 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+using ControleDeMedicamentos.ConsoleApp.Util;
+using Microsoft.Win32;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
 
@@ -33,9 +35,16 @@ public class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
         Console.Write("Digite o ID do medicamento: ");
         int idMedicamento = Convert.ToInt32(Console.ReadLine() ?? "0");
 
-        
+        Medicamento medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(idMedicamento);
+        if (medicamentoSelecionado == null)
+        {
+            Notificador.ExibirMensagem("Medicamento não encontrado!", ConsoleColor.Red);
+
+            return ObterDados();
+        }
 
         Prescricao novaPrescricao = new Prescricao(crm, DateTime.Now);
+        novaPrescricao.Medicamentos.Add(medicamentoSelecionado);
 
         return novaPrescricao;
     }
@@ -50,10 +59,11 @@ public class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
 
     public override void ExibirLinhaTabela(Prescricao registro)
     {
-        Console.WriteLine(
-            "{0, -10} | {1, -12} | {2, -20} | {3, -20}",
-             registro.Id, registro.CRM, registro.DataPrescricao, registro.Medicamentos.Count
-        );
+        Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -20}",
+            registro.Id,
+            registro.CRM,
+            registro.DataPrescricao,
+            CarregarMedicamentosEmString(registro));
     }
 
     public void ExibirCabecalhoTabelaMedicamento()
@@ -66,6 +76,11 @@ public class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
     {
         Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}",
             medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade);
+    }
+
+    public string CarregarMedicamentosEmString(Prescricao p)
+    {
+        return string.Join(", ", p.Medicamentos.Select(m => m.NomeMedicamento));
     }
 
 }
