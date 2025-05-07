@@ -6,6 +6,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
     public class TelaFornecedor : TelaBase<Fornecedor>, ITelaCrud
     {
         public string telefone;
+        IRepositorioFornecedor repositorioFornecedor;
 
         public TelaFornecedor(IRepositorioFornecedor repositorioFornecedor) : base("Fornecedor", repositorioFornecedor)
         {
@@ -51,6 +52,55 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 
             Notificador.ExibirMensagem("O registro foi concluído com sucesso!", ConsoleColor.Green);
         }
+
+        public override void EditarRegistro()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine($"Editando {nomeEntidade}...");
+            Console.WriteLine("----------------------------------------");
+
+            Console.WriteLine();
+
+            VisualizarRegistros(false);
+
+            Console.Write("Digite o ID do registro que deseja selecionar: ");
+            int idRegistro = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine();
+           
+            Fornecedor fornecedorExistente = repositorio.SelecionarRegistroPorId(idRegistro);
+
+            if (fornecedorExistente == null)
+            {
+                Notificador.ExibirMensagem("Fornecedor não encontrado!", ConsoleColor.Red);
+                return;
+            }
+
+            Fornecedor registroEditado = ObterDados(fornecedorExistente.CNPJ);
+            
+            string erros = registroEditado.Validar();
+
+            if (erros.Length > 0)
+            {
+                Notificador.ExibirMensagem(erros, ConsoleColor.Red);
+
+                EditarRegistro();
+
+                return;
+            }
+
+            bool conseguiuEditar = repositorio.EditarRegistro(idRegistro, registroEditado);
+
+            if (!conseguiuEditar)
+            {
+                Notificador.ExibirMensagem("Houve um erro durante a edição do registro...", ConsoleColor.Red);
+
+                return;
+            }
+
+            Notificador.ExibirMensagem("O registro foi editado com sucesso!", ConsoleColor.Green);
+        }
         public override Fornecedor ObterDados()
         {
             Console.Write("Digite o Nome do fornecedor: ");
@@ -65,6 +115,18 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
             Fornecedor fornecedor = new Fornecedor(nome, telefone, cnpj);
 
                 return fornecedor;
+        }
+        public Fornecedor ObterDados(string cnpjExistente)
+        {
+            Console.Write("Digite o Nome do fornecedor: ");
+            string nome = Console.ReadLine()!;
+
+            Console.Write("Digite o Telefone do fornecedor: ");
+            string telefone = Console.ReadLine()!;
+
+            Console.WriteLine($"CNPJ atual (não pode ser alterado): {cnpjExistente}");
+
+            return new Fornecedor(nome, telefone, cnpjExistente);
         }
 
         public override void ExibirCabecalhoTabela()

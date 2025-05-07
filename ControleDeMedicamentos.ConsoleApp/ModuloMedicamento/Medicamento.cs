@@ -1,25 +1,39 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
 {
     public class Medicamento : EntidadeBase<Medicamento>
     {
+        
         public string NomeMedicamento { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
         public List<RequisicaoDeSaida> RequisicoesDeSaida { get; set; }
+        public Fornecedor Fornecedor { get; set; }
+        
 
         public Medicamento()
         {
             RequisicoesDeSaida = new List<RequisicaoDeSaida>();
+            
         }
 
-        public Medicamento(string nomeMedicamento, string descricao, int quantidade)
+        public Medicamento(string nomeMedicamento, string descricao, int quantidade, Fornecedor fornecedor)
         {
             NomeMedicamento = nomeMedicamento;
             Descricao = descricao;
             Quantidade = quantidade;
+            Fornecedor = fornecedor;
+        }
+
+        public Medicamento(string nomeMedicamento, string descricao, int quantidade, string nome)
+        {
+            NomeMedicamento = nomeMedicamento;
+            Descricao = descricao;
+            Quantidade = quantidade;
+            
         }
 
         public override void AtualizarRegistro(Medicamento registroEditado)

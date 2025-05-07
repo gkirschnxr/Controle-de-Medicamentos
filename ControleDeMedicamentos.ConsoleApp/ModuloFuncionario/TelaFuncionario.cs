@@ -53,6 +53,8 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
             Notificador.ExibirMensagem("O registro foi concluído com sucesso!", ConsoleColor.Green);
         }
 
+
+
         public override Funcionario ObterDados()
         {
             Console.WriteLine("Digite o Nome do Funcionario: ");

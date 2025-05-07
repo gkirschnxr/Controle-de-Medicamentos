@@ -9,10 +9,14 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
     {
         int quantidade;
 
+        protected IRepositorio<Fornecedor> repositorio;
+
         private IRepositorioMedicamento repositorioMedicamento;
-        public TelaMedicamento(IRepositorioMedicamento repositorioMedicamento) : base("Medicamento", repositorioMedicamento)
+        public TelaFornecedor telaFornecedor;
+        public TelaMedicamento(IRepositorioMedicamento repositorioMedicamento, TelaFornecedor telaFornecedor) : base("Medicamento", repositorioMedicamento)
         {
             this.repositorioMedicamento = repositorioMedicamento;
+            this.telaFornecedor = telaFornecedor;
         }
 
         
@@ -27,21 +31,29 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
             Console.WriteLine("Digite a quantidade do medicamento: ");
             quantidade = Convert.ToInt32(Console.ReadLine());
 
-            Medicamento medicamento = new Medicamento(nomeMedicamento, descricao, quantidade);
+            telaFornecedor.VisualizarRegistros(false);
+            Console.WriteLine("Digite o ID do Fornecedor: ");
+            int idFornecedor = Convert.ToInt32(Console.ReadLine());
+
+            Fornecedor fornecedor = repositorio.SelecionarRegistroPorId(idFornecedor);
+
+
+            Medicamento medicamento = new Medicamento(nomeMedicamento, descricao, quantidade, fornecedor);
 
             return medicamento;
         }
 
         public override void ExibirCabecalhoTabela()
         {
-            Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -30}",
-                "Id", "Medicamento", "Descricao", "Quantidade");
+            Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -15} | {4, -30}",
+                "Id", "Medicamento", "Descricao", "Quantidade","Nome Fornecedor");
         }
 
         public override void ExibirLinhaTabela(Medicamento medicamento)
         {
-            Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}", 
-                medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade);
+            
+            Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -15} | {4, -30}", 
+                medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade, medicamento.Fornecedor.Nome);
         }
 
         

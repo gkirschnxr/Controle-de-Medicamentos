@@ -31,6 +31,8 @@ public class Prescricao : EntidadeBase<Prescricao>
 
         if (CRM.Length != 6)
             erros += "O CRM deve conter exatos 6 dígitos";
+        if (Medicamentos == null)
+            erros += "Deve Selecionar um Medicamento valido";
 
         return erros;
     }

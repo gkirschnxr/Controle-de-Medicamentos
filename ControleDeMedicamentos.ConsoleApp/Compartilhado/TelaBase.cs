@@ -166,6 +166,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 
         public abstract void ExibirCabecalhoTabela();
         public abstract void ExibirLinhaTabela(T registro);
+        
 
     }
 }

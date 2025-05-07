@@ -33,6 +33,8 @@ public class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
         Console.Write("Digite o ID do medicamento: ");
         int idMedicamento = Convert.ToInt32(Console.ReadLine() ?? "0");
 
+        
+
         Prescricao novaPrescricao = new Prescricao(crm, DateTime.Now);
 
         return novaPrescricao;

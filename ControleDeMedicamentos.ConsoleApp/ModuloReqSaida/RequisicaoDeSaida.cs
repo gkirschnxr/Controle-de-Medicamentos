@@ -36,6 +36,8 @@ public class RequisicaoDeSaida : EntidadeBase<RequisicaoDeSaida>
         if (DataRequisicaoSaida > DateTime.Now)
             erros += "O campo 'Data Requisição de Saída' deve conter uma data passada.\n";
 
+
+
         return erros;
     }
 }
