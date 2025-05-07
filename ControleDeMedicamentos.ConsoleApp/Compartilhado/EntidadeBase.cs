@@ -12,6 +12,9 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 
         public virtual string FormatarTelefone(string telefone)
         {
+            if (telefone == null)
+                return string.Empty;
+
             string numeroTelefone = new string(telefone.Where(char.IsDigit).ToArray());
 
             if (numeroTelefone.Length == 10)// Formato (XX) XXXX-XXXX
