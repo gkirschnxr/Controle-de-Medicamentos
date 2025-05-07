@@ -28,7 +28,6 @@ public class RequisicaoDeSaida : EntidadeBase<RequisicaoDeSaida>
     {
         DataRequisicaoSaida = registroEditado.DataRequisicaoSaida;
     }
-
     public override string Validar()
     {
         string erros = "";

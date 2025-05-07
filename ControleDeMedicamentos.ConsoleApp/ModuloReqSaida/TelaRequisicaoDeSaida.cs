@@ -13,8 +13,6 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
     IRepositorioPrescricao repositorioPrescricao;
     IRepositorioMedicamento repositorioMedicamento;
 
-    private readonly string telefone;
-
     public TelaRequisicaoDeSaida (IRepositorioRequisicaoDeSaida repositorio, IRepositorioPaciente repositorioPaciente,
                                   IRepositorioPrescricao repositorioPrescricao, IRepositorioMedicamento repositorioMedicamento)
                                  : base("Requisição de Saída", repositorio)
@@ -36,7 +34,7 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
 
         foreach (var paciente in pacientes)
         {
-            ExibirLinhaTabelaPaciente(paciente, telefone);
+            ExibirLinhaTabelaPaciente(paciente);
         }
 
         Console.WriteLine();
@@ -101,15 +99,15 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
     public void ExibirCabecalhoTabelaPaciente()
     {
         Console.WriteLine(
-            "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
-            "ID", "Nome", "Telefone", "Cartão do SUS"
+            "{0, -6} | {1, -25} | {2, -20}",
+            "ID", "Nome", "Cartão do SUS"
         );
     }
-    public void ExibirLinhaTabelaPaciente(Paciente registro, string telefone)
+    public void ExibirLinhaTabelaPaciente(Paciente registro)
     {
         Console.WriteLine(
-            "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
-            registro.Id, registro.Nome, registro.FormatarTelefone(telefone), registro.CartaoSus
+            "{0, -6} | {1, -25} | {2, -20}",
+            registro.Id, registro.Nome, registro.CartaoSus
         );
     }
 
@@ -139,7 +137,7 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
             medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade);
     }
 
-    public override void VisualizarRegistros(bool exibirTitulo)
+    public void VisualizarRegistros(bool exibirTitulo)
     {
         if (exibirTitulo)
             ExibirCabecalho();
@@ -151,7 +149,7 @@ public class TelaRequisicaoDeSaida : TelaBase<RequisicaoDeSaida>, ITelaCrud
 
         List<RequisicaoDeSaida> registros = repositorio.SelecionarRegistros();
 
-        foreach (RequisicaoDeSaida registro in registros)
+        foreach (RequisicaoDeSaida registro in registros) 
             ExibirLinhaTabela(registro);
 
 
