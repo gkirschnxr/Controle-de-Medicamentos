@@ -5,4 +5,5 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
     {
         bool CpfEstaDuplicado(Funcionario funcionario);
     }
+}
 

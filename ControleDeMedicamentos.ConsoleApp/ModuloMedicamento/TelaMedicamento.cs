@@ -1,7 +1,6 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
-using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
-using ControleDeMedicamentos.ConsoleApp.Util;
+
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
 {
@@ -9,8 +8,8 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
     {
         int quantidade;
 
-        protected IRepositorio<Fornecedor> repositorio;
 
+        
         private IRepositorioMedicamento repositorioMedicamento;
         public TelaFornecedor telaFornecedor;
         public TelaMedicamento(IRepositorioMedicamento repositorioMedicamento, TelaFornecedor telaFornecedor) : base("Medicamento", repositorioMedicamento)
@@ -35,9 +34,8 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
             Console.WriteLine("Digite o ID do Fornecedor: ");
             int idFornecedor = Convert.ToInt32(Console.ReadLine());
 
-            Fornecedor fornecedor = repositorio.SelecionarRegistroPorId(idFornecedor);
-
-
+            Fornecedor fornecedor = telaFornecedor.repositorioFornecedor.SelecionarRegistroPorId(idFornecedor);
+            
             Medicamento medicamento = new Medicamento(nomeMedicamento, descricao, quantidade, fornecedor);
 
             return medicamento;
@@ -53,7 +51,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
         {
             
             Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -15} | {4, -30}", 
-                medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade, medicamento.Fornecedor.Nome);
+                medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade, medicamento.Fornecedor.NomeFornecedor);
         }
 
         
