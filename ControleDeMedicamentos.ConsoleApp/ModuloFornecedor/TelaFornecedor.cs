@@ -40,8 +40,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
             bool cnpjDuplicado = repositorioFornecedor.CnpjEstaDuplicado(novoRegistro);
 
             if (cnpjDuplicado) 
-            {
-                
+            {                
                 Notificador.ExibirMensagem("Este CNPJ já está cadastrado", ConsoleColor.Red);
 
                 CadastrarRegistro();
@@ -114,8 +113,9 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 
             Fornecedor fornecedor = new Fornecedor(nome, telefone, cnpj);
 
-                return fornecedor;
+            return fornecedor;
         }
+
         public Fornecedor ObterDados(string cnpjExistente)
         {
             Console.Write("Digite o Nome do fornecedor: ");

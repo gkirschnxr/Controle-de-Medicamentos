@@ -10,10 +10,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 
         public string Telefone { get; set; } = string.Empty;
 
-        public string CNPJ { get; set; } = string.Empty;
-
-
-        
+        public string CNPJ { get; set; } = string.Empty;        
 
         public Fornecedor()
         {
@@ -31,7 +28,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
             NomeFornecedor = registroEditado.NomeFornecedor;
             Telefone = registroEditado.Telefone;
             CNPJ = registroEditado.CNPJ;
-
         }
 
         public override string FormatarTelefone(string telefone)
@@ -40,8 +36,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
         }
 
         public override string Validar()
-        {
-            
+        {            
             string erros = "";
 
             if (string.IsNullOrWhiteSpace(NomeFornecedor))
@@ -64,14 +59,11 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
             if (cnpjNumerico.Length != 14)
                 erros += "O campo 'CNPJ' deve conter exatamente 14 dígitos numéricos.\n";
 
-
             FormatarTelefone(Telefone);
             
 
             return erros;
-        }
-
-        
+        }        
 
         public string ObterCnpjFormatado()
         {
@@ -83,6 +75,9 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
             return Convert.ToUInt64(numeros).ToString(@"00\.000\.000\/0000\-00");
         }
 
-        
+        public override string ToString()
+        {
+            return $"Nome: {NomeFornecedor}, Telefone: {Telefone}, CNPJ: {CNPJ}";
+        }
     }
 }

@@ -62,7 +62,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
             string numeros = new string(CartaoSus.Where(char.IsDigit).ToArray());
 
             if (numeros.Length != 15)
-                return CartaoSus; // Retorna como está se inválido
+                return CartaoSus;
 
             return Convert.ToUInt64(numeros).ToString(@"000\ 0000\ 0000\ 0000");
         }

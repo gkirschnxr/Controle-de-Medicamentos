@@ -11,13 +11,11 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
         public List<RequisicaoDeSaida> RequisicoesDeSaida { get; set; }
-        public Fornecedor Fornecedor { get; set; }
-        
+        public Fornecedor Fornecedor { get; set; }        
 
         public Medicamento()
         {
-            RequisicoesDeSaida = new List<RequisicaoDeSaida>();
-            
+            RequisicoesDeSaida = new List<RequisicaoDeSaida>();            
         }
 
         public Medicamento(string nomeMedicamento, string descricao, int quantidade, Fornecedor fornecedor)
@@ -32,8 +30,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
         {
             NomeMedicamento = nomeMedicamento;
             Descricao = descricao;
-            Quantidade = quantidade;
-            
+            Quantidade = quantidade;            
         }
 
         public override void AtualizarRegistro(Medicamento registroEditado)
@@ -60,9 +57,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
                 erros += "O campo 'Quantidade' deve ser maior que Zero.\n";
 
             if(Quantidade <= 20)
-                Console.WriteLine("Medicamento em falta");
-
-            
+                Console.WriteLine("Medicamento em falta");            
 
             return erros;
         }

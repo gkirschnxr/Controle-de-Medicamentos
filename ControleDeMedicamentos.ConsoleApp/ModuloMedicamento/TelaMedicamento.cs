@@ -7,10 +7,8 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
     public class TelaMedicamento : TelaBase<Medicamento>, ITelaCrud
     {
         int quantidade;
-
-
         
-        private IRepositorioMedicamento repositorioMedicamento;
+        public IRepositorioMedicamento repositorioMedicamento;
         public TelaFornecedor telaFornecedor;
         public TelaMedicamento(IRepositorioMedicamento repositorioMedicamento, TelaFornecedor telaFornecedor) : base("Medicamento", repositorioMedicamento)
         {

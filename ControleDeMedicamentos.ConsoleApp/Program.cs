@@ -1,6 +1,7 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.Util;
-
+using System.Text;
 
 namespace ControleDeMedicamentos.ConsoleApp;
 
@@ -8,41 +9,44 @@ class Program
 {
     static void Main(string[] args)
     {
-    
-        MenuPrincipal telaPrincipal = new MenuPrincipal();
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-        while (true)
-        {
-            Console.Clear();
+        WebApplication app = builder.Build();
 
-            telaPrincipal.ApresentarMenu();
-            ITelaCrud telaSelecionada = telaPrincipal.ObterTela(); 
+        app.MapGet("/", PaginaInicial);
 
-            char opcaoEscolhida = telaSelecionada.ApresentarMenu();
+        app.MapGet("/fornecedor/visualizar", VisualizarFornecedores);
 
-            //if (telaSelecionada is TelaEmprestimo)
-            //{
-            //    TelaEmprestimo telaEmprestimo = (TelaEmprestimo)telaSelecionada;
-
-            //    if (opcaoEscolhida == 5)
-            //        telaEmprestimo.RegistrarDevolucao();
-            //}
-
-            switch (opcaoEscolhida)
-            {
-                case '1': telaSelecionada.CadastrarRegistro(); break;
-
-                case '2': telaSelecionada.EditarRegistro(); break;
-
-                case '3': telaSelecionada.ExcluirRegistro(); break;
-
-                case '4': telaSelecionada.VisualizarRegistros(true); break;
-
-
-            }
-
-
-        }
+        app.Run();
     }
 
+    static Task PaginaInicial(HttpContext context)
+    {
+        string conteudo = File.ReadAllText("Html/PaginaInicial.html");
+
+        return context.Response.WriteAsync(conteudo);
+    }
+
+    static Task VisualizarFornecedores(HttpContext context)
+    {
+        ContextoDeDados contextoDeDados = new ContextoDeDados();
+        IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedor(contextoDeDados);
+
+        string conteudo = File.ReadAllText("ModuloFornecedor/Html/Visualizar.html");
+
+        StringBuilder sb = new StringBuilder(conteudo);
+
+        foreach (Fornecedor f in repositorioFornecedor.SelecionarRegistros())
+        {
+            string itemLista = $"<li>{f.ToString()}</li> #fornecedor#";
+
+            sb.Replace("#fornecedor#", itemLista);
+        }
+
+        sb.Replace("#fornecedor#", "");
+
+        string conteudoString = sb.ToString();
+
+        return context.Response.WriteAsync(conteudoString);
+    }
 }

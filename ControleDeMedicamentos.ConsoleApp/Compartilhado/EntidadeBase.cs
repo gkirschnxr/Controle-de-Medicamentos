@@ -34,5 +34,10 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 
             return telefone; // Retorna como está se inválido
         }
+
+        internal string FormatarCNPJ(string cNPJ)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
