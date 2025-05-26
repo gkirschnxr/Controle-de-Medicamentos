@@ -10,7 +10,10 @@ class Program
         WebApplication app = builder.Build();
 
         app.UseRouting();
-        app.MapControllers();
+
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Index}/{id?}");
 
         app.Run();
     }

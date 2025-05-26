@@ -33,8 +33,7 @@ public class EditarFornecedorViewModel : FormularioFornecedorViewModel {
     }
 }
 
-public class ExcluirFornecedorViewModel
-{
+public class ExcluirFornecedorViewModel {
     public int Id { get; set; }
     public string Nome { get; set; }
 

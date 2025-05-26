@@ -1,0 +1,37 @@
+﻿@using ControleDeMedicamentos.ConsoleApp.Models
+
+@model VisualizarFuncionarioViewModel;
+
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Visualização de Funcionários - Gestão de Medicamentos</title>
+    </head>
+
+    <body>
+        <h1>Controle de Medicamentos</h1>
+
+        <h3>Visualização de Funcionários</h3>
+
+        <hr />
+
+        <a href="/">Página Inicial</a> /
+        <a href="/funcionarios/cadastrar">Cadastrar Novo Funcionário</a>
+
+        <hr />
+
+        <ul>
+            @foreach (var f in Model.Registros)
+            {
+                <li>
+                    @f.ToString() / <a href="/funcionarios/editar/@f.Id">Editar</a>
+                    / <a href="/funcionarios/excluir/@f.Id">Excluir</a>
+                </li>
+            }
+        </ul>
+    </body>
+
+</html>
