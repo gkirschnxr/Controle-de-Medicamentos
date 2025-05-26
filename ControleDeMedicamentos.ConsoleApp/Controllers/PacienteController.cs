@@ -39,6 +39,32 @@ public class PacienteController : Controller
     }
 
 
+    [HttpGet("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id) {
+        var pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
+
+        var editarVM = new EditarPacienteViewModel(pacienteSelecionado.Id, pacienteSelecionado.Nome,
+                                                  pacienteSelecionado.Telefone, pacienteSelecionado.CartaoSus);
+
+        return View(editarVM);
+    }
+
+
+    [HttpPost("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id, EditarPacienteViewModel editarVM)
+    {
+        var pacienteEditado = editarVM.ParaEntidade();
+
+        repositorioPaciente.EditarRegistro(id, pacienteEditado);
+
+        var notificacaoVM = new NotificacaoViewModel(
+             "Paciente Editado!",
+            $"O registro \"{pacienteEditado.Nome}\" foi editado com sucesso!");
+
+        return View("Notificacao", notificacaoVM);
+    }
+
+
     [HttpGet("visualizar")]
     public IActionResult Visualizar() {  
        var pacientes = repositorioPaciente.SelecionarRegistros();
