@@ -63,6 +63,25 @@ public class FuncionarioController : Controller
         return View("Notificacao", notificacaoVM);
     }
 
+    [HttpGet("excluir/{id:int}")]
+    public IActionResult Excluir([FromRoute] int id) {
+        var funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
+
+        var excluirVM = new ExcluirFuncionarioViewModel(funcionarioSelecionado.Id, funcionarioSelecionado.Nome);
+
+        return View(excluirVM);
+    }
+
+    [HttpPost("excluir/{id:int}")]
+    public IActionResult ExcluirFuncionario([FromRoute] int id) {
+        repositorioFuncionario.ExcluirRegistro(id);
+
+        var notificacaoVM = new NotificacaoViewModel("Funcionário Excluído!",
+                                                    $"O funcionário foi excluído com sucesso"!);
+
+        return View("Notificacao", notificacaoVM);
+    }
+
 
     [HttpGet("visualizar")]
     public IActionResult Visualizar() {

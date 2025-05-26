@@ -32,6 +32,17 @@ public class EditarFuncionarioViewModel : FormularioFuncionarioViewModel {
     }
 }
 
+public class ExcluirFuncionarioViewModel {
+    public int Id { get; set; }
+    public string Nome { get; set; }
+
+    public ExcluirFuncionarioViewModel(int id, string nome)
+    {
+        Id = id;
+        Nome = nome;
+    }
+}
+
 public class VisualizarFuncionarioViewModel {
     public List<DetalhesFuncionariosViewModel> Registros {  get; }
 
