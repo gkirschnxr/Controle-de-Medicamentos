@@ -5,7 +5,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
 {
     public class Paciente : EntidadeBase <Paciente>
     {
-        public string NomePaciente { get; set; } = string.Empty;
+        public string Nome { get; set; } = string.Empty;
         public string Telefone { get; set; } = string.Empty;
         public string CartaoSus { get; set; } = string.Empty;
 
@@ -13,14 +13,14 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
 
         public Paciente (string nome, string telefone, string cartaoSus)
         {
-            NomePaciente = nome;
+            Nome = nome;
             Telefone = telefone;
             CartaoSus = cartaoSus;
         }
 
         public override void AtualizarRegistro(Paciente registroEditado) //pega o registro do paciente e passar para cá:
         {
-            NomePaciente = registroEditado.NomePaciente;
+            Nome = registroEditado.Nome;
             Telefone = registroEditado.Telefone;
             CartaoSus = registroEditado.CartaoSus;
         }
@@ -34,10 +34,10 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
         {
             string erros = "";
 
-            if (string.IsNullOrEmpty(NomePaciente))
+            if (string.IsNullOrEmpty(Nome))
                 erros += "O campo 'Nome' é obrigatório.\n";
 
-            if (NomePaciente.Length < 3 || NomePaciente.Length > 100)
+            if (Nome.Length < 3 || Nome.Length > 100)
                 erros += "O campo 'Nome' deve conter entre 3 e 100 caracteres.\n";
 
             if (string.IsNullOrWhiteSpace(Telefone))

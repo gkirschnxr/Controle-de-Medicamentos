@@ -63,6 +63,7 @@ public class FuncionarioController : Controller
         return View("Notificacao", notificacaoVM);
     }
 
+
     [HttpGet("excluir/{id:int}")]
     public IActionResult Excluir([FromRoute] int id) {
         var funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
@@ -71,6 +72,7 @@ public class FuncionarioController : Controller
 
         return View(excluirVM);
     }
+
 
     [HttpPost("excluir/{id:int}")]
     public IActionResult ExcluirFuncionario([FromRoute] int id) {

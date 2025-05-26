@@ -142,7 +142,7 @@ public class TelaPaciente : TelaBase<Paciente>, ITelaCrud
     {
         Console.WriteLine(
             "{0, -6} | {1, -25} | {2, -20} | {3, -20}",
-            registro.Id, registro.NomePaciente, registro.Telefone, registro.ObterCartaoSusFormatado()
+            registro.Id, registro.Nome, registro.Telefone, registro.ObterCartaoSusFormatado()
         );
     }
 

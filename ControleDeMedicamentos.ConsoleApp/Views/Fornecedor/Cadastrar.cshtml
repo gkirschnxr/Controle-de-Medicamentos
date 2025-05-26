@@ -6,43 +6,44 @@
 
 <html>
 
-<head>
-    <meta charset="utf-8" />
-    <title> Cadastro de Fornecedor - Controle de Medicamentos </title>
-</head>
 
-<body>
-    <h1>Controle de Medicamentos</h1>
+    <head>
+        <meta charset="utf-8" />
+        <title> Cadastro de Fornecedor - Controle de Medicamentos </title>
+    </head>
 
-    <hr />
-
-    <a href="/">Pagina Inicial</a> /
-    <a href="/fornecedores/visualizar">Visualizar Fornecedores</a>
-
-    <hr />
-
-    <h3>Cadastro de Fornecedor</h3>
-
-    <form action="/fornecedores/cadastrar" method="post">
-
-        <label for="nome">Nome do Fornecedor:</label>
-        <input type="text" name="nome" />
-
-        <br />
-
-        <label for="telefone">Telefone do Fornecedor:</label>
-        <input type="text" name="telefone" />
-
-        <br />
-
-        <label for="cnpj">CNPJ do Fabricante:</label>
-        <input type="text" name="cnpj" />
+    <body>
+        <h1>Controle de Medicamentos</h1>
 
         <hr />
 
-        <button type="submit">Gravar</button>
-    </form>
-</body>
+        <a href="/">Pagina Inicial</a> /
+        <a href="/fornecedores/visualizar">Visualizar Fornecedores</a>
+
+        <hr />
+
+        <h3>Cadastro de Fornecedor</h3>
+
+        <form action="/fornecedores/cadastrar" method="post">
+
+            <label for="nome">Nome do Fornecedor:</label>
+            <input type="text" name="nome" />
+
+            <br />
+
+            <label for="telefone">Telefone do Fornecedor:</label>
+            <input type="text" name="telefone" />
+
+            <br />
+
+            <label for="cnpj">CNPJ do Fabricante:</label>
+            <input type="text" name="cnpj" />
+
+            <hr />
+
+            <button type="submit">Gravar</button>
+        </form>
+    </body>
 
 </html>
 
