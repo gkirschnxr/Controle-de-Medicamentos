@@ -1,31 +1,26 @@
-﻿
-using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
 {
     public class Fornecedor : EntidadeBase<Fornecedor>
     {
-        public string NomeFornecedor { get; set; } = string.Empty;
+        public string Nome { get; set; }
 
-        public string Telefone { get; set; } = string.Empty;
+        public string Telefone { get; set; }
 
-        public string CNPJ { get; set; } = string.Empty;        
-
-        public Fornecedor()
-        {
-        }
+        public string CNPJ { get; set; }      
 
         public Fornecedor(string nome, string telefone, string cnpj)
         {
-            NomeFornecedor = nome;
+            Nome = nome;
             Telefone = telefone;
             CNPJ = cnpj;
         }
 
         public override void AtualizarRegistro(Fornecedor registroEditado)
         {
-            NomeFornecedor = registroEditado.NomeFornecedor;
+            Nome = registroEditado.Nome;
             Telefone = registroEditado.Telefone;
             CNPJ = registroEditado.CNPJ;
         }
@@ -39,10 +34,10 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
         {            
             string erros = "";
 
-            if (string.IsNullOrWhiteSpace(NomeFornecedor))
+            if (string.IsNullOrWhiteSpace(Nome))
                 erros += "O campo 'Nome' é obrigatório.\n";
 
-            if (NomeFornecedor.Length < 3)
+            if (Nome.Length < 3)
                 erros += "O campo 'Nome' precisa conter ao menos 3 caracteres.\n";
 
             if (string.IsNullOrWhiteSpace(Telefone))
@@ -73,11 +68,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
                 return CNPJ; // Retorna como está se inválido
 
             return Convert.ToUInt64(numeros).ToString(@"00\.000\.000\/0000\-00");
-        }
-
-        public override string ToString()
-        {
-            return $"Nome: {NomeFornecedor}, Telefone: {Telefone}, CNPJ: {CNPJ}";
         }
     }
 }

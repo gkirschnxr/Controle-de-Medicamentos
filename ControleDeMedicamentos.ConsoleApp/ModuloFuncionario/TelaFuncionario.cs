@@ -9,7 +9,8 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
 
         private IRepositorioFuncionario repositorioFuncionario;
 
-        string telefone { get; set; }
+        string? telefone { get; set; }
+        string? cpf { get; set; }
         public TelaFuncionario(IRepositorioFuncionario repositorioFuncionario) : base("Funcionario", repositorioFuncionario)
         {
             this.repositorioFuncionario = repositorioFuncionario;
@@ -73,13 +74,13 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
         public override void ExibirCabecalhoTabela()
         {
             Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -30}",
-                "Id", "Nome", "Telefone", "CPF");
+                "Id", "Nome", "Telefone");
         }
 
         public override void ExibirLinhaTabela(Funcionario funcionario)
         {
             Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}",
-            funcionario.Id, funcionario.Nome, funcionario.FormatarTelefone(telefone), funcionario.ObterCpfFormatado());
+            funcionario.Id, funcionario.Nome, funcionario.FormatarTelefone(telefone!));
         }
 
         

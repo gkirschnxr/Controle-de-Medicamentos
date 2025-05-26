@@ -5,7 +5,6 @@ using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
 using ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
-using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoDeEntrada;
 
 namespace ControleDeMedicamentos.ConsoleApp.Util
 {
@@ -19,8 +18,6 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
         private TelaMedicamento telaMedicamento;
         private TelaPaciente telaPaciente;               
         private TelaPrescricao telaPrescricao;      
-        private TelaRequisicaoDeSaida telaRequisicaoDeSaida;
-        private TelaRequisicaoDeEntrada telaRequisicaoDeEntrada;
         
 
         public MenuPrincipal()
@@ -41,14 +38,6 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
 
             IRepositorioPrescricao repositorioPrescricao = new RepositorioPrescricao(contexto);
             telaPrescricao = new TelaPrescricao(repositorioPrescricao, repositorioMedicamento);
-
-            IRepositorioRequisicao repositorioRequisicaoDeSaida = new RepositorioRequisicao(contexto);
-            telaRequisicaoDeSaida = new TelaRequisicaoDeSaida(repositorioRequisicaoDeSaida, repositorioPaciente, repositorioPrescricao, repositorioMedicamento);
-
-            IRepositorioRequisicaoDeEntrada repositorioRequisicaoDeEntrada = new RepositorioRequisicaoDeEntrada(contexto);
-            telaRequisicaoDeEntrada = new TelaRequisicaoDeEntrada(repositorioRequisicaoDeEntrada);
-
-
         }
 
         public void ApresentarMenu()
@@ -97,10 +86,6 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
                 return telaFuncionario;
             if (opcaoPrincipal == '5')
                 return telaPrescricao;
-            if (opcaoPrincipal == '6')
-                return telaRequisicaoDeSaida;
-            if (opcaoPrincipal == '7')
-                return telaRequisicaoDeEntrada;
 
             return null!;
             ;

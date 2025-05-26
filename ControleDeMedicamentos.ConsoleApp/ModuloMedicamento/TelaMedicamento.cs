@@ -34,22 +34,22 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
 
             Fornecedor fornecedor = telaFornecedor.repositorioFornecedor.SelecionarRegistroPorId(idFornecedor);
             
-            Medicamento medicamento = new Medicamento(nomeMedicamento, descricao, quantidade, fornecedor);
+            Medicamento medicamento = new Medicamento(nomeMedicamento, descricao, fornecedor);
 
             return medicamento;
         }
 
         public override void ExibirCabecalhoTabela()
         {
-            Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -15} | {4, -30}",
-                "Id", "Medicamento", "Descricao", "Quantidade","Nome Fornecedor");
+            Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -15}",
+                "Id", "Medicamento", "Descricao", "Nome Fornecedor");
         }
 
         public override void ExibirLinhaTabela(Medicamento medicamento)
         {
             
             Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -15} | {4, -30}", 
-                medicamento.Id, medicamento.Nome, medicamento.Descricao, medicamento.Quantidade, medicamento.Fornecedor.NomeFornecedor);
+                medicamento.Id, medicamento.Nome, medicamento.Descricao, medicamento.Fornecedor!.Nome);
         }
 
         

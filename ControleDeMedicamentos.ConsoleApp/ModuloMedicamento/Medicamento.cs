@@ -7,23 +7,23 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
 public class Medicamento : EntidadeBase<Medicamento>
 {    
-    public string Nome { get; set; }
-    public string Descricao { get; set; }
-    public Fornecedor Fornecedor { get; set; }
-    public List<RequisicaoDeEntrada> RequisicoesEntrada { get; set; }
-    public List<RequisicaoDeSaida> RequisicoesSaida { get; set; }
+    public string? Nome { get; set; }
+    public string? Descricao { get; set; }
+    public Fornecedor? Fornecedor { get; set; }
+    public List<RequisicaoDeEntrada>? RequisicoesEntrada { get; set; }
+    public List<RequisicaoDeSaida>? RequisicoesSaida { get; set; }
     public int QuantidadeTotal
     {
         get 
         {
             int quantidadeEmEstoque = 0;
 
-            foreach (var req in RequisicoesEntrada)
+            foreach (var req in RequisicoesEntrada!)
             {
                 quantidadeEmEstoque += req.QuantidadeRequisitada;
             }
 
-            foreach (var req in RequisicoesSaida)
+            foreach (var req in RequisicoesSaida!)
             {
                 quantidadeEmEstoque += req.QuantidadeRequisita;
             }
@@ -52,13 +52,13 @@ public class Medicamento : EntidadeBase<Medicamento>
 
     public void AdicionarAoEstoque(RequisicaoDeEntrada requisicaoDeEntrada)
     {
-        if (!RequisicoesEntrada.Contains(requisicaoDeEntrada))
+        if (!RequisicoesEntrada!.Contains(requisicaoDeEntrada))
             RequisicoesEntrada.Add(requisicaoDeEntrada);
     }
 
     public void RemoverDoEstoque(RequisicaoDeSaida requisicaoDeSaida)
     {
-        if (!RequisicoesSaida.Contains(requisicaoDeSaida))
+        if (!RequisicoesSaida!.Contains(requisicaoDeSaida))
             RequisicoesSaida.Add(requisicaoDeSaida);
     }
 
@@ -76,7 +76,7 @@ public class Medicamento : EntidadeBase<Medicamento>
         if (string.IsNullOrWhiteSpace(Nome))
             erros += "O campo 'Nome' é obrigatório.\n";
 
-        if (Nome.Length < 3)
+        if (Nome!.Length < 3)
             erros += "O campo 'Nome' precisa conter ao menos 3 caracteres.\n";
 
         if (string.IsNullOrWhiteSpace(Descricao))

@@ -68,14 +68,14 @@ public class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
 
     public void ExibirCabecalhoTabelaMedicamento()
     {
-        Console.WriteLine("{0, -10} | {1, -30} | {2, -20} | {3, -30}",
-            "Id", "Medicamento", "Descricao", "Quantidade");
+        Console.WriteLine("{0, -10} | {1, -30} | {2, -20}",
+            "Id", "Medicamento", "Descricao");
     }
 
     public void ExibirLinhaTabelaMedicamento(Medicamento medicamento)
     {
-        Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}",
-            medicamento.Id, medicamento.Nome, medicamento.Descricao, medicamento.Quantidade);
+        Console.WriteLine("{0, -10} | {1, -30} | {2,-20}",
+            medicamento.Id, medicamento.Nome, medicamento.Descricao);
     }
 
     public string CarregarMedicamentosEmString(Prescricao p)
