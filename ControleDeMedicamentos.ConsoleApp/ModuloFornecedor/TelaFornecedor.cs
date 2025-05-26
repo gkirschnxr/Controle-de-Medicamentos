@@ -37,16 +37,6 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloFornecedor
                 return;
             }
 
-            bool cnpjDuplicado = repositorioFornecedor.CnpjEstaDuplicado(novoRegistro);
-
-            if (cnpjDuplicado) 
-            {                
-                Notificador.ExibirMensagem("Este CNPJ já está cadastrado", ConsoleColor.Red);
-
-                CadastrarRegistro();
-                return;
-            }
-
             repositorio.CadastrarRegistro(novoRegistro);
 
             Notificador.ExibirMensagem("O registro foi concluído com sucesso!", ConsoleColor.Green);
