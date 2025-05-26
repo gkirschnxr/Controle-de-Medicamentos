@@ -1,75 +1,90 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
-{
-    public class Medicamento : EntidadeBase<Medicamento>
+namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+
+public class Medicamento : EntidadeBase<Medicamento>
+{    
+    public string Nome { get; set; }
+    public string Descricao { get; set; }
+    public Fornecedor Fornecedor { get; set; }
+    public List<RequisicaoDeEntrada> RequisicoesEntrada { get; set; }
+    public List<RequisicaoDeSaida> RequisicoesSaida { get; set; }
+    public int QuantidadeTotal
     {
-        
-        public string NomeMedicamento { get; set; }
-        public string Descricao { get; set; }
-        public int Quantidade { get; set; }
-        public List<RequisicaoDeSaida> RequisicoesDeSaida { get; set; }
-        public Fornecedor Fornecedor { get; set; }        
-
-        public Medicamento()
+        get 
         {
-            RequisicoesDeSaida = new List<RequisicaoDeSaida>();            
+            int quantidadeEmEstoque = 0;
+
+            foreach (var req in RequisicoesEntrada)
+            {
+                quantidadeEmEstoque += req.QuantidadeRequisitada;
+            }
+
+            foreach (var req in RequisicoesSaida)
+            {
+                quantidadeEmEstoque += req.QuantidadeRequisita;
+            }
+
+            return quantidadeEmEstoque;
         }
+    }
 
-        public Medicamento(string nomeMedicamento, string descricao, int quantidade, Fornecedor fornecedor)
-        {
-            NomeMedicamento = nomeMedicamento;
-            Descricao = descricao;
-            Quantidade = quantidade;
-            Fornecedor = fornecedor;
-        }
+    public bool EmFalta
+    {
+        get {  return QuantidadeTotal < 20; }
+    }
 
-        public Medicamento(string nomeMedicamento, string descricao, int quantidade, string nome)
-        {
-            NomeMedicamento = nomeMedicamento;
-            Descricao = descricao;
-            Quantidade = quantidade;            
-        }
+    public Medicamento()
+    {
+        RequisicoesEntrada = new List<RequisicaoDeEntrada>();            
+        RequisicoesSaida = new List<RequisicaoDeSaida>();            
+    }
 
-        public override void AtualizarRegistro(Medicamento registroEditado)
-        {
-            NomeMedicamento = registroEditado.NomeMedicamento;
-            Descricao = registroEditado.Descricao;
-            Quantidade = registroEditado.Quantidade;
-        }
+    public Medicamento(string nome, string descricao, Fornecedor fornecedor) : this()
+    {
+        Nome = nome;
+        Descricao = descricao;  
+        Fornecedor = fornecedor;
+    }
 
-        public override string Validar()
-        {
-            string erros = "";
+    public void AdicionarAoEstoque(RequisicaoDeEntrada requisicaoDeEntrada)
+    {
+        if (!RequisicoesEntrada.Contains(requisicaoDeEntrada))
+            RequisicoesEntrada.Add(requisicaoDeEntrada);
+    }
 
-            if (string.IsNullOrWhiteSpace(NomeMedicamento))
-                erros += "O campo 'Nome' é obrigatório.\n";
+    public void RemoverDoEstoque(RequisicaoDeSaida requisicaoDeSaida)
+    {
+        if (!RequisicoesSaida.Contains(requisicaoDeSaida))
+            RequisicoesSaida.Add(requisicaoDeSaida);
+    }
 
-            if (NomeMedicamento.Length < 3)
-                erros += "O campo 'Nome' precisa conter ao menos 3 caracteres.\n";
+    public override void AtualizarRegistro(Medicamento registroEditado)
+    {
+        Nome = registroEditado.Nome;
+        Descricao = registroEditado.Descricao;
+        Fornecedor = registroEditado.Fornecedor;
+    }
 
-            if (string.IsNullOrWhiteSpace(Descricao))
-                erros += "O campo 'Descrição' é obrigatório.\n";
+    public override string Validar()
+    {
+        string erros = "";
 
-            if (Quantidade <= 0)
-                erros += "O campo 'Quantidade' deve ser maior que Zero.\n";
+        if (string.IsNullOrWhiteSpace(Nome))
+            erros += "O campo 'Nome' é obrigatório.\n";
 
-            if(Quantidade <= 20)
-                Console.WriteLine("Medicamento em falta");            
+        if (Nome.Length < 3)
+            erros += "O campo 'Nome' precisa conter ao menos 3 caracteres.\n";
 
-            return erros;
-        }
+        if (string.IsNullOrWhiteSpace(Descricao))
+            erros += "O campo 'Descrição' é obrigatório.\n";
 
-        public void AdicionarRequisicao(RequisicaoDeSaida requisicoesDeSaida)
-        {
-            RequisicoesDeSaida.Add(requisicoesDeSaida);
-        }
+        if (Fornecedor == null)
+            erros += "O campo 'Fornecedor' é obrigatório.\n";      
 
-        public void ExcluirRequisicao(RequisicaoDeSaida requisicoesDeSaida)
-        {
-            RequisicoesDeSaida.Remove(requisicoesDeSaida);
-        }
+        return erros;
     }
 }

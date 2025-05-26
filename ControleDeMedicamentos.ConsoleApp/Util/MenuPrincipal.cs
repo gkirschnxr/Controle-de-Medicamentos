@@ -42,7 +42,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Util
             IRepositorioPrescricao repositorioPrescricao = new RepositorioPrescricao(contexto);
             telaPrescricao = new TelaPrescricao(repositorioPrescricao, repositorioMedicamento);
 
-            IRepositorioRequisicaoDeSaida repositorioRequisicaoDeSaida = new RepositorioRequisicaoDeSaida(contexto);
+            IRepositorioRequisicao repositorioRequisicaoDeSaida = new RepositorioRequisicao(contexto);
             telaRequisicaoDeSaida = new TelaRequisicaoDeSaida(repositorioRequisicaoDeSaida, repositorioPaciente, repositorioPrescricao, repositorioMedicamento);
 
             IRepositorioRequisicaoDeEntrada repositorioRequisicaoDeEntrada = new RepositorioRequisicaoDeEntrada(contexto);

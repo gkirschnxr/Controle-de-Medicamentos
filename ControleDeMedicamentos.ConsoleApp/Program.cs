@@ -29,7 +29,7 @@ class Program
 
     static Task VisualizarFornecedores(HttpContext context)
     {
-        ContextoDeDados contextoDeDados = new ContextoDeDados();
+        ContextoDeDados contextoDeDados = new ContextoDeDados(true);
         IRepositorioFornecedor repositorioFornecedor = new RepositorioFornecedor(contextoDeDados);
 
         string conteudo = File.ReadAllText("ModuloFornecedor/Html/Visualizar.html");

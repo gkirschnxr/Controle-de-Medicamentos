@@ -6,7 +6,7 @@ using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
 using ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
-using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoDeEntrada;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
 
 namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
 {

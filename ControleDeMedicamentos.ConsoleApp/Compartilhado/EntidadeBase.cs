@@ -32,7 +32,16 @@ namespace ControleDeMedicamentos.ConsoleApp.Compartilhado
                 return $"({ddd}) {parte1}-{parte2}";
             }
 
-            return telefone; // Retorna como está se inválido
+            return telefone;
+        }
+
+        public virtual string FormatarCPF(string cpf) {
+            string numeros = new string(cpf.Where(char.IsDigit).ToArray());
+
+            if (numeros.Length != 11)
+                return cpf;
+
+            return Convert.ToUInt64(numeros).ToString(@"000\.000\.000\-00");
         }
 
         internal string FormatarCNPJ(string cNPJ)

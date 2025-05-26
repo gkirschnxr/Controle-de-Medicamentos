@@ -49,7 +49,7 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento
         {
             
             Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -15} | {4, -30}", 
-                medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade, medicamento.Fornecedor.NomeFornecedor);
+                medicamento.Id, medicamento.Nome, medicamento.Descricao, medicamento.Quantidade, medicamento.Fornecedor.NomeFornecedor);
         }
 
         

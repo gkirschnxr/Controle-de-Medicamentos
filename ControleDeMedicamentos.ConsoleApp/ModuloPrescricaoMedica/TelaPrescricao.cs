@@ -75,12 +75,12 @@ public class TelaPrescricao : TelaBase<Prescricao>, ITelaCrud
     public void ExibirLinhaTabelaMedicamento(Medicamento medicamento)
     {
         Console.WriteLine("{0, -10} | {1, -30} | {2,-20} | {3, -30}",
-            medicamento.Id, medicamento.NomeMedicamento, medicamento.Descricao, medicamento.Quantidade);
+            medicamento.Id, medicamento.Nome, medicamento.Descricao, medicamento.Quantidade);
     }
 
     public string CarregarMedicamentosEmString(Prescricao p)
     {
-        return string.Join(", ", p.Medicamentos.Select(m => m.NomeMedicamento));
+        return string.Join(", ", p.Medicamentos.Select(m => m.Nome));
     }
 
 }
