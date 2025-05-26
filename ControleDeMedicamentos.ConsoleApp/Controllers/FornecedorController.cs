@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
-[Route("/fornecedor")]
+[Route("/fornecedores")]
 public class FornecedorController : Controller
 {
     private ContextoDeDados contextoDados;
@@ -18,12 +18,14 @@ public class FornecedorController : Controller
         repositorioFornecedor = new RepositorioFornecedor(contextoDados);
     }
 
+
     [HttpGet("cadastrar")]
     public IActionResult Cadastrar() {
         var cadastrarVM = new CadastrarFornecedorViewModel();
 
         return View(cadastrarVM);
     }
+
 
     [HttpPost("cadastrar")]
     public IActionResult Cadastrar(CadastrarFornecedorViewModel cadastrarVM) {
@@ -37,6 +39,7 @@ public class FornecedorController : Controller
         return View("Notificacao", notificacaoVM);
     }
 
+
     [HttpGet("editar/{id:int}")]
     public IActionResult Editar([FromRoute] int id) {
         var fornecedorSelecionado = repositorioFornecedor.SelecionarRegistroPorId(id);
@@ -47,6 +50,7 @@ public class FornecedorController : Controller
         return View(editarVM);
     }
 
+
     [HttpPost("editar/{id:int}")]
     public IActionResult Editar([FromRoute] int id, EditarFornecedorViewModel editarVM) { 
         var fornecedorAtualizado = new Fornecedor(editarVM.Nome, editarVM.Telefone, editarVM.CNPJ);
@@ -55,6 +59,26 @@ public class FornecedorController : Controller
 
         var notificacaoVM = new NotificacaoViewModel("Fornecedor Editado!",
                                                     $"O fornecedor \"{fornecedorAtualizado.Nome}\" foi editado com sucesso!");
+
+        return View("Notificacao", notificacaoVM);
+    }
+
+    [HttpGet("excluir/{id:int}")]
+    public IActionResult Excluir([FromRoute] int id) {
+        var fornecedorSelecionado = repositorioFornecedor.SelecionarRegistroPorId(id);
+
+        var excluirVM = new ExcluirFornecedorViewModel(fornecedorSelecionado.Id, fornecedorSelecionado.Nome);
+
+        return View(excluirVM);
+    }
+
+
+    [HttpPost("excluir/{id:int}")]
+    public IActionResult ExcluirFornecedor([FromRoute] int id) {
+        repositorioFornecedor.ExcluirRegistro(id);
+
+        var notificacaoVM = new NotificacaoViewModel("Fornecedor Excluído!",
+                                                    $"O fornecedor foi excluído com sucesso!");
 
         return View("Notificacao", notificacaoVM);
     }

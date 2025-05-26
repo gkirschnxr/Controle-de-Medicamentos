@@ -19,7 +19,7 @@
         <hr/>
 
         <a href="/">Página Inicial</a> /
-        <a href="/fornecedor/cadastrar">Cadastrar Novo Fornecedor</a>
+        <a href="/fornecedores/cadastrar">Cadastrar Novo Fornecedor</a>
 
         <hr />
 
@@ -27,8 +27,8 @@
             @foreach (var f in Model.Registros)
             {
                 <li>
-                    @f.ToString() / <a href="/fornecedor/editar/@f.Id">Editar</a>
-                                  / <a href="/fornecedor/excluir/@f.Id">Excluir</a>  
+                    @f.ToString() / <a href="/fornecedores/editar/@f.Id">Editar</a>
+                                  / <a href="/fornecedores/excluir/@f.Id">Excluir</a>  
                 </li>
             }
         </ul>

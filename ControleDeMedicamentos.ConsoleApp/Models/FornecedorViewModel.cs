@@ -33,6 +33,17 @@ public class EditarFornecedorViewModel : FormularioFornecedorViewModel {
     }
 }
 
+public class ExcluirFornecedorViewModel
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+
+    public ExcluirFornecedorViewModel(int id, string nome) {
+        Id = id;
+        Nome = nome;
+    }
+}
+
 public class VisualizarFornecedorViewModel {
     public List<DetalhesFornecedorViewModel> Registros { get; }
 
