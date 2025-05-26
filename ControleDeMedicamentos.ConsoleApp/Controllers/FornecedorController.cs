@@ -37,6 +37,28 @@ public class FornecedorController : Controller
         return View("Notificacao", notificacaoVM);
     }
 
+    [HttpGet("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id) {
+        var fornecedorSelecionado = repositorioFornecedor.SelecionarRegistroPorId(id);
+
+        var editarVM = new EditarFornecedorViewModel(id, fornecedorSelecionado.Nome, 
+                                                    fornecedorSelecionado.Telefone, fornecedorSelecionado.CNPJ);
+
+        return View(editarVM);
+    }
+
+    [HttpPost("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id, EditarFornecedorViewModel editarVM) { 
+        var fornecedorAtualizado = new Fornecedor(editarVM.Nome, editarVM.Telefone, editarVM.CNPJ);
+
+        repositorioFornecedor.EditarRegistro(id, fornecedorAtualizado);
+
+        var notificacaoVM = new NotificacaoViewModel("Fornecedor Editado!",
+                                                    $"O fornecedor \"{fornecedorAtualizado.Nome}\" foi editado com sucesso!");
+
+        return View("Notificacao", notificacaoVM);
+    }
+
 
     [HttpGet("visualizar")]
     public IActionResult Visualizar() {         
