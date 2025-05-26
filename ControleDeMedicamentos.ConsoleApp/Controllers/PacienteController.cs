@@ -1,4 +1,5 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.Extensions;
 using ControleDeMedicamentos.ConsoleApp.Models;
 using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,28 @@ public class PacienteController : Controller
         contexto = new ContextoDeDados(true);
         repositorioPaciente = new RepositorioPaciente(contexto);
     }
+
+    [HttpGet("cadastrar")]
+    public IActionResult Cadastrar() {
+        var cadastrarVM = new CadastrarPacienteViewModel();
+
+        return View(cadastrarVM);
+    }
+
+
+    [HttpPost("cadastrar")]
+    public IActionResult Cadastrar(CadastrarPacienteViewModel cadastrarVM) {
+        var novoPaciente = cadastrarVM.ParaEntidade();
+
+        repositorioPaciente.CadastrarRegistro(novoPaciente);
+
+        var notificacaoVM = new NotificacaoViewModel(
+             "Paciente Cadastrado!",
+            $"O registro \"{novoPaciente.Nome}\" foi cadastrado com sucesso!");
+
+        return View("Notificacao", notificacaoVM);
+    }
+
 
     [HttpGet("visualizar")]
     public IActionResult Visualizar() {  
