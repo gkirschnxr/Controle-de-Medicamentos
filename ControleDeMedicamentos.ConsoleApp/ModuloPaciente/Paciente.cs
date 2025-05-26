@@ -5,9 +5,9 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloPaciente
 {
     public class Paciente : EntidadeBase <Paciente>
     {
-        public string NomePaciente { get; set; }
-        public string Telefone { get; set; }
-        public string CartaoSus { get; set; }
+        public string NomePaciente { get; set; } = string.Empty;
+        public string Telefone { get; set; } = string.Empty;
+        public string CartaoSus { get; set; } = string.Empty;
 
         public Paciente() { } //criar instancia vazia para o serializador JSON
 

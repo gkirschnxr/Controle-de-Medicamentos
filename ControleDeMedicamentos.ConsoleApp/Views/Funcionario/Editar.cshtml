@@ -1,5 +1,49 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using ControleDeMedicamentos.ConsoleApp.Models
+
+@model EditarFuncionarioViewModel;
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title> Edição de Funcionário - Controle de Medicamentos </title>
+</head>
+
+<body>
+    <h1>Controle de Medicamentos</h1>
+
+    <hr />
+
+    <a href="/">Pagina Inicial</a> /
+    <a href="/funcionarios/visualizar">Visualizar Funcionários</a>
+
+    <hr />
+
+    <h3>Edição de Funcionário</h3>
+
+    <form action="/funcionarios/editar/@Model.Id" method="post">
+
+        <label for="nome">Nome do Funcionário:</label>
+        <input type="text" name="nome" />
+
+        <br />
+
+        <label for="telefone">Telefone do Funcionário:</label>
+        <input type="text" name="telefone" />
+
+        <br />
+
+        <label for="cpf">CPF do Funcionários:</label>
+        <input type="text" name="cpf" />
+
+        <hr />
+
+        <button type="submit">Gravar</button>
+    </form>
+</body>
+
+</html>
+
+

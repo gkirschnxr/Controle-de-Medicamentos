@@ -19,6 +19,19 @@ public class CadastrarFuncionarioViewModel : FormularioFuncionarioViewModel {
     }
 }
 
+public class EditarFuncionarioViewModel : FormularioFuncionarioViewModel { 
+    public int Id { get; set; }
+
+    public EditarFuncionarioViewModel() { }
+    public EditarFuncionarioViewModel(int id, string nome, string telefone, string cpf)
+    {
+        Id = id;
+        Nome = nome;
+        Telefone = telefone;
+        CPF = cpf;
+    }
+}
+
 public class VisualizarFuncionarioViewModel {
     public List<DetalhesFuncionariosViewModel> Registros {  get; }
 

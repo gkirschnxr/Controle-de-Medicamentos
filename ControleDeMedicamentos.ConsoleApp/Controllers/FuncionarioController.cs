@@ -39,6 +39,31 @@ public class FuncionarioController : Controller
         return View("Notificacao", notificacaoVM);
     }
 
+
+    [HttpGet("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id) { 
+        var funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
+
+        var editarVM = new EditarFuncionarioViewModel(funcionarioSelecionado.Id, funcionarioSelecionado.Nome,
+                                                     funcionarioSelecionado.Telefone, funcionarioSelecionado.CPF);
+
+        return View(editarVM);
+    }
+
+
+    [HttpPost("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id, EditarFuncionarioViewModel editarVM) {
+        var funcionarioAtualizado = new Funcionario(editarVM.Nome, editarVM.Telefone, editarVM.CPF);
+
+        repositorioFuncionario.EditarRegistro(id, funcionarioAtualizado);
+
+        var notificacaoVM = new NotificacaoViewModel("Funcionário Editado!",
+                                                    $"O registro \"{funcionarioAtualizado.Nome}\" foi atualizado com sucesso!");
+
+        return View("Notificacao", notificacaoVM);
+    }
+
+
     [HttpGet("visualizar")]
     public IActionResult Visualizar() {
         var funcionarios = repositorioFuncionario.SelecionarRegistros();
