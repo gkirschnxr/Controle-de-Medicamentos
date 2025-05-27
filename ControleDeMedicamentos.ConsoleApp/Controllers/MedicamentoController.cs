@@ -1,8 +1,11 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
+using ControleDeMedicamentos.ConsoleApp.Extensions;
 using ControleDeMedicamentos.ConsoleApp.Models;
 using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
 using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
+using System.Security.Cryptography.X509Certificates;
 
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
@@ -18,11 +21,87 @@ public class MedicamentoController : Controller {
         repositorioFornecedor = new RepositorioFornecedor(contexto);
     }
 
+
+    [HttpGet("cadastrar")]
+    public IActionResult Cadastrar() {
+        var fornecedores = repositorioFornecedor.SelecionarRegistros();
+
+        var cadastrarVM = new CadastrarMedicamentoViewModel(fornecedores);
+
+        return View(cadastrarVM);
+    }
+
+
+    [HttpPost("cadastrar")]
+    public IActionResult Cadastrar(CadastrarMedicamentoViewModel cadastrarVM)
+    {
+        var fornecedores = repositorioFornecedor.SelecionarRegistros();
+
+        var registro = cadastrarVM.ParaEntidade(fornecedores);
+
+        repositorioMedicamento.CadastrarRegistro(registro);
+
+        var notificacaoVM = new NotificacaoViewModel("Medicamento Cadastrado!",
+                                                    $"O registro \"{registro.Nome}\" foi cadastrado com sucesso!");
+
+        return View("Notificacao", notificacaoVM);
+    }
+
+
+    [HttpGet("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id) {
+        var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(id);
+
+        var fornecedor = repositorioFornecedor.SelecionarRegistros();
+
+        var editarVM = new EditarMedicamentoViewModel(medicamentoSelecionado.Id, medicamentoSelecionado.Nome,
+                                                     medicamentoSelecionado.Descricao, medicamentoSelecionado.Fornecedor!.Id, fornecedor);    
+    
+        return View();
+    }
+
+
+    [HttpPost("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id, EditarMedicamentoViewModel editarVM) {
+        var fornecedor = repositorioFornecedor.SelecionarRegistros();
+
+        var registro = editarVM.ParaEntidade(fornecedor);
+
+        repositorioMedicamento.EditarRegistro(id, registro);
+
+        var notificacaoVM = new NotificacaoViewModel("Medicamento Editado!",
+                                                    $"O registro \"{registro.Nome}\" foi editado com sucesso!");
+
+        return View("Notificacao", notificacaoVM);
+    }
+
+
+    [HttpGet("excluir/{id:int}")]
+    public IActionResult Excluir([FromRoute] int id) {
+        var registro = repositorioMedicamento.SelecionarRegistroPorId(id);
+
+        var excluirVM = new ExcluirMedicamentoViewModel(registro.Id, registro.Nome);
+
+        return View(excluirVM);
+    }
+
+
+    [HttpPost("excluir/{id:int}")]
+    public IActionResult ExcluirConfirmado([FromRoute] int id) {
+        repositorioMedicamento.ExcluirRegistro(id);
+
+        var notificacaoVM = new NotificacaoViewModel("Medicamento Excluído!",
+                                                    "O registro foi excluído com sucesso!");
+
+        return View("Notificacao", notificacaoVM);
+    }
+
+
     [HttpGet("visualizar")]
     public IActionResult Visualizar() {
         var medicamentos = repositorioMedicamento.SelecionarRegistros();
-        
-        var visualizarVM = new VisualizarMedicamentoViewModel(medicamentos);
+
+        VisualizarMedicamentoViewModel visualizarVM = new VisualizarMedicamentoViewModel(medicamentos);
 
         return View(visualizarVM);
     }

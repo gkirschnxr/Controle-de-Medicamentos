@@ -1,6 +1,6 @@
 ﻿@using ControleDeMedicamentos.ConsoleApp.Models
 
-@model EditarPacienteViewModel;
+@model EditarMedicamentoViewModel;
 
 <!DOCTYPE html>
 
@@ -8,7 +8,7 @@
 
     <head>
         <meta charset="utf-8" />
-        <title> Edição de Paciente - Controle de Medicamentos </title>
+        <title> Edição de Medicamento - Controle de Medicamentos </title>
     </head>
 
     <body>
@@ -17,26 +17,31 @@
         <hr />
 
         <a href="/">Pagina Inicial</a> /
-        <a href="/pacientes/visualizar">Visualizar Pacientes</a>
+        <a href="/medicamentos/visualizar">Visualizar Medicamentos</a>
 
         <hr />
 
-        <h3>Edição de Paciente</h3>
+        <h3>Edição de Medicamento</h3>
 
-        <form action="/pacientes/editar/@Model.Id" method="post">
+        <form action="/medicamentos/editar/@Model.Id" method="post">
 
-            <label for="nome">Nome do Paciente:</label>
+            <label for="nome">Nome do Medicamento:</label>
             <input type="text" name="nome" />
 
             <br />
 
-            <label for="telefone">Telefone do Paciente:</label>
-            <input type="text" name="telefone" />
+            <label for="descricao">Descrição do Medicamento:</label>
+            <input type="text" name="descricao" />
 
             <br />
 
-            <label for="cartaoSus">Cartão SUS do Paciente:</label>
-            <input type="text" name="cartaoSus" />
+            <label for="fornecedorId">Fornecedor do Medicamento:</label>
+            <select name="fornecedorId" id="fornecedorId">
+                @foreach (var f in Model.FornecedoresDisponiveis)
+                {
+                    <option value="@f.Id" @(f.Id == Model.FornecedorId ? "selected" : "")>@f.Nome</option>
+                }
+            </select>
 
             <hr />
 

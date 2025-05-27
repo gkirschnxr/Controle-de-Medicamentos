@@ -7,11 +7,11 @@ namespace ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 
 public class Medicamento : EntidadeBase<Medicamento>
 {    
-    public string? Nome { get; set; }
-    public string? Descricao { get; set; }
-    public Fornecedor? Fornecedor { get; set; }
-    public List<RequisicaoDeEntrada>? RequisicoesEntrada { get; set; }
-    public List<RequisicaoDeSaida>? RequisicoesSaida { get; set; }
+    public string Nome { get; set; }
+    public string Descricao { get; set; }
+    public Fornecedor Fornecedor { get; set; } 
+    public List<RequisicaoDeEntrada> RequisicoesEntrada { get; set; }
+    public List<RequisicaoDeSaida> RequisicoesSaida { get; set; }
     public int QuantidadeTotal
     {
         get 
