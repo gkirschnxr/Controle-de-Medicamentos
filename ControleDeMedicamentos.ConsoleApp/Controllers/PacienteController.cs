@@ -65,6 +65,28 @@ public class PacienteController : Controller
     }
 
 
+    [HttpGet("excluir/{id:int}")]
+    public IActionResult Excluir([FromRoute] int id) {
+        var pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
+
+        var excluirVM = new ExcluirPacienteViewModel(pacienteSelecionado.Id, pacienteSelecionado.Nome);
+    
+        return View(excluirVM);
+    }
+
+
+    [HttpPost("excluir/{id:int}")]
+    public IActionResult ExcluirPaciente([FromRoute] int id) {
+        repositorioPaciente.ExcluirRegistro(id);
+
+        var notificacaoVM = new NotificacaoViewModel(
+             "Paciente Excluído!",
+            $"O registro foi excluído com sucesso!");
+
+        return View("Notificacao", notificacaoVM);
+    }
+
+
     [HttpGet("visualizar")]
     public IActionResult Visualizar() {  
        var pacientes = repositorioPaciente.SelecionarRegistros();
