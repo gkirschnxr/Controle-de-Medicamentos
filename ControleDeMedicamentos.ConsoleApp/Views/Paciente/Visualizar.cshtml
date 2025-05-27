@@ -6,32 +6,32 @@
 
 <html>
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Visualização de Pacientes - Gestão de Medicamentos</title>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <title>Visualização de Pacientes - Gestão de Medicamentos</title>
+</head>
 
-    <body>
-        <h1>Controle de Medicamentos</h1>
+<body>
+    <h1>Controle de Medicamentos</h1>
 
-        <h3>Visualização de Paciente</h3>
+    <h3>Visualização de Paciente</h3>
 
-        <hr />
+    <hr />
 
-        <a href="/">Página Inicial</a> /
-        <a href="/pacientes/cadastrar">Cadastrar Novo Paciente</a>
+    <a href="/">Página Inicial</a> /
+    <a href="/pacientes/cadastrar">Cadastrar Novo Paciente</a>
 
-        <hr />
+    <hr />
 
-        <ul>
-            @foreach (var p in Model.Registros)
-            {
-                <li>
-                    @p.ToString() / <a href="/pacientes/editar/@p.Id">Editar</a>
-                    / <a href="/pacientes/excluir/@p.Id">Excluir</a>
-                </li>
-            }
-        </ul>
-    </body>
+    <ul>
+        @foreach (var p in Model.Registros)
+        {
+            <li>
+                @p.ToString() / <a href="/pacientes/editar/@p.Id">Editar</a>
+                / <a href="/pacientes/excluir/@p.Id">Excluir</a>
+            </li>
+        }
+    </ul>
+</body>
 
 </html>

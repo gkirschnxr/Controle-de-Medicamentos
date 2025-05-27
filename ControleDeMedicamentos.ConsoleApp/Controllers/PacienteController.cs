@@ -7,8 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 
 [Route("/pacientes")]
-public class PacienteController : Controller
-{
+public class PacienteController : Controller {
     private ContextoDeDados contexto;
     private IRepositorioPaciente repositorioPaciente;
     
