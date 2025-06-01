@@ -1,41 +1,219 @@
 ﻿<!DOCTYPE html>
 <html>
+<head>
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Controle de Medicamentos</title>
-    </head>
+    <meta charset="utf-8" />
+    <title>Controle de Medicamentos</title> 
+
+    <style>
+        /*media query */
+        @@media (max-width 768px) {
+            header {
+                padding: 20px;
+            }
+
+            main {
+                padding: 20px;
+            }
+
+            nav {
+                padding: 20px;
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        :root {
+        --fundo-principal: #1e1e1e;
+        --fundo-secundario: #182d5b;
+        --cor-borda: #182d78;
+        }
+
+/*----------------------------------------------INICIO----------------------------------------------*/
+        a {
+            color: white;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--fundo-principal);
+            color: white;
+            margin: 0;
+            font-size: 18px;
+        }
+
+        main {
+            padding: 50px 50px;
+        }
+
+        nav {
+            background-color: var(--fundo-secundario);
+            padding: 10px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            border-bottom: 1px solid var(--cor-borda);
+        }
+
+/*-------------------------------------------CLASSES------------------------------------------------*/
+        .card {
+            border: 2px solid var(--cor-borda);
+            border-radius: 10px;
+            padding: 0 0 20px 10px;
+            margin: 10px 10px;
+            width: 300px;
+            height: 120px;
+            background-color: var(--fundo-secundario);
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            background-color: var(--cor-borda);
+        }
+
+        .card-link {
+            display: inline-flex;
+            width: 320px;
+            height: 120px;
+            margin-bottom: 50px;
+        }
+
+        .conteudo {
+            transition: margin-right 0.3s ease;
+        }
+
+        .icone-menu {
+            width: 30px;
+            height: 22px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .link-navegacao {
+            color: var(--fundo-secundario);
+            font-weight: bold;
+        }
+
+        .menu-lateral {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: white;
+            padding-top: 60px;
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            transition: left 0.3s ease;
+            z-index: 1000;
+        }
+
+        .menu-principal {
+            font-size: xx-large;
+            font-weight: bold;
+            margin-left: 50px;
+        }
+
+        #gatilho {
+            display: none;
+        }
+
+/*--------------------------------------------------------------------------------------------------*/
+        nav > h2 { /*apagar?*/
+            margin: 0;
+            margin-left: 50px;
+        } 
+
+        .icone-menu span {
+            display: block;
+            height: 3px;
+            background: white;
+        }
+
+        .menu-lateral a {
+            padding: 15px 20px;
+            border-bottom: 2px solid #182d5b;
+        }
+
+        .menu-lateral a:hover {
+            background-color: lightslategray;
+        }
+
+        #gatilho:checked ~ .conteudo {
+            margin-right: 250px;
+        }
+
+        #gatilho:checked ~ .menu-lateral {
+            right: 0;
+        }
+    </style>
+</head>
 
     <body>
-        <h1>Controle de Medicamentos</h1>
 
-        <h3>Fornecedores</h3>
+        <input type="checkbox" id="gatilho" />
+        <div class="menu-lateral">
+            <a class="link-navegacao" href="/fornecedores/visualizar">Fornecedores</a>
+            <a class="link-navegacao" href="/pacientes/visualizar">Pacientes</a>
+            <a class="link-navegacao" href="/funcionarios/visualizar">Funcionários</a>
+            <a class="link-navegacao" href="/medicamentos/visualizar">Medicamentos</a>
+            <a class="link-navegacao" href="/">Sair do Menu</a>
+        </div>
 
-        <ul>
-            <li> <a href="/fornecedores/cadastrar">Cadastrar Fornecedor</a> </li>
-            <li> <a href="/fornecedores/visualizar">Visualizar Fornecedores</a> </li>
-        </ul>
+      <div>
+        <nav>
+         <label for="gatilho" class="icone-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+         </label>
+         <a href="/" class="menu-principal">Controle de Medicamentos</a>
+        </nav>       
 
-        <h3>Funcionários</h3>
+        <main>
+            <a href="fornecedores/visualizar" class="card-link">
+                <div class="card">
+                    <h3>Fornecedores</h3>
 
-        <ul>
-            <li> <a href="/funcionarios/cadastrar">Cadastrar Funcionário</a> </li>
-            <li> <a href="/funcionarios/visualizar">Visualizar Funcionários</a> </li>
-        </ul>
+                    <p>Gerencie os Fornecedores</p>
+                </div>
+            </a>
 
-        <h3>Pacientes</h3>
+            <a href="funcionarios/visualizar" class="card-link">
+                <div class="card">
+                    <h3>Funcionários</h3>
 
-        <ul>
-            <li> <a href="/pacientes/cadastrar">Cadastrar Paciente</a> </li>
-            <li> <a href="/pacientes/visualizar">Visualizar Pacientes</a> </li>
-        </ul>
+                    <p>Gerencie os Funcionários</p>
+                </div>
+            </a>
 
-        <h3>Medicamentos</h3>
+            <a href="pacientes/visualizar" class="card-link">
+                <div class="card">
+                    <h3>Pacientes</h3>
 
-        <ul>
-            <li> <a href="/medicamentos/cadastrar">Cadastrar Medicamento</a> </li>
-            <li> <a href="/medicamentos/visualizar">Visualizar Medicamentos</a> </li>
-        </ul>
+                    <p>Gerencie os Pacientes</p>
+                </div>
+            </a>
+
+            <a href="medicamentos/visualizar" class="card-link">
+                <div class="card">
+                    <h3>Medicamentos</h3>
+
+                    <p>Gerencie os Medicamentos e Requisições de Entrada ou Saída</p>
+                </div>
+            </a>
+
+
+       </main>
+      </div>
+
 
     </body>
 
