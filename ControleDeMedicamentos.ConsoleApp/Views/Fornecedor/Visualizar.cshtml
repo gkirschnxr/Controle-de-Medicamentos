@@ -9,68 +9,95 @@
 
 <style>
     div .card {
-        padding: 0px 10px 20px 10px;
+    padding: 0px 10px 20px 10px;
     }
 
     #botaoCadastrar {
-        padding: 5px 15px;
-        border: 1px solid var(--cor-principal);
-        border-radius: 9px;
-        background-color: var(--cor-principal);
-        color: var(--cor-neutra)
+    padding: 5px 15px;
+    border: 1px solid var(--cor-principal);
+    border-radius: 9px;
+    background-color: var(--cor-principal);
+    color: var(--cor-neutra)
     }
 
     .card {
-        height: 200px;
+    height: 200px;
     }
 
     .card:hover {
-        transform: scale(1);
-        background-color: var(--cor-borda);
+    transform: scale(1);
+    background-color: var(--cor-borda);
     }
 
     .botoes-interacao {
-        display: flex;
-        gap: 10px;
-        justify-content: end;
-        align-items: center;
-        margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
+    margin-top: 30px;
     }
 
     .botoes-interacao > a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 90px;
-        height: 30px;
-        border-radius: 9px;
-        background-color: var(--cor-principal);
-        color: var(--cor-neutra);
-        cursor: pointer;
-        font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    height: 30px;
+    border-radius: 9px;
+    background-color: var(--cor-principal);
+    color: var(--cor-neutra);
+    cursor: pointer;
+    font-size: 16px;
     }
 
     #botaoEditar {
-        background-color: #2C5D9A;
+    background-color: #2C5D9A;
     }
 
     #botaoEditar:hover {
-        background-color: #3874bc;
+    background-color: #3874bc;
     }
 
     #botaoExcluir {
-        background-color: #BF5E5A;
+    background-color: #BF5E5A;
     }
 
     #botaoExcluir:hover {
-        background-color: #9b4b49;
+    background-color: #9b4b49;
+    }
+
+    .card-cadastrar {
+    display: flex;
+    flex-wrap: wrap;
+    border: 3px dashed var(--cor-cadastrar);
+    color: var(--cor-principal);
+    background: #262626;
+    transition: background 0.2s, color 0.2s;
+    }
+
+    .card-cadastrar:hover {
+    background: var(--cor-principal);
+    color: var(--cor-neutra);
+    }
+
+    .cards-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 20px;
     }
 </style>
 
-@foreach (var f in Model.Registros)
-{
-    <div class="card">
-        <h3>@f.Nome</h3>
+<div class="cards-container">
+    <a href="/fornecedores/cadastrar" class="card card-cadastrar" style="display: block; text-align: center; text-decoration: none;">
+        <div style="font-size: 100px; margin-top: 20px; color: var(--cor-cadastrar)">+</div>
+        <h3 style="margin: 0; padding: 0 0 40px 0; color: var(--cor-cadastrar)">Novo Fornecedor</h3>
+    </a>
+
+    @foreach (var f in Model.Registros)
+    {
+        <div class="card">
+            <h3>@f.Nome</h3>
 
         <p><strong>Telefone:</strong> @f.Telefone</p>
         <p><strong>CNPJ:</strong> @f.CNPJ</p>
@@ -79,5 +106,6 @@
             <a type="button" href="/fornecedores/editar/@f.Id" id="botaoEditar">Editar</a>
             <a type="button" href="/fornecedores/excluir/@f.Id" id="botaoExcluir">Excluir</a>
         </div>
-    </div>
-}
+        </div>
+    }
+</div>
