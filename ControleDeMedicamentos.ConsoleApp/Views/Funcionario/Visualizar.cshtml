@@ -2,36 +2,31 @@
 
 @model VisualizarFuncionarioViewModel;
 
-<!DOCTYPE html>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Funcionários";
+}
 
-<html>
+<link rel="stylesheet" href="~/vform.css" />
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Visualização de Funcionários - Gestão de Medicamentos</title>
-    </head>
+<div class="cards-container">
+    <a href="/funcionarios/cadastrar" class="card card-cadastrar" style="display: block; text-align: center; text-decoration: none;">
+        <div style="font-size: 100px; margin-top: 20px; color: var(--cor-cadastrar)">+</div>
+        <h3 style="margin: 0; padding: 0 0 40px 0; color: var(--cor-cadastrar)">Novo Funcionário</h3>
+    </a>
 
-    <body>
-        <h1>Controle de Medicamentos</h1>
+    @foreach (var f in Model.Registros)
+    {
+        <div class="card">
+            <h3>@f.Nome</h3>
 
-        <h3>Visualização de Funcionários</h3>
+            <p><strong>Telefone:</strong> @f.Telefone</p>
+            <p><strong>CPF:</strong> @f.CPF</p>
 
-        <hr />
-
-        <a href="/">Página Inicial</a> /
-        <a href="/funcionarios/cadastrar">Cadastrar Novo Funcionário</a>
-
-        <hr />
-
-        <ul>
-            @foreach (var f in Model.Registros)
-            {
-                <li>
-                    @f.ToString() / <a href="/funcionarios/editar/@f.Id">Editar</a>
-                    / <a href="/funcionarios/excluir/@f.Id">Excluir</a>
-                </li>
-            }
-        </ul>
-    </body>
-
-</html>
+            <div class="botoes-interacao">
+                <a type="button" href="/funcionarios/editar/@f.Id" id="botaoEditar">Editar</a>
+                <a type="button" href="/funcionarios/excluir/@f.Id" id="botaoExcluir">Excluir</a>
+            </div>
+        </div>
+    }
+</div>

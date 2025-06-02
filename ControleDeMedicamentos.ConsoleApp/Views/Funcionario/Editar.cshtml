@@ -1,49 +1,26 @@
-﻿@using ControleDeMedicamentos.ConsoleApp.Models
+﻿﻿@using ControleDeMedicamentos.ConsoleApp.Models
 
 @model EditarFuncionarioViewModel;
 
-<!DOCTYPE html>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Edição de Funcionário";
+}
 
-<html>
+<link rel="stylesheet" href="~/form.css" />
 
-    <head>
-        <meta charset="utf-8" />
-        <title> Edição de Funcionário - Controle de Medicamentos </title>
-    </head>
+<form action="/funcionarios/editar/@Model.Id" method="post">
+    <label for="nome">Nome do Funcionário:</label>
+    <input type="text" name="nome" value="@Model.Nome" />
 
-    <body>
-        <h1>Controle de Medicamentos</h1>
+    <label for="telefone">Telefone do Funcionário:</label>
+    <input type="text" name="telefone" value="@Model.Telefone" />
 
-        <hr />
+    <label for="cpf">CPF do Funcionário:</label>
+    <input type="text" name="cpf" value="@Model.CPF" />
 
-        <a href="/">Pagina Inicial</a> /
-        <a href="/funcionarios/visualizar">Visualizar Funcionários</a>
-
-        <hr />
-
-        <h3>Edição de Funcionário</h3>
-
-        <form action="/funcionarios/editar/@Model.Id" method="post">
-
-            <label for="nome">Nome do Funcionário:</label>
-            <input type="text" name="nome" />
-
-            <br />
-
-            <label for="telefone">Telefone do Funcionário:</label>
-            <input type="text" name="telefone" />
-
-            <br />
-
-            <label for="cpf">CPF do Funcionários:</label>
-            <input type="text" name="cpf" />
-
-            <hr />
-
-            <button type="submit">Gravar</button>
-        </form>
-    </body>
-
-</html>
-
-
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/funcionarios/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Confirmar</button>
+    </div>
+</form>

@@ -1,38 +1,35 @@
-﻿@using ControleDeMedicamentos.ConsoleApp.Models
+﻿﻿@using ControleDeMedicamentos.ConsoleApp.Models
 
 @model ExcluirFuncionarioViewModel;
 
-<!DOCTYPE html>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Exclusão de Funcionário";
+}
 
-<html>
+<link rel="stylesheet" href="~/form.css" />
 
-    <head>
-        <meta charset="utf-8" />
-        <title> Exclusão de Funcionário - Controle de Medicamentos </title>
-    </head>
+<style>
+    #botaoConfirmar {
+        background-color: #BF5E5A;
+    }
 
-    <body>
-        <h1>Controle de Medicamentos</h1>
+    #botaoConfirmar:hover {
+        background-color: #9b4b49;
+        transform: scale(1);
+    }
 
-        <hr />
+    #botaoVoltar:hover {
+        background-color: #939393;
+        transform: scale(1);
+    }
+</style>
 
-        <a href="/">Pagina Inicial</a> /
-        <a href="/funcionarios/visualizar">Visualizar Fornecedores</a>
+<form action="/funcionarios/excluir/@Model.Id" method="post">
+    <p>Você deseja realmente excluir o registro "@Model.Nome?"</p>
 
-        <hr />
-
-        <h3>Exclusão de Funcionário</h3>
-
-        <p>Você tem certeza que deseja excluir o registro @Model.Nome?</p>
-
-        <form action="/funcionarios/excluir/@Model.Id" method="post">
-
-            <button type="submit">Gravar</button>
-
-            <a href="funcionarios/visualizar">Voltar</a>
-
-        </form>
-    </body>
-
-</html>
-
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/funcionarios/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Confirmar</button>
+    </div>
+</form>
