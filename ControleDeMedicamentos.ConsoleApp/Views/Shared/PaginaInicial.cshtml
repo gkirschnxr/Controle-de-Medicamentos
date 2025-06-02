@@ -1,220 +1,36 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
+﻿@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Página Inicial";
+}
 
-    <meta charset="utf-8" />
-    <title>Controle de Medicamentos</title> 
+<a href="fornecedores/visualizar" class="card-link">
+    <div class="card">
+        <h3>Fornecedores</h3>
 
-    <style>
-        /*media query */
-        @@media (max-width 768px) {
-            header {
-                padding: 20px;
-            }
+        <p>Gerencie os Fornecedores</p>
+    </div>
+</a>
 
-            main {
-                padding: 20px;
-            }
+<a href="funcionarios/visualizar" class="card-link">
+    <div class="card">
+        <h3>Funcionários</h3>
 
-            nav {
-                padding: 20px;
-                justify-content: center;
-                text-align: center;
-            }
-        }
+        <p>Gerencie os Funcionários</p>
+    </div>
+</a>
 
-        :root {
-        --fundo-principal: #1e1e1e;
-        --fundo-secundario: #182d5b;
-        --cor-borda: #182d78;
-        }
+<a href="pacientes/visualizar" class="card-link">
+    <div class="card">
+        <h3>Pacientes</h3>
 
-/*----------------------------------------------INICIO----------------------------------------------*/
-        a {
-            color: white;
-            text-decoration: none;
-        }
+        <p>Gerencie os Pacientes</p>
+    </div>
+</a>
 
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--fundo-principal);
-            color: white;
-            margin: 0;
-            font-size: 18px;
-        }
+<a href="medicamentos/visualizar" class="card-link">
+    <div class="card">
+        <h3>Medicamentos</h3>
 
-        main {
-            padding: 50px 50px;
-        }
-
-        nav {
-            background-color: var(--fundo-secundario);
-            padding: 10px 20px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            width: 100%;
-            border-bottom: 1px solid var(--cor-borda);
-        }
-
-/*-------------------------------------------CLASSES------------------------------------------------*/
-        .card {
-            border: 2px solid var(--cor-borda);
-            border-radius: 10px;
-            padding: 0 0 20px 10px;
-            margin: 10px 10px;
-            width: 300px;
-            height: 120px;
-            background-color: var(--fundo-secundario);
-        }
-
-        .card:hover {
-            transform: scale(1.03);
-            background-color: var(--cor-borda);
-        }
-
-        .card-link {
-            display: inline-flex;
-            width: 320px;
-            height: 120px;
-            margin-bottom: 50px;
-        }
-
-        .conteudo {
-            transition: margin-right 0.3s ease;
-        }
-
-        .icone-menu {
-            width: 30px;
-            height: 22px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
-        }
-
-        .link-navegacao {
-            color: var(--fundo-secundario);
-            font-weight: bold;
-        }
-
-        .menu-lateral {
-            position: fixed;
-            top: 0;
-            right: -250px;
-            width: 250px;
-            height: 100%;
-            background-color: white;
-            padding-top: 60px;
-            display: flex;
-            flex-direction: column;
-            gap: 0px;
-            transition: left 0.3s ease;
-            z-index: 1000;
-        }
-
-        .menu-principal {
-            font-size: xx-large;
-            font-weight: bold;
-            margin-left: 50px;
-        }
-
-        #gatilho {
-            display: none;
-        }
-
-/*--------------------------------------------------------------------------------------------------*/
-        nav > h2 { /*apagar?*/
-            margin: 0;
-            margin-left: 50px;
-        } 
-
-        .icone-menu span {
-            display: block;
-            height: 3px;
-            background: white;
-        }
-
-        .menu-lateral a {
-            padding: 15px 20px;
-            border-bottom: 2px solid #182d5b;
-        }
-
-        .menu-lateral a:hover {
-            background-color: lightslategray;
-        }
-
-        #gatilho:checked ~ .conteudo {
-            margin-right: 250px;
-        }
-
-        #gatilho:checked ~ .menu-lateral {
-            right: 0;
-        }
-    </style>
-</head>
-
-    <body>
-
-        <input type="checkbox" id="gatilho" />
-        <div class="menu-lateral">
-            <a class="link-navegacao" href="/fornecedores/visualizar">Fornecedores</a>
-            <a class="link-navegacao" href="/pacientes/visualizar">Pacientes</a>
-            <a class="link-navegacao" href="/funcionarios/visualizar">Funcionários</a>
-            <a class="link-navegacao" href="/medicamentos/visualizar">Medicamentos</a>
-            <a class="link-navegacao" href="/">Sair do Menu</a>
-        </div>
-
-      <div>
-        <nav>
-         <label for="gatilho" class="icone-menu">
-            <span></span>
-            <span></span>
-            <span></span>
-         </label>
-         <a href="/" class="menu-principal">Controle de Medicamentos</a>
-        </nav>       
-
-        <main>
-            <a href="fornecedores/visualizar" class="card-link">
-                <div class="card">
-                    <h3>Fornecedores</h3>
-
-                    <p>Gerencie os Fornecedores</p>
-                </div>
-            </a>
-
-            <a href="funcionarios/visualizar" class="card-link">
-                <div class="card">
-                    <h3>Funcionários</h3>
-
-                    <p>Gerencie os Funcionários</p>
-                </div>
-            </a>
-
-            <a href="pacientes/visualizar" class="card-link">
-                <div class="card">
-                    <h3>Pacientes</h3>
-
-                    <p>Gerencie os Pacientes</p>
-                </div>
-            </a>
-
-            <a href="medicamentos/visualizar" class="card-link">
-                <div class="card">
-                    <h3>Medicamentos</h3>
-
-                    <p>Gerencie os Medicamentos e Requisições de Entrada ou Saída</p>
-                </div>
-            </a>
-
-
-       </main>
-      </div>
-
-
-    </body>
-
-</html>
+        <p>Gerencie os Medicamentos e Requisições de Entrada ou Saída</p>
+    </div>
+</a>

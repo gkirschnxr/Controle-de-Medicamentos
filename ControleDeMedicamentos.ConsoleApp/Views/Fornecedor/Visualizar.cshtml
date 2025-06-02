@@ -2,36 +2,82 @@
 
 @model VisualizarFornecedorViewModel;
 
-<!DOCTYPE html>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Fornecedores";
+}
 
-<html>
+<style>
+    div .card {
+        padding: 0px 10px 20px 10px;
+    }
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Visualização de Fornecedores - Gestão de Medicamentos</title>
-    </head>
+    #botaoCadastrar {
+        padding: 5px 15px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra)
+    }
 
-    <body>
-        <h1>Controle de Medicamentos</h1>
+    .card {
+        height: 200px;
+    }
 
-        <h3>Visualização de Fornecedores</h3>
+    .card:hover {
+        transform: scale(1);
+        background-color: var(--cor-borda);
+    }
 
-        <hr/>
+    .botoes-interacao {
+        display: flex;
+        gap: 10px;
+        justify-content: end;
+        align-items: center;
+        margin-top: 30px;
+    }
 
-        <a href="/">Página Inicial</a> /
-        <a href="/fornecedores/cadastrar">Cadastrar Novo Fornecedor</a>
+    .botoes-interacao > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90px;
+        height: 30px;
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: var(--cor-neutra);
+        cursor: pointer;
+        font-size: 16px;
+    }
 
-        <hr />
+    #botaoEditar {
+        background-color: #2C5D9A;
+    }
 
-        <ul>
-            @foreach (var f in Model.Registros)
-            {
-                <li>
-                    @f.ToString() / <a href="/fornecedores/editar/@f.Id">Editar</a>
-                                  / <a href="/fornecedores/excluir/@f.Id">Excluir</a>  
-                </li>
-            }
-        </ul>
-    </body>
+    #botaoEditar:hover {
+        background-color: #3874bc;
+    }
 
-</html>
+    #botaoExcluir {
+        background-color: #BF5E5A;
+    }
+
+    #botaoExcluir:hover {
+        background-color: #9b4b49;
+    }
+</style>
+
+@foreach (var f in Model.Registros)
+{
+    <div class="card">
+        <h3>@f.Nome</h3>
+
+        <p><strong>Telefone:</strong> @f.Telefone</p>
+        <p><strong>CNPJ:</strong> @f.CNPJ</p>
+
+        <div class="botoes-interacao">
+            <a type="button" href="/fornecedores/editar/@f.Id" id="botaoEditar">Editar</a>
+            <a type="button" href="/fornecedores/excluir/@f.Id" id="botaoExcluir">Excluir</a>
+        </div>
+    </div>
+}
