@@ -1,49 +1,23 @@
-﻿@using ControleDeMedicamentos.ConsoleApp.Models
+﻿﻿@using ControleDeMedicamentos.ConsoleApp.Models
 
 @model EditarPacienteViewModel;
 
-<!DOCTYPE html>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Edição de Paciente";
+}
 
-<html>
+<link rel="stylesheet" href="~/form.css" />
 
-    <head>
-        <meta charset="utf-8" />
-        <title> Edição de Paciente - Controle de Medicamentos </title>
-    </head>
-
-    <body>
-        <h1>Controle de Medicamentos</h1>
-
-        <hr />
-
-        <a href="/">Pagina Inicial</a> /
-        <a href="/pacientes/visualizar">Visualizar Pacientes</a>
-
-        <hr />
-
-        <h3>Edição de Paciente</h3>
-
-        <form action="/pacientes/editar/@Model.Id" method="post">
-
-            <label for="nome">Nome do Paciente:</label>
-            <input type="text" name="nome" />
-
-            <br />
-
-            <label for="telefone">Telefone do Paciente:</label>
-            <input type="text" name="telefone" />
-
-            <br />
-
-            <label for="cartaoSus">Cartão SUS do Paciente:</label>
-            <input type="text" name="cartaoSus" />
-
-            <hr />
-
-            <button type="submit">Gravar</button>
-        </form>
-    </body>
-
-</html>
-
-
+<form action="/pacientes/editar/@Model.Id" method="post">
+    <label for="nome">Nome do Paciente:</label>
+    <input type="text" name="nome" value="@Model.Nome" />
+    <label for="telefone">Telefone do Paciente:</label>
+    <input type="text" name="telefone" value="@Model.Telefone" />
+    <label for="cartaoSus">Cartão SUS do Paciente:</label>
+    <input type="text" name="cartaoSus" value="@Model.CartaoSUS" />
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/pacientes/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Confirmar</button>
+    </div>
+</form>

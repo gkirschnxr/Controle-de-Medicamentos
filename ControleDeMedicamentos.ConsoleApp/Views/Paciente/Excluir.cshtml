@@ -2,37 +2,33 @@
 
 @model ExcluirPacienteViewModel;
 
-<!DOCTYPE html>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Exclusão de Paciente";
+}
 
-<html>
+<link rel="stylesheet" href="~/form.css" />
 
-    <head>
-        <meta charset="utf-8" />
-        <title> Exclusão de Paciente - Controle de Medicamentos </title>
-    </head>
+<style>
+    #botaoConfirmar {
+        background-color: #BF5E5A;
+    }
 
-    <body>
-        <h1>Controle de Medicamentos</h1>
+    #botaoConfirmar:hover {
+        background-color: #9b4b49;
+        transform: scale(1);
+    }
 
-        <hr />
+    #botaoVoltar:hover {
+        background-color: #939393;
+        transform: scale(1);
+    }
+</style>
 
-        <a href="/">Pagina Inicial</a> /
-        <a href="/pacientes/visualizar">Visualizar Pacientes</a>
-
-        <hr />
-
-        <h3>Exclusão de Paciente</h3>
-
-        <p>Você tem certeza que deseja excluir o registro @Model.Nome?</p>
-
-        <form action="/pacientes/excluir/@Model.Id" method="post">
-
-            <button type="submit">Gravar</button>
-
-            <a href="pacientes/visualizar">Voltar</a>
-
-        </form>
-    </body>
-
-</html>
-
+<form action="/pacientes/excluir/@Model.Id" method="post">
+    <p>Tem certeza que deseja excluir o paciente <strong>@Model.Nome</strong>?</p>
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/pacientes/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Excluir</button>
+    </div>
+</form>
