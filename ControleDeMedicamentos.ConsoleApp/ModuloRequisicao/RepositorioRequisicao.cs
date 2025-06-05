@@ -1,7 +1,8 @@
 ﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using ControleDeMedicamentos.ConsoleApp.ModuloRequisicoes;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoEntrada;
+using ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoSaida;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
+namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicao;
 
 public class RepositorioRequisicao : IRepositorioRequisicao
 {
@@ -25,5 +26,9 @@ public class RepositorioRequisicao : IRepositorioRequisicao
         this.requisicaoSaida.Add(requisicaoSaida);
 
         contexto.Salvar();
+    }
+
+    public List<RequisicaoDeSaida> SelecionarRequisicaoSaida() {
+        return requisicaoSaida;
     }
 }

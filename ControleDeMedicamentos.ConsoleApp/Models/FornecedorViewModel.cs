@@ -20,11 +20,11 @@ public class CadastrarFornecedorViewModel : FormularioFornecedorViewModel {
 }
 
 public class EditarFornecedorViewModel : FormularioFornecedorViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public EditarFornecedorViewModel() { }
 
-    public EditarFornecedorViewModel(int id, string nome, string telefone, string cnpj) : this()
+    public EditarFornecedorViewModel(Guid id, string nome, string telefone, string cnpj) : this()
     {
         Id = id;
         Nome = nome;
@@ -34,10 +34,10 @@ public class EditarFornecedorViewModel : FormularioFornecedorViewModel {
 }
 
 public class ExcluirFornecedorViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
 
-    public ExcluirFornecedorViewModel(int id, string nome) {
+    public ExcluirFornecedorViewModel(Guid id, string nome) {
         Id = id;
         Nome = nome;
     }
@@ -59,9 +59,9 @@ public class VisualizarFornecedorViewModel {
 }
 
 public class DetalhesFornecedorViewModel : FormularioFornecedorViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    public DetalhesFornecedorViewModel(int id, string nome, string telefone, string cnpj)
+    public DetalhesFornecedorViewModel(Guid id, string nome, string telefone, string cnpj)
     {
         Id = id;
         Nome = nome;

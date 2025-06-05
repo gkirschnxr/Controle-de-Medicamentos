@@ -5,8 +5,7 @@ namespace ControleDeMedicamentos.ConsoleApp.Controllers;
 [Route("/")]
 public class PaginaInicialController : Controller
 {
-    public IActionResult PaginaInicial()
-    {
+    public IActionResult PaginaInicial() {
         return View("PaginaInicial");
     }
 }

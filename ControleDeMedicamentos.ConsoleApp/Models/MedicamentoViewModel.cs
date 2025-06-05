@@ -5,9 +5,9 @@ using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
 namespace ControleDeMedicamentos.ConsoleApp.Models;
 
 public abstract class FormularioMedicamentoViewModel {
-    public string Nome { get; set; }
-    public string Descricao { get; set; }
-    public int FornecedorId { get; set; }
+    public string Nome { get; set; } = string.Empty;
+    public string Descricao { get; set; } = string.Empty;
+    public Guid FornecedorId { get; set; }
     public List<SelecionarFornecedorViewModel> FornecedoresDisponiveis { get; set; }
 
     protected FormularioMedicamentoViewModel() {
@@ -16,10 +16,10 @@ public abstract class FormularioMedicamentoViewModel {
 }
 
 public class SelecionarFornecedorViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
 
-    public SelecionarFornecedorViewModel(int id, string nome)
+    public SelecionarFornecedorViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -54,11 +54,11 @@ public class VisualizarMedicamentoViewModel {
 }
 
 public class EditarMedicamentoViewModel : FormularioMedicamentoViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public EditarMedicamentoViewModel() { }
-    public EditarMedicamentoViewModel(int id, string nome, string descricao,
-                                     int fornecedorId, List<Fornecedor> fornecedores) {
+    public EditarMedicamentoViewModel(Guid id, string nome, string descricao,
+                                     Guid fornecedorId, List<Fornecedor> fornecedores) {
         Id = id;
         Nome = nome;
         Descricao = descricao;
@@ -73,25 +73,25 @@ public class EditarMedicamentoViewModel : FormularioMedicamentoViewModel {
 }
 
 public class ExcluirMedicamentoViewModel {
-    public int Id { get; set; } 
+    public Guid Id { get; set; } 
     public string Nome { get; set; } = string.Empty;
 
     public ExcluirMedicamentoViewModel() { }
-    public ExcluirMedicamentoViewModel(int id, string nome) {
+    public ExcluirMedicamentoViewModel(Guid id, string nome) {
         Id = id;
         Nome = nome;
     }
 }
 
 public class DetalhesMedicamentoViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
     public string Descricao { get; set; }
     public string NomeFornecedor { get; set; }
     public int QuantidadeTotal { get; set; }
     public bool EmFalta { get; set; }
 
-    public DetalhesMedicamentoViewModel(int id, string nome, string descricao, string nomeFornecedor, int quantidade, bool emFalta)
+    public DetalhesMedicamentoViewModel(Guid id, string nome, string descricao, string nomeFornecedor, int quantidade, bool emFalta)
     {
         Id = id;
         Nome = nome;

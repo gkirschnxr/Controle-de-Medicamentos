@@ -9,6 +9,6 @@ public static class FuncionarioExtensions {
     }
 
     public static DetalhesFuncionariosViewModel ParaDetalhesVM(this Funcionario f) {
-        return new DetalhesFuncionariosViewModel(f.Id, f.Nome, f.Telefone, f.CPF);    
+        return new DetalhesFuncionariosViewModel(f.Id, f.NomeFuncionario, f.Telefone, f.CPF);    
     }
 }

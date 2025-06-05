@@ -33,6 +33,11 @@
     margin-top: 30px;
 }
 
+.botoes-interacao-estoque {
+    display: flex;
+    gap: 5px;
+}
+
 .card {
     height: 200px;
 }
@@ -75,6 +80,22 @@
     color: var(--cor-neutra);
     cursor: pointer;
     font-size: 16px;
+}
+
+.botoes-interacao-estoque > a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--cor-neutra);
+    border: 2px solid #107c10;
+    border-radius: 6px;
+    padding: 3px 6px;
+    font-size: 15px;
+    background-color: #3a823a;
+}
+
+.botoes-interacao-estoque > a:hover {
+    background-color: #12a812;
 }
 
 div .card {

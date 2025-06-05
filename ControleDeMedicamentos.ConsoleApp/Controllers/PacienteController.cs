@@ -32,25 +32,25 @@ public class PacienteController : Controller {
 
         var notificacaoVM = new NotificacaoViewModel(
              "Paciente Cadastrado!",
-            $"O registro \"{novoPaciente.Nome}\" foi cadastrado com sucesso!");
+            $"O registro \"{novoPaciente.NomePaciente}\" foi cadastrado com sucesso!");
 
         return View("Notificacao", notificacaoVM);
     }
 
 
-    [HttpGet("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id) {
+    [HttpGet("editar/{id:Guid}")]
+    public IActionResult Editar([FromRoute] Guid id) {
         var pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-        var editarVM = new EditarPacienteViewModel(pacienteSelecionado.Id, pacienteSelecionado.Nome,
+        var editarVM = new EditarPacienteViewModel(pacienteSelecionado.Id, pacienteSelecionado.NomePaciente,
                                                   pacienteSelecionado.Telefone, pacienteSelecionado.CartaoSus);
 
         return View(editarVM);
     }
 
 
-    [HttpPost("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id, EditarPacienteViewModel editarVM)
+    [HttpPost("editar/{id:Guid}")]
+    public IActionResult Editar([FromRoute] Guid id, EditarPacienteViewModel editarVM)
     {
         var pacienteEditado = editarVM.ParaEntidade();
 
@@ -58,24 +58,24 @@ public class PacienteController : Controller {
 
         var notificacaoVM = new NotificacaoViewModel(
              "Paciente Editado!",
-            $"O registro \"{pacienteEditado.Nome}\" foi editado com sucesso!");
+            $"O registro \"{pacienteEditado.NomePaciente}\" foi editado com sucesso!");
 
         return View("Notificacao", notificacaoVM);
     }
 
 
-    [HttpGet("excluir/{id:int}")]
-    public IActionResult Excluir([FromRoute] int id) {
+    [HttpGet("excluir/{id:Guid}")]
+    public IActionResult Excluir([FromRoute] Guid id) {
         var pacienteSelecionado = repositorioPaciente.SelecionarRegistroPorId(id);
 
-        var excluirVM = new ExcluirPacienteViewModel(pacienteSelecionado.Id, pacienteSelecionado.Nome);
+        var excluirVM = new ExcluirPacienteViewModel(pacienteSelecionado.Id, pacienteSelecionado.NomePaciente);
     
         return View(excluirVM);
     }
 
 
-    [HttpPost("excluir/{id:int}")]
-    public IActionResult ExcluirPaciente([FromRoute] int id) {
+    [HttpPost("excluir/{id:Guid}")]
+    public IActionResult ExcluirPaciente([FromRoute] Guid id) {
         repositorioPaciente.ExcluirRegistro(id);
 
         var notificacaoVM = new NotificacaoViewModel(

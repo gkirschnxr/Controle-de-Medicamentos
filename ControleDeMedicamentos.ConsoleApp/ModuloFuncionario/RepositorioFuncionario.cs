@@ -1,28 +1,21 @@
-﻿
-using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using ControleDeMedicamentos.ConsoleApp.ModuloFornecedor;
+﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario
+namespace ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
+
+public class RepositorioFuncionario : RepositorioBase<Funcionario>, IRepositorioFuncionario
 {
-    public class RepositorioFuncionario : RepositorioBase<Funcionario>, IRepositorioFuncionario
-    {
-        public RepositorioFuncionario(ContextoDeDados contexto) : base(contexto)
-        {
-        }
+    public RepositorioFuncionario(ContextoDeDados contexto) : base(contexto) { }
 
-        protected override List<Funcionario> ObterRegistros()
-        {
-            return contexto.Funcionarios;
-        }
+    protected override List<Funcionario> ObterRegistros() {
+        return contexto.Funcionarios;
+    }
 
-        public bool CpfEstaDuplicado(Funcionario funcionario)
+    public bool CpfEstaDuplicado(Funcionario funcionario) {
+        foreach (Funcionario f in SelecionarRegistros())
         {
-            foreach (Funcionario f in SelecionarRegistros())
-            {
-                if (f.CPF == funcionario.CPF)
-                    return true;
-            }
-            return false;
+            if (f.CPF == funcionario.CPF)
+                return true;
         }
+        return false;
     }
 }

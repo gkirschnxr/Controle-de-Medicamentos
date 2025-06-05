@@ -1,0 +1,40 @@
+﻿﻿@using ControleDeMedicamentos.ConsoleApp.Models
+
+@model CadastrarRequisicaoSaidaViewModel;
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Cadastro de Paciente";
+}
+
+<link rel="stylesheet" href="~/form.css" />
+
+<style>
+    h2 {
+        margin-bottom: 15px;
+    }
+</style>
+
+<form action="/requisicoes-medicamentos/saida/cadastrar" method="post">
+    <h2>Informações da Requisição</h2>
+    <label for="funcionarioId">Funcionário Requisitante:</label>
+    <select name="funcionarioId" id="funcionarioId">
+        @foreach (var f in Model.FuncionariosDisponiveis)
+        {
+            <option value="@f.Id">@f.Nome</option>
+        }
+    </select>
+
+    <label for="pacienteId">Paciente Requisitante:</label>
+    <select name="pacienteId" id="pacienteId">
+        @foreach (var f in Model.PacientesDisponiveis)
+        {
+            <option value="@f.Id">@f.Nome</option>
+        }
+    </select>
+
+    <div class="botoes-interacao">
+        <a type="button" id="botaoVoltar" href="/requisicoes-medicamentos/saida/visualizar">Voltar</a>
+        <button type="submit" id="botaoConfirmar">Confirmar</button>
+    </div>
+</form>

@@ -20,9 +20,9 @@ public class CadastrarPacienteViewModel : FormularioPacienteViewModel {
 }
 
 public class EditarPacienteViewModel : FormularioPacienteViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public EditarPacienteViewModel() { }
-    public EditarPacienteViewModel(int id, string nome, string telefone, string cartaoSus) 
+    public EditarPacienteViewModel(Guid id, string nome, string telefone, string cartaoSus) 
     {
         Id = id;
         Nome = nome;
@@ -32,9 +32,9 @@ public class EditarPacienteViewModel : FormularioPacienteViewModel {
 }
 
 public class ExcluirPacienteViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
-    public ExcluirPacienteViewModel(int id, string nome)
+    public ExcluirPacienteViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -56,8 +56,8 @@ public class VisualizarPacienteViewModel {
 }
 
 public class DetalhesPacienteViewModel : FormularioPacienteViewModel {
-    public int Id { get; set; }
-    public DetalhesPacienteViewModel(int id, string nome, string telefone, string cartaoSus)
+    public Guid Id { get; set; }
+    public DetalhesPacienteViewModel(Guid id, string nome, string telefone, string cartaoSus)
     {
         Id = id;
         Nome = nome;
@@ -65,7 +65,7 @@ public class DetalhesPacienteViewModel : FormularioPacienteViewModel {
         CartaoSUS = cartaoSus;
     }
 
-    public override string ToString(){
+    public override string ToString() {
         return $"Id: {Id}, Nome: {Nome}, Telefone: {Telefone}, Cartão SUS: {CartaoSUS}";
     }
 }

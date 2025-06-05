@@ -19,7 +19,7 @@ public static class MedicamentoExtensions {
 
     public static DetalhesMedicamentoViewModel ParaDetalhesVM(this Medicamento m) {
         return new DetalhesMedicamentoViewModel(m.Id, m.Nome, m.Descricao,
-                                               m.Fornecedor!.Nome, m.QuantidadeTotal, m.EmFalta);
+                                               m.Fornecedor!.Nome, m.QuantidadeEmEstoque, m.EmFalta);
     
     }
 }

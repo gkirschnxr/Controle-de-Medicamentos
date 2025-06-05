@@ -9,6 +9,6 @@ public static class PacienteExtensions {
     }
 
     public static DetalhesPacienteViewModel ParaDetalhesVM(this Paciente paciente) {
-        return new DetalhesPacienteViewModel(paciente.Id, paciente.Nome, paciente.Telefone, paciente.CartaoSus);
+        return new DetalhesPacienteViewModel(paciente.Id, paciente.NomePaciente, paciente.Telefone, paciente.CartaoSus);
     }
 }

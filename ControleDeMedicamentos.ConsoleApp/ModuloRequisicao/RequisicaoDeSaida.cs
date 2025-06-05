@@ -1,49 +1,47 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
-using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+﻿using ControleDeMedicamentos.ConsoleApp.ModuloFuncionario;
 using ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
+using System.Diagnostics.CodeAnalysis;
 
-namespace ControleDeMedicamentos.ConsoleApp.ModuloReqSaida;
+namespace ControleDeMedicamentos.ConsoleApp.ModuloRequisicaoSaida;
 
 public class RequisicaoDeSaida
 {
     public Guid Id { get; set; }
-    public DateTime DataRequisicaoSaida { get; set; }
-    public Paciente Paciente { get; set; }
-    public Prescricao Prescricao { get; set; }
-    public Medicamento Medicamentos { get; set; }
-    public int QuantidadeRequisita { get; set; }
+    public DateTime DataOcorrencia { get; set; }
+    public Funcionario Funcionario { get; set; } = null!;
+    public Prescricao Prescricao { get; set; } = null!;
 
+    [ExcludeFromCodeCoverage]
     public RequisicaoDeSaida() { }
 
-    public RequisicaoDeSaida (Paciente paciente, Prescricao prescricao, Medicamento medicamento, int quantidadeRequisita) : this()
-    {
+    public RequisicaoDeSaida(Funcionario funcionario, Prescricao prescricao) {
         Id = Guid.NewGuid();
-        DataRequisicaoSaida = DateTime.Now;
-        Paciente = paciente;
+        DataOcorrencia = DateTime.Now;
+        Funcionario = funcionario;
         Prescricao = prescricao;
-        Medicamentos = medicamento;
-        QuantidadeRequisita = quantidadeRequisita;
     }
 
     public string Validar()
     {
-        string erros = "";
+        string erros = string.Empty;
 
-        if (Paciente == null)
-            erros += "O campo 'Paciente' é obrigatório. \n";
+        if (Funcionario == null)
+            erros += "O campo \"Paciente\" é obrigatório.";
 
         if (Prescricao == null)
-            erros += "O campo 'Prescricao' é obrigatório. \n";
+            erros += "O campo \"Medicamento\" é obrigatório.";
 
-        if (Medicamentos == null)
-            erros += "O campo 'Medicamentos' é obrigatório. \n";
+        else if (Prescricao.MedicamentosPrescritos == null || Prescricao.MedicamentosPrescritos.Count < 1)
+            erros += "O campo \"Medicamentos Prescritos da Prescrição\" necessita conter ao menos um medicamento.";
 
-        if (QuantidadeRequisita < 1)
-            erros += "A requisição deve conter um valor positivo.\n";
-
-        if (QuantidadeRequisita > Medicamentos.QuantidadeTotal)
-            erros += "A quantidade solicitada não pode ser maior que a quantidade em estoque.\n";
+        if (Prescricao!.MedicamentosPrescritos != null) {
+            
+            foreach (var item in Prescricao.MedicamentosPrescritos) {
+                
+                if (item.Quantidade > item.Medicamento.QuantidadeEmEstoque)
+                    erros += $"O medicamento \"{item.Medicamento}\" não está disponível na quantidade requisitada.";
+            }
+        }
 
         return erros;
     }

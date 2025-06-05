@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Compartilhado\TelaBase.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\img\cadastrar.png" />
   </ItemGroup>
 

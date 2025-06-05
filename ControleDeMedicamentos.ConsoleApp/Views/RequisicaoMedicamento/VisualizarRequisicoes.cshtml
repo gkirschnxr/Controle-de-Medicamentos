@@ -1,0 +1,26 @@
+﻿@using ControleDeMedicamentos.ConsoleApp.Models
+
+@model VisualizarRequisicoesSaidaViewModel;
+
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Requisições de Saída";
+}
+
+<link rel="stylesheet" href="~/vform.css" />
+
+<a href="/requisicoes-medicamentos/saida/cadastrar" type="button" id="botaoCadastrar">Cadastrar Nova Requisição de Saída</a>
+
+<div class="secao-cards">
+    @foreach (var m in Model.Registros) {
+        <div class="card">
+            <div class="cabecalho-card">
+                <h3>@m.DataOcorrencia.ToShortDateString()</h3>
+            </div>
+
+            <p><strong>Funcionário Requisitante:</strong> @m.FuncionarioRequisitante</p>
+            <p><strong>Paciente:</strong> @m.Paciente</p>
+            <p><strong>Medicamentos:</strong> @string.Join(", ", m.MedicamentoPrescrito)</p>
+        </div>
+    }
+</div>

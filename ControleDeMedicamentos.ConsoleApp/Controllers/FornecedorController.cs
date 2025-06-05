@@ -40,8 +40,8 @@ public class FornecedorController : Controller
     }
 
 
-    [HttpGet("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id) {
+    [HttpGet("editar/{id:Guid}")]
+    public IActionResult Editar([FromRoute] Guid id) {
         var fornecedorSelecionado = repositorioFornecedor.SelecionarRegistroPorId(id);
 
         var editarVM = new EditarFornecedorViewModel(id, fornecedorSelecionado.Nome, 
@@ -51,8 +51,8 @@ public class FornecedorController : Controller
     }
 
 
-    [HttpPost("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id, EditarFornecedorViewModel editarVM) { 
+    [HttpPost("editar/{id:Guid}")]
+    public IActionResult Editar([FromRoute] Guid id, EditarFornecedorViewModel editarVM) { 
         var fornecedorAtualizado = new Fornecedor(editarVM.Nome, editarVM.Telefone, editarVM.CNPJ);
 
         repositorioFornecedor.EditarRegistro(id, fornecedorAtualizado);
@@ -63,8 +63,9 @@ public class FornecedorController : Controller
         return View("Notificacao", notificacaoVM);
     }
 
-    [HttpGet("excluir/{id:int}")]
-    public IActionResult Excluir([FromRoute] int id) {
+
+    [HttpGet("excluir/{id:Guid}")]
+    public IActionResult Excluir([FromRoute] Guid id) {
         var fornecedorSelecionado = repositorioFornecedor.SelecionarRegistroPorId(id);
 
         var excluirVM = new ExcluirFornecedorViewModel(fornecedorSelecionado.Id, fornecedorSelecionado.Nome);
@@ -73,8 +74,8 @@ public class FornecedorController : Controller
     }
 
 
-    [HttpPost("excluir/{id:int}")]
-    public IActionResult ExcluirFornecedor([FromRoute] int id) {
+    [HttpPost("excluir/{id:Guid}")]
+    public IActionResult ExcluirFornecedor([FromRoute] Guid id) {
         repositorioFornecedor.ExcluirRegistro(id);
 
         var notificacaoVM = new NotificacaoViewModel("Fornecedor Excluído!",

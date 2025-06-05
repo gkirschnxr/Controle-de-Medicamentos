@@ -34,48 +34,48 @@ public class FuncionarioController : Controller
         repositorioFuncionario.CadastrarRegistro(novoFuncionario);
 
         var notificacaoVM = new NotificacaoViewModel("Funcionário Cadastrado!",
-                                                    $"O funcionário \"{novoFuncionario.Nome}\" foi cadastrado com sucesso!");
+                                                    $"O funcionário \"{novoFuncionario.NomeFuncionario}\" foi cadastrado com sucesso!");
 
         return View("Notificacao", notificacaoVM);
     }
 
 
-    [HttpGet("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id) { 
+    [HttpGet("editar/{id:Guid}")]
+    public IActionResult Editar([FromRoute] Guid id) { 
         var funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
 
-        var editarVM = new EditarFuncionarioViewModel(funcionarioSelecionado.Id, funcionarioSelecionado.Nome,
+        var editarVM = new EditarFuncionarioViewModel(funcionarioSelecionado.Id, funcionarioSelecionado.NomeFuncionario,
                                                      funcionarioSelecionado.Telefone, funcionarioSelecionado.CPF);
 
         return View(editarVM);
     }
 
 
-    [HttpPost("editar/{id:int}")]
-    public IActionResult Editar([FromRoute] int id, EditarFuncionarioViewModel editarVM) {
+    [HttpPost("editar/{id:Guid}")]
+    public IActionResult Editar([FromRoute] Guid id, EditarFuncionarioViewModel editarVM) {
         var funcionarioAtualizado = new Funcionario(editarVM.Nome, editarVM.Telefone, editarVM.CPF);
 
         repositorioFuncionario.EditarRegistro(id, funcionarioAtualizado);
 
         var notificacaoVM = new NotificacaoViewModel("Funcionário Editado!",
-                                                    $"O registro \"{funcionarioAtualizado.Nome}\" foi atualizado com sucesso!");
+                                                    $"O registro \"{funcionarioAtualizado.NomeFuncionario}\" foi atualizado com sucesso!");
 
         return View("Notificacao", notificacaoVM);
     }
 
 
-    [HttpGet("excluir/{id:int}")]
-    public IActionResult Excluir([FromRoute] int id) {
+    [HttpGet("excluir/{id:Guid}")]
+    public IActionResult Excluir([FromRoute] Guid id) {
         var funcionarioSelecionado = repositorioFuncionario.SelecionarRegistroPorId(id);
 
-        var excluirVM = new ExcluirFuncionarioViewModel(funcionarioSelecionado.Id, funcionarioSelecionado.Nome);
+        var excluirVM = new ExcluirFuncionarioViewModel(funcionarioSelecionado.Id, funcionarioSelecionado.NomeFuncionario);
 
         return View(excluirVM);
     }
 
 
-    [HttpPost("excluir/{id:int}")]
-    public IActionResult ExcluirFuncionario([FromRoute] int id) {
+    [HttpPost("excluir/{id:Guid}")]
+    public IActionResult ExcluirFuncionario([FromRoute] Guid id) {
         repositorioFuncionario.ExcluirRegistro(id);
 
         var notificacaoVM = new NotificacaoViewModel("Funcionário Excluído!",

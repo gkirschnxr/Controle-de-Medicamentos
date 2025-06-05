@@ -11,7 +11,7 @@ public class FormularioFuncionarioViewModel {
 
 public class CadastrarFuncionarioViewModel : FormularioFuncionarioViewModel { 
     public CadastrarFuncionarioViewModel() { }
-    public CadastrarFuncionarioViewModel(string nome, string telefone, string cpf) : this()
+    public CadastrarFuncionarioViewModel(string nome, string telefone, string cpf) : this() 
     {
         Nome = nome;
         Telefone = telefone;
@@ -20,10 +20,10 @@ public class CadastrarFuncionarioViewModel : FormularioFuncionarioViewModel {
 }
 
 public class EditarFuncionarioViewModel : FormularioFuncionarioViewModel { 
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     public EditarFuncionarioViewModel() { }
-    public EditarFuncionarioViewModel(int id, string nome, string telefone, string cpf)
+    public EditarFuncionarioViewModel(Guid id, string nome, string telefone, string cpf) 
     {
         Id = id;
         Nome = nome;
@@ -33,10 +33,10 @@ public class EditarFuncionarioViewModel : FormularioFuncionarioViewModel {
 }
 
 public class ExcluirFuncionarioViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Nome { get; set; }
 
-    public ExcluirFuncionarioViewModel(int id, string nome)
+    public ExcluirFuncionarioViewModel(Guid id, string nome)
     {
         Id = id;
         Nome = nome;
@@ -59,9 +59,9 @@ public class VisualizarFuncionarioViewModel {
 }
 
 public class DetalhesFuncionariosViewModel : FormularioFuncionarioViewModel {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
-    public DetalhesFuncionariosViewModel(int id, string nome, string telefone, string cpf)
+    public DetalhesFuncionariosViewModel(Guid id, string nome, string telefone, string cpf)
     {
         Id = id;
         Nome = nome;

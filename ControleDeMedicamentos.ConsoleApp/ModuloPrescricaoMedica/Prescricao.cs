@@ -1,39 +1,25 @@
-﻿using ControleDeMedicamentos.ConsoleApp.Compartilhado;
-using ControleDeMedicamentos.ConsoleApp.ModuloMedicamento;
+﻿using ControleDeMedicamentos.ConsoleApp.ModuloPaciente;
+using ControleDeMedicamentos.ConsoleApp.ModuloPrescricao;
 
 namespace ControleDeMedicamentos.ConsoleApp.ModuloPrescricaoMedica;
 
-public class Prescricao : EntidadeBase<Prescricao>
+public class Prescricao
 {
-    public string CRM { get; set; }
+    public Guid Id { get; set; } = Guid.Empty;
+    public string CRM { get; set; } = string.Empty;
     public DateTime DataPrescricao { get; set; }
-    public List<Medicamento> Medicamentos { get; set; }
+    public Paciente Paciente { get; set; } = null!;
+    public List<MedicamentoPrescrito> MedicamentosPrescritos { get; set; } = new List<MedicamentoPrescrito>();
 
-    public Prescricao()
-    {
-        Medicamentos = new List<Medicamento>();
-    }
+    public Prescricao() { }
 
-    public Prescricao(string crm, DateTime dataPrescricao) : this()
+    public Prescricao(string crm, Paciente paciente,
+                     List<MedicamentoPrescrito> medicamentosPrescritos) : this()
     {
+        Id = Guid.NewGuid();
         CRM = crm;
-        DataPrescricao = dataPrescricao;
-    }
-
-    public override void AtualizarRegistro(Prescricao registroEditado)
-    {
-        CRM = registroEditado.CRM;
-    }
-
-    public override string Validar()
-    {
-        string erros = "";
-
-        if (CRM.Length != 6)
-            erros += "O CRM deve conter exatos 6 dígitos";
-        if (Medicamentos == null)
-            erros += "Deve Selecionar um Medicamento valido";
-
-        return erros;
+        DataPrescricao = DateTime.Now;
+        Paciente = paciente;
+        MedicamentosPrescritos = medicamentosPrescritos;
     }
 }

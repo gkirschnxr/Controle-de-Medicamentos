@@ -2,36 +2,43 @@
 
 @model VisualizarMedicamentoViewModel;
 
-<!DOCTYPE html>
+@{
+    Layout = "_Layout";
+    ViewBag.Titulo = "Visualização de Medicamentos";
+}
 
-<html>
+<link rel="stylesheet" href="~/vform.css" />
 
-    <head>
-        <meta charset="utf-8" />
-        <title>Visualização de Medicamentos - Gestão de Medicamentos</title>
-    </head>
+<div class="cards-container">
+    <a href="/medicamentos/cadastrar" class="card card-cadastrar" style="display: block; text-align: center; text-decoration: none;">
+        <div style="font-size: 100px; margin-top: 20px; color: var(--cor-cadastrar)">+</div>
+        <h3 style="margin: 0; padding: 0 0 40px 0; color: var(--cor-cadastrar)">Novo Medicamento</h3>
+    </a>
 
-    <body>
-        <h1>Controle de Medicamentos</h1>
+    @foreach (var m in Model.Registros)
+    {
+        <div class="card">
+            <div class="cabecalho-card">
+                <h3>@m.Nome</h3>
 
-        <h3>Visualização de Medicamentos</h3>
+                <div class="botoes-interacao-estoque">
+                    <a type="button" href="/requisicoes-medicamentos/entrada/@m.Id">+ Estoque</a>
 
-        <hr />
+                    @if (m.QuantidadeTotal != 0)
+                    {
+                        <a type="button" href="/requisicoes-medicamentos/saida/@m.Id">- Estoque</a>
+                    }
+                </div>
+            </div>
 
-        <a href="/">Página Inicial</a> /
-        <a href="/medicamentos/cadastrar">Cadastrar Novo Medicamento</a>
+            <p><strong>Descrição:</strong> @m.Descricao</p>
+            <p><strong>Fornecedor:</strong> @m.NomeFornecedor</p>
+            <p><strong>Qtd. em Estoque:</strong> @m.QuantidadeTotal</p>
 
-        <hr />
-
-        <ul>
-            @foreach (var m in Model.Registros)
-            {
-                <li>
-                    @m.ToString() / <a href="/medicamentos/editar/@m.Id">Editar</a>
-                                  / <a href="/medicamentos/excluir/@m.Id">Excluir</a>
-                </li>
-            }
-        </ul>
-    </body>
-
-</html>
+            <div class="botoes-interacao">
+                <a type="button" href="/funcionarios/editar/@m.Id" id="botaoEditar">Editar</a>
+                <a type="button" href="/funcionarios/excluir/@m.Id" id="botaoExcluir">Excluir</a>
+            </div>
+        </div>
+    }
+</div>
