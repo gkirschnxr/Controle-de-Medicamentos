@@ -9,7 +9,11 @@
 
 <link rel="stylesheet" href="~/vform.css" />
 
-<a href="/requisicoes-medicamentos/saida/cadastrar" type="button" id="botaoCadastrar">Cadastrar Nova Requisição de Saída</a>
+<div class="cards-container">
+    <a href="/requisicoes-medicamentos/saida/cadastrar" class="card card-cadastrar" style="display: block; text-align: center; text-decoration: none;">
+        <div style="font-size: 100px; margin-top: 20px; color: var(--cor-cadastrar)">+</div>
+        <h3 style="margin: 0; padding: 0 0 40px 0; color: var(--cor-cadastrar)">Nova Requisição de Saída</h3>
+    </a>
 
 <div class="secao-cards">
     @foreach (var m in Model.Registros) {
@@ -23,4 +27,5 @@
             <p><strong>Medicamentos:</strong> @string.Join(", ", m.MedicamentoPrescrito)</p>
         </div>
     }
+</div>
 </div>

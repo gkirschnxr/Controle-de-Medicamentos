@@ -12,9 +12,6 @@
 <link rel="stylesheet" href="~/form.css" />
 
 <form action="/requisicoes-medicamentos/entrada/@Model.MedicamentoId" method="post">
-    <label for="medicamentoId">Id do Medicamento:</label>
-    <input type="text" name="nome" value="@Model.MedicamentoId" readonly disabled />
-
     <label for="nome">Nome do Medicamento:</label>
     <p style="margin-top: 5px; color: var(--cor-principal); font-size: 18px; font-weight: 600;">@nomeMedicamento</p>
 

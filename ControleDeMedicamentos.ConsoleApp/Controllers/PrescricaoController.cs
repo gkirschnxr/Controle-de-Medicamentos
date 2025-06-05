@@ -57,7 +57,7 @@ public class PrescricaoController : Controller
         if (TempData.TryGetValue("Prescricao", out var valor) && valor is string jsonString) {
             var vmAnterior = JsonSerializer.Deserialize<CadastrarPrescricaoViewModel>(jsonString)!;
 
-            vmAnterior.CrmMedico = cadastrarVM.CrmMedico;
+            vmAnterior.CRM = cadastrarVM.CRM;
             vmAnterior.PacienteId = cadastrarVM.PacienteId;
             vmAnterior.MedicamentoId = cadastrarVM.MedicamentoId;
             vmAnterior.DosagemMedicamento = cadastrarVM.DosagemMedicamento;

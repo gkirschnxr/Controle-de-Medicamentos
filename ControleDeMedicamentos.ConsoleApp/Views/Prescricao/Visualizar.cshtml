@@ -47,11 +47,14 @@
         }
 </style>
 
-<a href="/prescricoes-medicas/cadastrar" type="button" id="botaoCadastrar">Cadastrar Nova Prescrição</a>
+<div class="cards-container">
+    <a href="/prescricoes-medicas/cadastrar" class="card card-cadastrar" style="display: block; text-align: center; text-decoration: none;">
+        <div style="font-size: 100px; margin-top: 20px; color: var(--cor-cadastrar)">+</div>
+        <h3 style="margin: 0; padding: 0 0 40px 0; color: var(--cor-cadastrar)">Nova Prescrição</h3>
+    </a>
 
 <div class="secao-cards">
-    @foreach (var m in Model.Registros)
-    {
+    @foreach (var m in Model.Registros) {
         <div class="card">
             <div class="cabecalho-card">
                 <h3>@m.DataPrescricao.ToShortDateString()</h3>
@@ -62,4 +65,5 @@
             <p><strong>Medicamentos:</strong> @string.Join(", ", m.MedicamentosPrescritos)</p>
         </div>
     }
+</div>
 </div>

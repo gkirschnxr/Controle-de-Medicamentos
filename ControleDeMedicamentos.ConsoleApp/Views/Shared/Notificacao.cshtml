@@ -3,30 +3,82 @@
 @model NotificacaoViewModel
 
 <!DOCTYPE html>
-
 <html>
+<head>
+    <meta charset="utf-8" />
+    <title>
+        @Model.TituloPagina - Controle de Medicamentos
+    </title>
 
-    <head>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #1e1e1e;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .card-sucesso {
+            background-color: #e6f9ec;
+            border: 2px solid #34c759;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            padding: 32px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 400px;
+        }
+        .icone-sucesso {
+            font-size: 48px;
+            color: #34c759;
+            margin-bottom: 16px;
+        }
+        .mensagem-sucesso {
+            color: #218838;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .titulo-pagina {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .voltar-link {
+            margin-top: 16px;
+            color: #34c759;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+        .voltar-link:hover {
+            color: #218838;
+        }
+    </style>
 
-        <meta charset="utf-8" />
-        <title>
-            @Model.TituloPagina - Controle de Medicamentos
-        </title>
-    </head>
-
-    <body>
-        <h1>Controle de Medicamentos</h1>
-
-        <hr />
-
-        <a href="/">Página Inicial</a> /
-
-        <hr />
-
-        <h3>@Model.Mensagem</h3>
-
-        <p>@Model.TituloPagina</p>
-
-    </body>
-
+</head>
+<body>
+    <div class="container">
+        <div class="card-sucesso">
+            <div class="icone-sucesso">
+                <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
+                    <circle cx="28" cy="28" r="28" fill="#34c759"/>
+                    <path d="M16 29.5L24.5 38L40 22.5" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <div class="mensagem-sucesso">@Model.Mensagem</div>
+            <div class="titulo-pagina">@Model.TituloPagina</div>
+            <a class="voltar-link" href="/">Voltar para Página Inicial</a>
+        </div>
+    </div>
+</body>
 </html>

@@ -12,13 +12,12 @@
 <form action="/prescricoes-medicas/cadastrar" method="post">
     <h2 style="margin-top: 0px;">Informações Básicas</h2>
 
-    <label for="crmMedico">CRM do Médico:</label>
-    <input type="text" name="crmMedico" value=@Model.CrmMedico />
+    <label for="CRM">CRM do Médico:</label>
+    <input type="text" name="CRM" value=@Model.CRM />
 
     <label for="pacienteId">Paciente Requisitante:</label>
     <select name="pacienteId" id="pacienteId">
-        @foreach (var p in Model.PacientesDisponiveis)
-        {
+        @foreach (var p in Model.PacientesDisponiveis) {
             <option value="@p.Id" @(p.Id == Model.PacienteId ? "selected" : "")>@p.Nome</option>
         }
     </select>
@@ -26,8 +25,7 @@
     <h3>Medicamentos</h3>
 
     <select name="medicamentoId" id="medicamentosDisponiveis">
-        @foreach (var m in Model.MedicamentosDisponiveis)
-        {
+        @foreach (var m in Model.MedicamentosDisponiveis) {
             <option value="@m.Id">@m.Nome</option>
         }
     </select>
@@ -51,12 +49,10 @@
 
     <h3>Medicamentos Selecionados</h3>
 
-    @if (!Model.MedicamentosPrescritos.Any())
-    {
+    @if (!Model.MedicamentosPrescritos.Any()) {
         <p class="fw-semibold">Ainda não há nenhum medicamento relacionado à prescrição...</p>
     }
-    else
-    {
+    else {
         <table>
             <thead>
                 <tr>
@@ -67,8 +63,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var medicamento in Model.MedicamentosPrescritos)
-                {
+                @foreach (var medicamento in Model.MedicamentosPrescritos) {
                     <tr>
                         <td>@medicamento.Medicamento</td>
                         <td>@medicamento.Dosagem</td>

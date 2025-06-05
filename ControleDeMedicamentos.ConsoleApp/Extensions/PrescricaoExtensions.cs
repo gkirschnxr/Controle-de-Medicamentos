@@ -33,7 +33,7 @@ public static class PrescricaoExtensions
             }
         }
 
-        return new Prescricao(cadastrarVM.CrmMedico, pacienteSelecionado, registrosSelecionados);
+        return new Prescricao(cadastrarVM.CRM, pacienteSelecionado, registrosSelecionados);
     }
 
     public static DetalhesPrescricaoViewModel ParaDetalhesVM(this Prescricao prescricao) {

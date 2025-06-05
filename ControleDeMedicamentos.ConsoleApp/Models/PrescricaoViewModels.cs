@@ -12,7 +12,7 @@ public class CadastrarPrescricaoViewModel
     public Guid PacienteId { get; set; }
     public List<SelecionarPacienteViewModel> PacientesDisponiveis { get; set; }
 
-    public string CrmMedico { get; set; } = string.Empty;
+    public string CRM { get; set; } = string.Empty;
 
     public List<SelecionarMedicamentoViewModel> MedicamentosDisponiveis { get; set; }
     public List<DetalhesMedicamentoPrescritoViewModel> MedicamentosPrescritos { get; set; }
