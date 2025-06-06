@@ -10,63 +10,155 @@
 <link rel="stylesheet" href="~/vform.css" />
 
 <style>
+    main {
+        padding-top: 0;
+    }
     #botaoCadastrar {
-    padding: 10px 20px;
-    width: 220px;
-    border: 1px solid var(--cor-principal);
-    border-radius: 9px;
-    background-color: var(--cor-principal);
-    color: var(--cor-neutra);
-    text-align: center;
+        padding: 8px 16px;
+        width: auto;
+        min-width: 80px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: #1e1e1e;
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 18px;
+        margin-right: 0;
+        display: inline-block;
+        font-weight: 300;
+        font-family: inherit;
+    }
+
+    .cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        align-items: stretch;
+        margin-top: 0;
+        width: 100%;
+    }
+
+    .secao-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+        width: 100%;
+        margin-top: 20px;
     }
 
     .card {
-    height: 400px;
+        display: flex;
+        flex-direction: column;
+        min-width: 320px;
+        max-width: 350px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        padding: 24px 20px 20px 20px;
+        margin-bottom: 20px;
+        transition: box-shadow 0.2s;
+        flex: 1 1 320px;
+        height: auto;
     }
 
-    .botoes-interacao {
-    display: flex;
-    gap: 5px;
-    justify-content: end;
-    align-items: center;
-    margin-top: 30px;
+    .card-cadastrar {
+        min-width: 100px;
+        max-width: 180px;
+        padding: 0;
+        height: 20px;
+        display: inline-flex;
+        margin-bottom: 0;
+        margin-right: 0;
+        justify-content: center;
+        background: #107c10;
+        align-items: center;
+        text-align: center;
     }
 
-    .botoes-interacao > a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 90px;
-    height: 30px;
-    border: 1px solid var(--cor-principal);
-    border-radius: 9px;
-    background-color: var(--cor-principal);
-    color: var(--cor-neutra);
-    cursor: pointer;
-    font-size: 16px;
+    .card-cadastrar:hover {
+        background: #108910;
+    }
+
+    .card-cadastrar div {
+        font-size: 40px !important;
+        margin-top: 10px !important;
+    }
+
+    .card-cadastrar h3 {
+        margin-top: 40px;
+        color: white;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 16px rgba(0,0,0,0.13);
+    }
+
+    .cabecalho-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0;
+    }
+
+    .medicamento-info {
+        display: flex;
+        flex-direction: row;
+        gap: 16px;
+        background: #f7f7f7;
+        border-radius: 7px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        align-items: center;
+    }
+
+    .medicamento-info span {
+        display: block;
+        font-size: 15px;
+        color: #333;
+    }
+
+    .medicamento-label {
+        font-weight: bold;
+        color: var(--cor-principal);
+        margin-right: 4px;
     }
 </style>
 
 <div class="cards-container">
-    <a href="/prescricoes-medicas/cadastrar" class="card card-cadastrar" style="display: block; text-align: center; text-decoration: none;">
-        <div style="font-size: 100px; margin-top: 20px; color: var(--cor-cadastrar)">+</div>
-        <h3 style="margin: 0; padding: 0 0 40px 0; color: var(--cor-cadastrar)">Nova Prescrição</h3>
-    </a>
+    <div style="display: initial;">
+        <a href="/prescricoes-medicas/cadastrar" class="card card-cadastrar" style="text-decoration: none;">
+            <h3>Nova Prescrição</h3>
+        </a>
+    </div>
 
     <div class="secao-cards">
         @foreach (var prescricao in Model.Prescricoes) {
             <div class="card">
                 <div class="cabecalho-card">
                     <h3>@prescricao.DataPrescricao.ToShortDateString()</h3>
+                    <span style="font-size: 17px; color: var(--cor-neutra); font-weight: 700;">
+                        CRM: @prescricao.CRM
+                    </span>
                 </div>
-                <p><strong>CRM do Médico:</strong> @prescricao.CRM</p>
-                <p><strong>Paciente:</strong> @prescricao.Paciente</p>
-                <p><strong>Medicamentos:</strong> @string.Join(", ", prescricao.MedicamentosPrescritos.Select(m => m.Nome))</p>
-                @foreach (var med in prescricao.MedicamentosPrescritos) {
-                    <p><strong>Dosagem:</strong> @med.Dosagem</p>
-                    <p><strong>Período de Uso:</strong> @med.Periodo</p>
-                }
+                <p style="margin-top: 0;"><strong>Paciente:</strong> @prescricao.Paciente</p>
+                <div style="margin-bottom: 8px;"><strong>Medicamentos:</strong></div>
+                <div>
+                    @foreach (var med in prescricao.MedicamentosPrescritos) {
+                        <div class="medicamento-info">
+                            <span>
+                                <span class="medicamento-label">Nome:</span> @med.Nome
+                            </span>
+                            <span>
+                                <span class="medicamento-label">Dosagem:</span> @med.Dosagem
+                            </span>
+                            <span>
+                                <span class="medicamento-label">Período:</span> @med.Periodo
+                            </span>
+                        </div>
+                    }
+                </div>
             </div>
         }
-</div>
+    </div>
 </div>
