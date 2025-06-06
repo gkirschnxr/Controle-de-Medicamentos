@@ -38,12 +38,7 @@ public static class PrescricaoExtensions
 
     public static DetalhesPrescricaoViewModel ParaDetalhesVM(this Prescricao prescricao) {
         
-        return new DetalhesPrescricaoViewModel(
-            prescricao.Id,
-            prescricao.CRM,
-            prescricao.Paciente.NomePaciente,
-            prescricao.DataPrescricao,
-            prescricao.MedicamentosPrescritos
-        );
+        return new DetalhesPrescricaoViewModel(prescricao.Id, prescricao.CRM, prescricao.Paciente.NomePaciente,
+                                              prescricao.DataPrescricao, prescricao.MedicamentosPrescritos);
     }
 }

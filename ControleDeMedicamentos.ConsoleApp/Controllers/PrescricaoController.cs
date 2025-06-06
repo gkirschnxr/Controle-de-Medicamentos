@@ -70,8 +70,13 @@ public class PrescricaoController : Controller
         if (acaoSubmit == "adicionarMedicamento") {
             var medicamentoSelecionado = repositorioMedicamento.SelecionarRegistroPorId(cadastrarVM.MedicamentoId);
 
-            var detalhesMedicamentoPrescritoVM = new DetalhesMedicamentoPrescritoViewModel(cadastrarVM.MedicamentoId, medicamentoSelecionado.Nome, cadastrarVM.DosagemMedicamento,
-                                                                                          cadastrarVM.PeriodoMedicamento, cadastrarVM.QuantidadeMedicamento);
+            var detalhesMedicamentoPrescritoVM = new DetalhesMedicamentoPrescritoViewModel(
+                cadastrarVM.MedicamentoId,
+                medicamentoSelecionado.Nome,
+                cadastrarVM.DosagemMedicamento,
+                cadastrarVM.PeriodoMedicamento,
+                cadastrarVM.QuantidadeMedicamento
+            );
 
             cadastrarVM.MedicamentosPrescritos.Add(detalhesMedicamentoPrescritoVM);
 
@@ -105,10 +110,21 @@ public class PrescricaoController : Controller
 
     [HttpGet("visualizar")]
     public IActionResult Visualizar() {
-        var registros = repositorioPrescricao.SelecionarRegistros();
+        var prescricoes = repositorioPrescricao.SelecionarRegistros();
 
-        var visualizarVM = new VisualizarPrescricoesViewModel(registros);
+        var visualizarGeral = new PrescricaoVisualizacaoCompostaViewModel {
+            Prescricoes = prescricoes.Select(p => new PrescricaoDetalheViewModel {
+                DataPrescricao = p.DataPrescricao,
+                CRM = p.CRM,
+                Paciente = p.Paciente.NomePaciente,
+                MedicamentosPrescritos = p.MedicamentosPrescritos.Select(m => new MedicamentoPrescritoViewModel {
+                    Nome = m.Medicamento.Nome,
+                    Dosagem = m.Dosagem,
+                    Periodo = m.Periodo,
+                }).ToList()
+            }).ToList() 
+        };
 
-        return View(visualizarVM);
+        return View(visualizarGeral);
     }
 }

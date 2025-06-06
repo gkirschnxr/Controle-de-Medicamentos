@@ -68,7 +68,7 @@ public class SelecionarMedicamentoViewModel
 public class DetalhesMedicamentoPrescritoViewModel
 {
     public Guid MedicamentoId { get; set; }
-    public string Medicamento { get; set; } = string.Empty;
+    public string Medicamento { get; set; }
     public string Dosagem { get; set; } = string.Empty;
     public string Periodo { get; set; } = string.Empty;
     public int Quantidade { get; set; }
@@ -108,8 +108,8 @@ public class DetalhesPrescricaoViewModel
     public DateTime DataPrescricao { get; set; }
     public List<SelecionarMedicamentoPrescritoViewModel> MedicamentosPrescritos { get; set; }
 
-    public DetalhesPrescricaoViewModel(Guid id, string crmMedico, string paciente,
-                                      DateTime dataEmissao, List<MedicamentoPrescrito> medicamentoPrescritos) {
+    public DetalhesPrescricaoViewModel(Guid id, string crmMedico, string paciente, DateTime dataEmissao,
+                                      List<MedicamentoPrescrito> medicamentoPrescritos) {
         Id = id;
         CRM = crmMedico;
         Paciente = paciente;
@@ -125,4 +125,24 @@ public class DetalhesPrescricaoViewModel
             }
         }
     }
+}
+
+public class PrescricaoVisualizacaoCompostaViewModel
+{
+    public List<PrescricaoDetalheViewModel> Prescricoes { get; set; }
+}
+
+public class PrescricaoDetalheViewModel
+{
+    public DateTime DataPrescricao { get; set; }
+    public string CRM { get; set; }
+    public string Paciente { get; set; }
+    public List<MedicamentoPrescritoViewModel> MedicamentosPrescritos { get; set; }
+}
+
+public class MedicamentoPrescritoViewModel
+{
+    public string Nome { get; set; }
+    public string Dosagem { get; set; }
+    public string Periodo { get; set; }
 }
