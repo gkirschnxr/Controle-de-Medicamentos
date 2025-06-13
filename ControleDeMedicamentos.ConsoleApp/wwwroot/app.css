@@ -101,6 +101,7 @@ nav {
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
+    position: initial;
 }
 
 .link-navegacao {
