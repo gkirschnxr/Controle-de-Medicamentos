@@ -9,6 +9,61 @@
 
 <link rel="stylesheet" href="~/vform.css" />
 
+<style>
+    main {
+        padding-top: 0;
+    }
+
+    #botaoCadastrar {
+        padding: 8px 16px;
+        width: auto;
+        min-width: 80px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 9px;
+        background-color: var(--cor-principal);
+        color: #1e1e1e;
+        text-align: center;
+        font-size: 16px;
+        margin-bottom: 18px;
+        margin-right: 0;
+        display: inline-block;
+        font-weight: 300;
+        font-family: inherit;
+    }
+
+    .cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        align-items: stretch;
+        margin-top: 0;
+        width: 100%;
+    }
+
+    .secao-cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 32px;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        min-width: 320px;
+        max-width: 350px;
+        border: 1px solid var(--cor-principal);
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        padding: 24px 20px 20px 20px;
+        margin-bottom: 20px;
+        transition: box-shadow 0.2s;
+        flex: 1 1 320px;
+        height: auto;
+    }
+</style>
+
 <div class="cards-container">
     <a href="/medicamentos/cadastrar" class="card card-cadastrar" style="display: block; text-align: center; text-decoration: none;">
         <div style="font-size: 100px; margin-top: 20px; color: var(--cor-cadastrar)">+</div>

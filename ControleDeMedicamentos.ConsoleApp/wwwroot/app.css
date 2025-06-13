@@ -1,21 +1,4 @@
-﻿/*media query */
-@media (max-width: 768px) {
-    header {
-        padding: 20px;
-    }
-
-    main {
-        padding: 20px;
-    }
-
-    nav {
-        padding: 20px;
-        justify-content: center;
-        text-align: center;
-    }
-}
-
-:root {
+﻿:root {
     --fundo-principal: #1e1e1e;
     --fundo-secundario: #182d5b;
     --cor-borda: #182d78;
@@ -166,4 +149,56 @@ nav > h2 { /*apagar?*/
 
 .menu-lateral a:hover {
     background-color: lightslategray;
+}
+
+/*media query */
+@media (max-width: 768px) {
+    header {
+        padding: 20px;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    nav {
+        padding: 20px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    form {}
+    form {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        form {
+            width: 100%;
+            max-width: 100%;
+            padding: 10px;
+            margin: 0 auto;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1em;
+        }
+        .botoes-interacao {
+            flex-direction: inherit;
+            gap: 10px;
+            margin-top: 30px;
+            align-items: stretch;
+        }
+    }
 }
